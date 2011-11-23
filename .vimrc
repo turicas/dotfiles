@@ -70,4 +70,4 @@ set shiftwidth=4
 match Todo /\s\+$/
 
 " Remove trailing spaces when save
-autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e
