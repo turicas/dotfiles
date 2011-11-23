@@ -1,0 +1,21 @@
+[ui]
+username = Álvaro Justen <alvaro@justen.eng.br>
+
+[extensions]
+color =
+pager =
+hgk =
+graphlog =
+inotify =
+bookmarks =
+
+record =
+rebase =
+mq =
+acl =
+
+[pager]
+pager = LESS='FSRX' less
+
+[bookmarks]
+track.current = True
