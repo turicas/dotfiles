@@ -9,9 +9,12 @@
     status = auto
     branch = auto
 
+[color "diff"]
+    whitespace = red reverse
 
 [core]
     quotepath = false
+    whitespace = trailing-space,tab-in-indent,cr-at-eol
 
 
 [filter "gpg"]
