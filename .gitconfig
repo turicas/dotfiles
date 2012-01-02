@@ -2,7 +2,6 @@
     name = Álvaro Justen aka Turicas
     email = alvaro@justen.eng.br
 
-
 [color]
     diff = auto
     ui = auto
@@ -13,9 +12,16 @@
     whitespace = red reverse
 
 [core]
+    editor = vim
     quotepath = false
     whitespace = trailing-space,tab-in-indent,cr-at-eol
 
+[alias]
+    br = branch
+    ci = commit
+    co = checkout
+    st = status
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
 [filter "gpg"]
     smudge = gpg -d -q --batch --no-tty
@@ -23,6 +29,7 @@
 
 [diff "gpg"]
     textconv = decrypt
+
 [giggle]
 	main-window-maximized = true
 	main-window-geometry = 0x0+0+0
