@@ -133,4 +133,7 @@ bash --rcfile ~/.virtualenvrc
 # pip bash-completion
 eval "$(pip completion --bash)"
 
-alias nose="nosetests --verbosity=2 -s"
+nose() {
+    nosetests --verbosity=2 -s --with-yanc --with-coverage \
+              --cover-package $(basename $(pwd))
+}
