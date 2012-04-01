@@ -11,6 +11,7 @@ set textwidth=79
 
 " Highlight searches:
 set hlsearch
+set incsearch " dynamically as they are typed
 
 " Highlight syntax:
 syntax on
@@ -18,9 +19,11 @@ syntax on
 " Enable modeline so vim will reconfigure when open vim-configured files
 set modeline
 
-" Indentation
+" Indentation and plugins
 set autoindent
-filetype indent plugin on
+filetype on
+filetype indent on
+filetype plugin on
 
 " Tell vim to remember certain things when we exit
 "  '10  -> marks will be remembered for up to 10 previously edited files
@@ -29,6 +32,7 @@ filetype indent plugin on
 "  %    -> saves and restores the buffer list
 "  n... -> where to save the viminfo files
 set viminfo='10,\"100,:20,%,n~/.viminfo
+set history=1000 " New history size
 
 " Reset cursor position:
 function! ResCur()
@@ -51,8 +55,7 @@ set mouse=a
 " Ctrl+c to copy to clipboard (only works when VIM is open)
 map <C-c> "+y<CR>
 
-
-" set listchars=tab:▸\ ,trail:·,nbsp:· list "list trailing characters
+set listchars=tab:▸\ ,trail:·,nbsp:· list "list trailing characters
 set showmatch                       "blink matching bracket, etc
 set visualbell                      "audio bell is evil
 
@@ -71,3 +74,36 @@ match Todo /\s\+$/
 
 " Remove trailing spaces when save
 autocmd BufWritePre * :%s/\s\+$//e
+
+" Changes leader key from "\" to ","
+let mapleader = ","
+
+" <TAB> completion in command-mode
+set wildmenu
+set wildmode=list:longest
+
+" These two options, when set together, will make /-style searches
+" case-sensitive only if there is a capital letter in the search expression.
+" *-style searches continue to be consistently case-sensitive.
+set ignorecase
+set smartcase
+
+
+" A running gvim will always have a window title, but when vim is run within an
+" xterm, by default it inherits the terminal’s current title.
+set title
+
+" When the cursor is moved outside the viewport of the current window, the
+" buffer is scrolled by a single line. Setting the option below will start the
+" scrolling three lines before the border, keeping more context around where
+" you’re working.
+set scrolloff=5
+
+" in the bottom right corner of the status line there will be something like:
+" 529, 35 68%, representing line 529, column 35, about 68% of the way to the
+" end.
+set ruler
+
+" Shortcut to tasklist and taglist plugins
+map T :TaskList<CR>
+map L :TlistToggle<CR>
