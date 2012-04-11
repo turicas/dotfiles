@@ -15,6 +15,7 @@
     editor = vim
     quotepath = false
     whitespace = trailing-space,tab-in-indent,cr-at-eol
+    autocrlf = input
 
 [alias]
     br = branch
