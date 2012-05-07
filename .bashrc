@@ -15,6 +15,7 @@ shopt -s histappend
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000000
 HISTFILESIZE=2000000
+HISTTIMEFORMAT="[%Y-%m-%d %H:%M:%S] "
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -60,7 +61,7 @@ hg_branch() {
 }
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w$(git_branch)\[\033[00m\]\\n$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w$(git_branch)$(hg_branch)\[\033[00m\]\\n$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(git_branch)$(hg_branch)\n\$ '
 fi
@@ -90,6 +91,7 @@ alias l='ls -CF'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias manmost="PAGER=`which most` man"
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -109,25 +111,21 @@ fi
 
 PATH="$PATH:$HOME/bin"
 PATH="$PATH:$HOME/android-sdk-linux/platform-tools:$HOME/android-sdk-linux/tools"
+PATH="$PATH:/opt/vagrant/bin/"
 
 # (virtualenv & virtualenvwrapper)-related things
 export WORKON_HOME="$HOME/.virtualenvs"
 source /usr/local/bin/virtualenvwrapper.sh
-function work () {
-typeset env_name="$1"
-if [ "$env_name" = "" ]
-then
-    virtualenvwrapper_show_workon_options
-    return 1
-fi
+work() {
+    if [ -z "$1" ]; then
+        virtualenvwrapper_show_workon_options
+        return 1
+    fi
 
-virtualenvwrapper_verify_workon_environment $env_name || return 1
-
-echo "source ~/.profile
-workon $env_name
-cdvirtualenv" > ~/.virtualenvrc
-
-bash --rcfile ~/.virtualenvrc
+    virtualenvwrapper_verify_workon_environment $1 || return 1
+    echo "source ~/.profile; workon $1; cdvirtualenv" > ~/.tmp_virtualenvrc
+    bash --rcfile ~/.tmp_virtualenvrc
+    rm ~/.tmp_virtualenvrc
 }
 
 # pip bash-completion
@@ -137,3 +135,5 @@ nose() {
     nosetests --verbosity=2 -s --with-yanc --with-coverage \
               --cover-package $(basename $(pwd))
 }
+
+source ~/.profile
