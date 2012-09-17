@@ -38,5 +38,5 @@
 	file-view-vpane-position = 182
 	main-window-view = HistoryView
 	file-view-hpane-position = 258
-[merge]
-	ff = false
+#[merge]
+#	ff = false

@@ -47,7 +47,7 @@ augroup resCur
 augroup END
 
 " Show line where you are:
-set cursorline
+" set cursorline
 
 " Use the mouse
 set mouse=a

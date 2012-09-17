@@ -137,3 +137,4 @@ nose() {
 }
 
 source ~/.profile
+source ~/.autoenv/activate.sh
