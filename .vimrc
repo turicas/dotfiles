@@ -107,3 +107,7 @@ set ruler
 " Shortcut to tasklist and taglist plugins
 map T :TaskList<CR>
 map L :TlistToggle<CR>
+
+" better indentation
+vnoremap > >gv
+vnoremap < <gv

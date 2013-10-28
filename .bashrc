@@ -81,9 +81,7 @@ alias manmost="PAGER=`which most` man"
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+[ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -91,10 +89,6 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-
-PATH="$PATH:$HOME/bin"
-PATH="$PATH:$HOME/android-sdk-linux/platform-tools:$HOME/android-sdk-linux/tools"
-PATH="$PATH:/opt/vagrant/bin/"
 
 # (virtualenv & virtualenvwrapper)-related things
 export WORKON_HOME="$HOME/.virtualenvs"
@@ -118,6 +112,10 @@ nose() {
     nosetests --verbosity=2 -s --with-yanc --with-coverage \
               --cover-package $(basename $(pwd))
 }
+alias cvs-update='cvs update -PCdR'
 
 source ~/.profile
 source ~/.autoenv/activate.sh
+[ -f ~/.bashrc.local ] && source ~/.bashrc.local
+
+alias rlerl='rlwrap -a erl'
