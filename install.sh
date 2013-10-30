@@ -1,0 +1,21 @@
+#!/bin/bash
+
+apt-get update
+apt-get -y install aptitude
+
+aptitude -y install \
+    vim-gnome vim-nox exuberant-ctags \
+    iptraf iperf nmap tcptraceroute mtr ntpdate \
+    i3 nitrogen \
+    cheese \
+    quicksynergy openssh-server \
+    tmux screen byobu bash-completion terminator \
+    unzip sudo curl lynx w3m htop \
+    git gitk mercurial bzr subversion \
+    make fakeroot build-essential python-setuptools python-dev markdown \
+    chromium chromium-inspector \
+    xscreensaver
+
+aptitude -y remove apache2 exim4
+easy_install pip
+pip install virtualenv virtualenvwrapper py3status
