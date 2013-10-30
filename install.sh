@@ -6,7 +6,7 @@ apt-get -y install aptitude
 aptitude -y install \
     vim-gnome vim-nox exuberant-ctags \
     iptraf iperf nmap tcptraceroute mtr ntpdate \
-    i3 nitrogen \
+    i3 nitrogen xscreensaver \
     cheese \
     quicksynergy openssh-server \
     tmux screen byobu bash-completion terminator \
@@ -14,7 +14,7 @@ aptitude -y install \
     git gitk mercurial bzr subversion \
     make fakeroot build-essential python-setuptools python-dev markdown \
     chromium chromium-inspector \
-    xscreensaver
+    gimp inkscape
 
 aptitude -y remove apache2 exim4
 easy_install pip
