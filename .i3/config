@@ -20,7 +20,8 @@ font pango:DejaVu Sans Mono 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec terminator
+#i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -245,7 +246,8 @@ exec xscreensaver
 exec dropbox start
 exec nm-applet
 
-exec --no-startup-id i3-msg 'workspace 1; exec x-terminal-emulator'
+exec --no-startup-id i3-msg 'workspace 1; exec terminator'
+#exec --no-startup-id i3-msg 'workspace 1; exec x-terminal-emulator'
 exec --no-startup-id i3-msg 'workspace 2; exec firefox'
 exec --no-startup-id i3-msg 'workspace 3; exec xchat; exec pidgin'
 #exec --no-startup-id i3-msg 'workspace 3; exec amarok'
