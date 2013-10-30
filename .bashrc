@@ -114,8 +114,8 @@ nose() {
 }
 alias cvs-update='cvs update -PCdR'
 
-source ~/.profile
-source ~/.autoenv/activate.sh
+#source ~/.profile
+#source ~/.autoenv/activate.sh
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
 
 alias rlerl='rlwrap -a erl'
