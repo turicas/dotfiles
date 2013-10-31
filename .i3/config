@@ -217,13 +217,13 @@ for_window [instance="xfce4-notifyd"] floating enable
 # screenshot
 bindsym --release Print exec scrot ~/screenshots/`date +"%Y-%m-%d_%H-%M-%S"`.png
 
+# lock screen
+bindsym Ctrl+Mod1+l exec xscreensaver-command -lock
+
 # displaying monitors
 bindsym $mod+m exec monitors
 # 'monitors' is a shell script to toggle displays (notebook,
 # notebook + HDMI monitor, notebook + VGA monitor, projector)
-
-# lock screen
-bindsym Ctrl+Mod1+l exec xscreensaver-command -lock
 
 #TODO:
 
@@ -247,8 +247,6 @@ exec dropbox start
 exec nm-applet
 
 exec --no-startup-id i3-msg 'workspace 1; exec terminator'
-#exec --no-startup-id i3-msg 'workspace 1; exec x-terminal-emulator'
 exec --no-startup-id i3-msg 'workspace 2; exec firefox'
 exec --no-startup-id i3-msg 'workspace 3; exec xchat; exec pidgin'
-#exec --no-startup-id i3-msg 'workspace 3; exec amarok'
 exec --no-startup-id i3-msg 'workspace 1'

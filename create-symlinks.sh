@@ -2,15 +2,23 @@
 
 path=$(pwd)
 this=$(basename $0)
-for file in $(ls -a); do
-    if [ "$file" != "$this" ] && [ "$file" != "." ] && [ "$file" != ".." ] && \
-       [ "$file" != ".git" ]; then
+do_not_copy=("$this" "." ".." ".git" "install.sh")
+
+for file in .* *; do
+    allowed=yes
+    for not_allowed in ${do_not_copy[@]}; do
+        if [ "$not_allowed" = "$file" ]; then
+            allowed=no
+        fi
+    done
+
+    if [ $allowed = "no" ]; then
+        echo "*** Ignoring file '$file'"
+    else
         if [ ! -e ~/$file ]; then
             ln -s "$path/$file" ~/$file
         else
             echo "*** Link to '$file' NOT created! File already exists."
         fi
-    else
-        echo "*** Ignoring file '$file'"
     fi
 done

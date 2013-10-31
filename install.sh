@@ -6,8 +6,8 @@ apt-get -y install aptitude
 aptitude -y install \
     vim-gnome vim-nox exuberant-ctags \
     iptraf iperf nmap tcptraceroute mtr ntpdate \
-    i3 nitrogen xscreensaver \
-    cheese \
+    i3 nitrogen xscreensaver scrot \
+    cheese zip unzip mplayer \
     quicksynergy openssh-server \
     tmux screen byobu bash-completion terminator \
     unzip sudo curl lynx w3m htop \
