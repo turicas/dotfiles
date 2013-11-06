@@ -18,4 +18,4 @@ aptitude -y install \
 
 aptitude -y remove apache2 exim4
 easy_install pip
-pip install virtualenv virtualenvwrapper py3status
+pip install virtualenv virtualenvwrapper tox py3status
