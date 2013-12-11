@@ -2,9 +2,9 @@
 
 path=$(pwd)
 this=$(basename $0)
-do_not_copy=("$this" "." ".." ".git" "install.sh")
+do_not_copy=("$this" "." ".." ".git" ".gitignore" "install.sh")
 
-for file in .* *; do
+for file in .* * .config/*; do
     allowed=yes
     for not_allowed in ${do_not_copy[@]}; do
         if [ "$not_allowed" = "$file" ]; then
@@ -17,6 +17,7 @@ for file in .* *; do
     else
         if [ ! -e ~/$file ]; then
             ln -s "$path/$file" ~/$file
+            echo "*** Created link to '$file'"
         else
             echo "*** Link to '$file' NOT created! File already exists."
         fi

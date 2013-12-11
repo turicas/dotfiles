@@ -1,0 +1,4 @@
+[profiles]
+  [[default]]
+    use_system_font = False
+    font = Monospace 17
