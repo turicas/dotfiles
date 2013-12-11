@@ -34,6 +34,7 @@ bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+ccedilla focus right
+bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -240,12 +241,15 @@ bindsym $mod+m exec monitors
 
 #autostart apps
 
-# background daemos
-exec --no-startup-id nitrogen  --restore
-exec xscreensaver
-exec dropbox start
-exec nm-applet
+exec --no-startup-id /home/turicas/bin/daskeyboard
 
+# background daemos
+exec --no-startup-id nitrogen --set-tiled /home/turicas/background.jpg
+exec --no-startup-id xscreensaver
+exec --no-startup-id dropbox start
+exec --no-startup-id nm-applet
+
+# configure my workspaces
 exec --no-startup-id i3-msg 'workspace 1; exec terminator'
 exec --no-startup-id i3-msg 'workspace 2; exec firefox'
 exec --no-startup-id i3-msg 'workspace 3; exec xchat; exec pidgin'
