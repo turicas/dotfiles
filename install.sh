@@ -12,7 +12,8 @@ aptitude -y install \
     tmux screen byobu bash-completion terminator \
     unzip sudo curl lynx w3m htop \
     git gitk mercurial bzr subversion \
-    make fakeroot build-essential python-setuptools python-dev markdown \
+    make fakeroot build-essential python-setuptools python-dev \
+    markdown pandoc htmldoc \
     chromium chromium-inspector \
     gimp inkscape
 
