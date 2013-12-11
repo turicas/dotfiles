@@ -1,5 +1,5 @@
 [ui]
-username = Álvaro Justen <alvaro@justen.eng.br>
+username = Álvaro Justen <alvarojusten@gmail.com>
 
 [extensions]
 color =
@@ -9,7 +9,6 @@ graphlog =
 inotify =
 bookmarks =
 hgext.bookmarks =
-hggit =
 record =
 rebase =
 mq =
