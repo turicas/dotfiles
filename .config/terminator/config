@@ -1,4 +1,18 @@
+[global_config]
+[keybindings]
 [profiles]
   [[default]]
-    use_system_font = False
+    scroll_on_output = False
     font = Monospace 17
+    use_system_font = False
+    scrollback_infinite = True
+    background_image = None
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
