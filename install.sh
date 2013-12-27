@@ -7,7 +7,8 @@ aptitude -y install \
     vim-gnome vim-nox exuberant-ctags \
     iptraf iperf nmap tcptraceroute mtr ntpdate \
     i3 nitrogen xscreensaver scrot \
-    cheese zip unzip mplayer \
+    zip unzip xarchiver \
+    cheese mplayer vlc \
     quicksynergy openssh-server \
     tmux screen byobu bash-completion terminator \
     unzip sudo curl lynx w3m htop \
