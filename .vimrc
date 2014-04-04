@@ -108,6 +108,8 @@ set ruler
 map T :TaskList<CR>
 map L :TlistToggle<CR>
 
+map <F3> :w !markdown \| pandoc -f html -t plain - \| wc<CR>
+
 " better indentation
 vnoremap > >gv
 vnoremap < <gv
