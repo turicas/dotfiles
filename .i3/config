@@ -212,7 +212,7 @@ force_display_urgency_hint 500 ms
 
 
 # per-window configuration
-for_window [instance="screenkey"] floating enable
+#for_window [instance="screenkey"] floating enable
 for_window [instance="wicd-client.py"] floating enable
 for_window [instance="xfce4-notifyd"] floating enable
 
@@ -224,6 +224,8 @@ bindsym Ctrl+Mod1+l exec xscreensaver-command -lock
 
 # displaying monitors
 bindsym $mod+m exec monitors
+bindsym $mod+c exec mplayer -tv driver=v4l2:gain=1:width=640:height=480:device=/dev/video0:fps=10:outfmt=rgb16 tv://
+
 # 'monitors' is a shell script to toggle displays (notebook,
 # notebook + HDMI monitor, notebook + VGA monitor, projector)
 
