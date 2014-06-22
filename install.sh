@@ -10,7 +10,7 @@ aptitude -y install \
     zip unzip xarchiver \
     cheese mplayer vlc \
     quicksynergy openssh-server \
-    tmux screen byobu bash-completion terminator \
+    tmux screen byobu bash-completion terminator urxvt xsel \
     unzip sudo curl lynx w3m htop \
     git gitk mercurial bzr subversion \
     make fakeroot build-essential python-setuptools python-dev \
@@ -21,3 +21,12 @@ aptitude -y install \
 aptitude -y remove apache2 exim4
 easy_install pip
 pip install virtualenv virtualenvwrapper tox py3status
+
+# URxvt stuff
+URXVT_PERL=/usr/lib/urxvt/perl/
+mkdir code
+cd code/
+sudo -u turicas git clone https://github.com/muennich/urxvt-perls.git
+sudo -u turicas git clone https://github.com/majutsushi/urxvt-font-size.git
+cp urxvt-font-size/font-size $UXRVT_PERL
+cp urxvt-perls/{clipboard,keyboard-select,url-select} $URXVT_PERL

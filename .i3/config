@@ -20,7 +20,7 @@ font pango:DejaVu Sans Mono 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec terminator
+bindsym $mod+Return exec urxvtc
 #i3-sensible-terminal
 
 # kill focused window
@@ -251,6 +251,7 @@ exec --no-startup-id nitrogen --set-tiled /home/turicas/background.jpg
 exec --no-startup-id xscreensaver
 exec --no-startup-id dropbox start
 exec --no-startup-id nm-applet
+exec --no-startup-id urxvtd -q -o -f
 
 # configure my workspaces
 exec --no-startup-id i3-msg 'workspace 1; exec terminator'
