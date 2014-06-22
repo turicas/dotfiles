@@ -1,17 +1,23 @@
-" Nice color scheme:
-colorscheme torte
+" Álvaro Justen's VIM configuration
+" https://github.com/turicas/dotfiles/
 
-" Show line numbers:
+
+" Colors
+colorscheme torte
+highlight clear
+set background=light
+
+" Show line numbers
 set number
 
-" Highligh 80-column:
-match ErrorMsg '\%>80v.\+'
-set colorcolumn=80
-set textwidth=79
+" 80-th column limit
+set textwidth=80
+set colorcolumn=+1
+highlight ColorColumn term=reverse cterm=reverse gui=reverse
 
 " Highlight searches:
-set hlsearch
-set incsearch " dynamically as they are typed
+set hlsearch      " highlight search terms
+set incsearch     " show search matches as you type
 
 " Highlight syntax:
 syntax on
@@ -19,8 +25,7 @@ syntax on
 " Enable modeline so vim will reconfigure when open vim-configured files
 set modeline
 
-" Indentation and plugins
-set autoindent
+" plugins
 filetype on
 filetype indent on
 filetype plugin on
@@ -55,25 +60,37 @@ set mouse=a
 " Ctrl+c to copy to clipboard (only works when VIM is open)
 map <C-c> "+y<CR>
 
-set listchars=tab:▸\ ,trail:·,nbsp:· list "list trailing characters
+" Show trailing characters and undesirable spaces
+set list
+set listchars=tab:▸\ ,trail:·,nbsp:~
+
+" Remove trailing spaces when save buffer
+autocmd BufWritePre * :%s/\s\+$//e
+
 set showmatch                       "blink matching bracket, etc
 set visualbell                      "audio bell is evil
 
-set encoding=utf-8 "explicit
+" Explicit the character encoding
+set encoding=utf-8
 
-set background=light
-highlight clear
+" Tab/spaces
+set nowrap        " don't wrap lines
+set tabstop=4     " a tab is four spaces
+set backspace=indent,eol,start
+                  " allow backspacing over everything in insert mode
+set autoindent    " always set autoindenting on
+set copyindent    " copy the previous indentation on autoindenting
+set shiftwidth=4  " number of spaces to use for autoindenting
+set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
+set showmatch     " set show matching parenthesis
+set ignorecase    " ignore case when searching
+set smartcase     " ignore case if search pattern is all lowercase,
+                  "    case-sensitive otherwise
+set smarttab      " insert tabs on the start of a line according to
+                  "    shiftwidth, not tabstop
 
-
-set expandtab
-set softtabstop=4
-set shiftwidth=4
-
-" Highlight trailing spaces
+" Highlight To-dos
 match Todo /\s\+$/
-
-" Remove trailing spaces when save
-autocmd BufWritePre * :%s/\s\+$//e
 
 " Changes leader key from "\" to ","
 let mapleader = ","
@@ -88,7 +105,6 @@ set wildmode=list:longest
 set ignorecase
 set smartcase
 
-
 " A running gvim will always have a window title, but when vim is run within an
 " xterm, by default it inherits the terminal’s current title.
 set title
@@ -97,16 +113,12 @@ set title
 " buffer is scrolled by a single line. Setting the option below will start the
 " scrolling three lines before the border, keeping more context around where
 " you’re working.
-set scrolloff=5
+set scrolloff=15
 
 " in the bottom right corner of the status line there will be something like:
 " 529, 35 68%, representing line 529, column 35, about 68% of the way to the
 " end.
 set ruler
-
-" Shortcut to tasklist and taglist plugins
-map T :TaskList<CR>
-map L :TlistToggle<CR>
 
 map <F3> :w !markdown \| pandoc -f html -t plain - \| wc<CR>
 
