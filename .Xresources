@@ -159,17 +159,27 @@ URxvt*font:                           xft:DejaVu Sans Mono:pixelsize=20,style=Bo
 ! URxvt*tabbar-bg:                      colour
 ! URxvt*tabbar-fg:                      colour
 
+! Load Perl extensions
 URxvt.perl-ext-common:                default,url-select,font-size,clipboard
 
-URxvt.keysym.C-Up:                    perl:font-size:increase
-URxvt.keysym.C-S-Up:                  perl:font-size:incglobal
-URxvt.keysym.C-Down:                  perl:font-size:decrease
-URxvt.keysym.C-S-Down:                perl:font-size:decglobal
+! Increase/decrease font size
+URxvt.keysym.C-equal:                 perl:font-size:increase
+URxvt.keysym.C-plus:                  perl:font-size:incglobal
+URxvt.keysym.C-minus:                 perl:font-size:decrease
+URxvt.keysym.C-underscore:            perl:font-size:decglobal
 
+! Clipboard management
 URxvt.keysym.C-C:                     perl:clipboard:copy
 URxvt.keysym.C-V:                     perl:clipboard:paste
 URxvt.keysym.M-C-V:                   perl:clipboard:paste_escaped
 
+! URL open
 URxvt.url-select.button:              2
 URxvt.url-select.launcher:            /usr/bin/xdg-open
 URxvt.url-select.underline:           true
+
+! Fix Ctrl-arrows when using VIM
+URxvt.keysym.C-Up:                    \033[1;5A
+URxvt.keysym.C-Down:                  \033[1;5B
+URxvt.keysym.C-Left:                  \033[1;5D
+URxvt.keysym.C-Right:                 \033[1;5C
