@@ -258,3 +258,8 @@ exec --no-startup-id i3-msg 'workspace 1; exec urxvtc'
 exec --no-startup-id i3-msg 'workspace 2; exec firefox'
 exec --no-startup-id i3-msg 'workspace 3; exec xchat; exec pidgin'
 exec --no-startup-id i3-msg 'workspace 1'
+
+# Volume Bindings
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
+bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
+bindsym XF86AudioMute exec amixer -q set Master toggle
