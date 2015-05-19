@@ -109,7 +109,7 @@ URxvt*font:                           xft:DejaVu Sans Mono:pixelsize=20,style=Bo
 ! URxvt*imFont:                         fontname
 ! URxvt*title:                          string
 ! URxvt*iconName:                       string
-! URxvt*saveLines:                      number
+URxvt*saveLines:                      65535
 ! URxvt*buffered:                       boolean
 ! URxvt*depth:                          number
 ! URxvt*visual:                         number
@@ -129,8 +129,8 @@ URxvt*font:                           xft:DejaVu Sans Mono:pixelsize=20,style=Bo
 ! URxvt*modifier:                       modifier
 ! URxvt*cutchars:                       string
 ! URxvt*answerbackString:               string
-! URxvt*secondaryScreen:                boolean
-! URxvt*secondaryScroll:                boolean
+URxvt*secondaryScreen:                1
+URxvt*secondaryScroll:                0
 ! URxvt*perl-lib:                       string
 ! URxvt*perl-eval:                      perl-eval
 ! URxvt*perl-ext:                       string

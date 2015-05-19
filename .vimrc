@@ -11,7 +11,7 @@ set background=light
 set number
 
 " 80-th column limit
-set textwidth=80
+set textwidth=79
 set colorcolumn=+1
 highlight ColorColumn term=reverse cterm=reverse gui=reverse
 

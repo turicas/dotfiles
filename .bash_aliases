@@ -19,3 +19,6 @@ alias music-at-work="totem ~/Music/zelda-64-ocarina-of-time 2> /dev/null &" # <3
 
 # Erlang
 alias erl='rlwrap -a erl'
+
+# Git
+alias gf='git fetch --all --prune'
