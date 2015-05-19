@@ -48,3 +48,11 @@ fi
 # source more bashrc files
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
+
+hack() {
+	workon $1
+	cd ~/projects/$1
+}
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
