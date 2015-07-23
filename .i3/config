@@ -157,7 +157,7 @@ bindsym $mod+b border toggle
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command py3status -c ~/.i3/i3status.conf
+        status_command i3status -c ~/.i3/i3status.conf | ~/.i3/wrapper.py
         mode dock
         workspace_buttons yes
         output LVDS1
