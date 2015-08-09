@@ -1,42 +1,48 @@
 #!/bin/bash
 
+# APT packages
 apt-get update
-apt-get -y install aptitude
-
-aptitude -y install \
-    vim-gnome vim-nox exuberant-ctags \
+apt-get -y install \
+    aptitude vim-gnome vim-nox \
     iptraf iperf nmap tcptraceroute mtr ntpdate \
-    i3 nitrogen xscreensaver scrot \
+    i3 i3status nitrogen xscreensaver scrot \
     zip unzip xarchiver \
     cheese mplayer vlc \
     quicksynergy openssh-server \
-    tmux screen byobu bash-completion terminator urxvt xsel \
-    unzip sudo curl lynx w3m htop \
+    tmux screen byobu bash-completion terminator rxvt-unicode xsel \
+    sudo curl lynx w3m htop \
     git gitk mercurial bzr subversion \
-    make fakeroot build-essential python-setuptools python-dev \
+    make fakeroot build-essential python-setuptools python-pip python-dev \
     markdown pandoc htmldoc \
     chromium chromium-inspector \
-    gimp inkscape
+    gimp inkscape xchat suckless-tools vlc mplayer iotop powertop iftop \
+    libmariadbd-dev libssl-dev libxslt-dev libxml2-dev \
+    htop iotop powertop lsof libpq-dev postgresql-client \
+    libffi-dev libtiff-dev libjpeg-dev libwebp-dev \
+    libopenjpeg-dev nodejs npm docker.io flashplugin-nonfree \
+    xchat
+apt-get -y remove apache2 exim4
+apt-get upgrade
+apt-get dist-upgrade
 
-apt-get -y install libmariadbd-dev libssl-dev libxslt-dev libxml2-dev \
-                   htop iotop powertop lsof libpq-dev postgresql-client \
-                   libffi-dev libtiff-dev libjpeg-dev libwebp-dev \
-                   libopenjpeg-dev nodejs npm docker.io flashplugin-nonfree \
-                   xchat
-# TODO: arduino, firefox nightly, googletalk-plugin, skype
+# pip packages
+easy_install pip
+pip install virtualenv virtualenvwrapper ipython ipython[notebook] \
+            bpython pypython httpie youtube-dl
 
-adduser turicas docker
-adduser turicas sudo
+# npm packages
 npm install grunt grunt-cli bower marked
-
 if [ ! -e "/usr/bin/node" ]; then
     ln -s /usr/bin/node{js,}
 fi
 
-aptitude -y remove apache2 exim4
-easy_install pip
-pip install virtualenv virtualenvwrapper ipython ipython[notebook] \
-            bpython pypython httpie youtube-dl
+# TODO: arduino, firefox nightly, googletalk-plugin, skype
+
+# Users and groups
+
+adduser turicas docker
+adduser turicas sudo
+
 
 # URxvt stuff
 URXVT_PERL=/usr/lib/urxvt/perl/
