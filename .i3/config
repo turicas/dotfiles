@@ -177,6 +177,26 @@ bar {
 }
 
 bar {
+        status_command i3status -c ~/.i3/i3status.conf | ~/.i3/wrapper.py
+        mode dock
+        workspace_buttons yes
+        output eDP1
+        tray_output eDP1
+        position bottom
+
+        colors {
+            background #000000
+            statusline #ffffff
+            separator #666666
+
+            focused_workspace  #4c7899 #285577 #ffffff
+            active_workspace   #333333 #5f676a #ffffff
+            inactive_workspace #333333 #222222 #888888
+            urgent_workspace   #2f343a #900000 #ffffff
+        }
+}
+
+bar {
     output HDMI1
     workspace_buttons yes
     tray_output none
