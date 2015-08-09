@@ -16,7 +16,7 @@ apt-get -y install \
     markdown pandoc htmldoc \
     chromium chromium-inspector \
     gimp inkscape xchat suckless-tools vlc mplayer iotop powertop iftop \
-    libmariadbd-dev libssl-dev libxslt-dev libxml2-dev \
+    pm-utils libmariadbd-dev libssl-dev libxslt-dev libxml2-dev \
     htop iotop powertop lsof libpq-dev postgresql-client \
     libffi-dev libtiff-dev libjpeg-dev libwebp-dev \
     libopenjpeg-dev nodejs npm docker.io flashplugin-nonfree \
