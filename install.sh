@@ -19,9 +19,10 @@ aptitude -y install \
     gimp inkscape
 
 apt-get -y install libmariadbd-dev libssl-dev libxslt-dev libxml2-dev \
-    htop iotop powertop lsof libpq-dev postgresql-client libffi-dev \
-    libtiff-dev libjpeg-dev libwebp-dev libopenjpeg-dev nodejs npm \
-    docker.io flashplugin-nonfree xchat
+                   htop iotop powertop lsof libpq-dev postgresql-client \
+                   libffi-dev libtiff-dev libjpeg-dev libwebp-dev \
+                   libopenjpeg-dev nodejs npm docker.io flashplugin-nonfree \
+                   xchat
 # TODO: arduino, firefox nightly, googletalk-plugin, skype
 
 adduser turicas docker
@@ -34,7 +35,8 @@ fi
 
 aptitude -y remove apache2 exim4
 easy_install pip
-pip install virtualenv virtualenvwrapper httpie youtube-dl
+pip install virtualenv virtualenvwrapper ipython ipython[notebook] \
+            bpython pypython httpie youtube-dl
 
 # URxvt stuff
 URXVT_PERL=/usr/lib/urxvt/perl/
