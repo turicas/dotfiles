@@ -1,6 +1,7 @@
 [user]
     name = Álvaro Justen (@turicas)
     email = alvarojusten@gmail.com
+    signingkey = 1D44961E
 
 [color]
     diff = auto
