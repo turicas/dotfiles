@@ -267,6 +267,7 @@ bindsym $mod+c exec mplayer -tv driver=v4l2:gain=1:width=640:height=480:device=/
 exec --no-startup-id /home/turicas/bin/daskeyboard
 
 # background daemos
+exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id nitrogen --set-tiled /home/turicas/background.jpg
 exec --no-startup-id xscreensaver
 exec --no-startup-id dropbox start
