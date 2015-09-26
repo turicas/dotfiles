@@ -54,5 +54,10 @@ hack() {
 	cd ~/projects/$1
 }
 
+ghc() {  # GitHub clone
+	cd ~/projects/
+	git clone git@github.com:$1.git
+}
+
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
