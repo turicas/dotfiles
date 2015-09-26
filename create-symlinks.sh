@@ -2,7 +2,8 @@
 
 path=$(pwd)
 this=$(basename $0)
-do_not_copy=("$this" "." ".." ".git" ".gitignore" "install.sh")
+do_not_copy=("$this" "." ".." ".git" ".gitignore" "install.sh"
+             "install-server.sh")
 
 for file in .* * .config/*; do
     allowed=yes
