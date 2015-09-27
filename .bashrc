@@ -36,7 +36,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 # env vars exports
 export GOPATH=$HOME/.go
-export PATH="$HOME/bin:$HOME/node_modules/.bin:$PATH"
+export PATH="$HOME/bin:$GOPATH/bin:$HOME/node_modules/.bin:$PATH"
 
 
 # bash completion
