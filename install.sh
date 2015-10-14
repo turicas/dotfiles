@@ -20,7 +20,7 @@ apt-get -y install \
     htop iotop powertop lsof libpq-dev postgresql-client \
     libffi-dev libtiff-dev libjpeg-dev libwebp-dev \
     libopenjpeg-dev nodejs npm docker.io flashplugin-nonfree \
-    xchat
+    xchat pm-utils x11-xserver-utils
 apt-get -y remove apache2 exim4
 apt-get upgrade
 apt-get dist-upgrade
