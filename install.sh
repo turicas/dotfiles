@@ -13,7 +13,7 @@ apt-get -y install \
     sudo curl lynx w3m htop \
     git gitk mercurial bzr subversion \
     make fakeroot build-essential python-setuptools python-pip python-dev \
-    markdown pandoc htmldoc \
+    python-requests markdown pandoc htmldoc \
     chromium chromium-inspector \
     gimp inkscape xchat suckless-tools vlc mplayer iotop powertop iftop \
     pm-utils libmariadbd-dev libssl-dev libxslt-dev libxml2-dev \

@@ -26,19 +26,21 @@
 
 import json
 import sys
-import urllib
+
+import requests
 
 
 IPIFY_URL = 'http://api.ipify.org/'
+TIMEOUT = 1.5  # request timeout, in seconds
 
 def get_public_ip():
     'Get the current public IP address'
     try:
-        url = urllib.urlopen(IPIFY_URL)
+        response = requests.get(IPIFY_URL, timeout=TIMEOUT)
     except:
         return '(unknown IP)'
     else:
-        return url.read().strip()
+        return response.text.strip()
 
 def print_line(message):
     """ Non-buffered printing to stdout. """

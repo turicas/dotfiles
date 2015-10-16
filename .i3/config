@@ -210,6 +210,20 @@ bar {
     mode hide
 }
 
+bar {
+    output DP1
+    workspace_buttons yes
+    tray_output none
+    mode hide
+}
+
+bar {
+    output DP2
+    workspace_buttons yes
+    tray_output none
+    mode hide
+}
+
 # do not focus windows when mouse cursor reach them
 focus_follows_mouse no
 
