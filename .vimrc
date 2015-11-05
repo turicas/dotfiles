@@ -125,3 +125,17 @@ map <F3> :w !markdown \| pandoc -f html -t plain - \| wc<CR>
 " better indentation
 vnoremap > >gv
 vnoremap < <gv
+
+" pathogen initialization
+call pathogen#infect()
+call pathogen#helptags()
+
+
+" autocomplete
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c set omnifunc=ccomplete#Complete
