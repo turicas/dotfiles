@@ -5,7 +5,7 @@ apt-get update
 apt-get -y install \
     aptitude vim-gnome vim-nox \
     iptraf iperf nmap tcptraceroute mtr ntpdate \
-    i3 i3status nitrogen xscreensaver scrot \
+    i3 i3status nitrogen xscreensaver xbacklight scrot \
     zip unzip xarchiver \
     cheese mplayer vlc \
     quicksynergy openssh-server \
@@ -20,7 +20,8 @@ apt-get -y install \
     htop iotop powertop lsof libpq-dev postgresql-client \
     libffi-dev libtiff-dev libjpeg-dev libwebp-dev \
     libopenjpeg-dev nodejs npm docker.io flashplugin-nonfree \
-    xchat pm-utils x11-xserver-utils
+    rlwrap erlang erlang-dev erlang-doc \
+    xchat pm-utils x11-xserver-utils uim
 apt-get -y remove apache2 exim4
 apt-get upgrade
 apt-get dist-upgrade
