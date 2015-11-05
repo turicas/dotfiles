@@ -53,3 +53,13 @@ sudo -u turicas git clone https://github.com/muennich/urxvt-perls.git
 sudo -u turicas git clone https://github.com/majutsushi/urxvt-font-size.git
 cp urxvt-font-size/font-size $UXRVT_PERL
 cp urxvt-perls/{clipboard,keyboard-select,url-select} $URXVT_PERL
+
+
+# vim-erlang
+
+mkdir -p ~/.vim/bundle
+cd ~/.vim/bundle
+git clone git@github.com:vim-erlang/vim-erlang-runtime.git
+git clone git@github.com:vim-erlang/vim-erlang-compiler.git
+git clone git@github.com:vim-erlang/vim-erlang-omnicomplete.git
+git clone git@github.com:vim-erlang/vim-erlang-tags.git
