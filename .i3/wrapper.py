@@ -40,7 +40,7 @@ def get_public_ip():
     except:
         return '(unknown IP)'
     else:
-        return response.text.strip()
+        return response.content.strip()
 
 def print_line(message):
     """ Non-buffered printing to stdout. """
@@ -77,6 +77,6 @@ if __name__ == '__main__':
         data = {'name': 'public_ip',
                 'full_text': '{}'.format(get_public_ip()),}
         wireless_index = [element['name'] for element in j].index('wireless')
-        j.insert(wireless_index, data)
+        #j.insert(wireless_index, data)
         # and echo back new encoded json
         print_line(prefix + json.dumps(j))

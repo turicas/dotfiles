@@ -3,9 +3,9 @@
 
 
 " Colors
-colorscheme torte
-highlight clear
-set background=light
+"colorscheme macvim-light
+"highlight clear
+set background=dark
 
 " Show line numbers
 set number
@@ -139,3 +139,13 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
+
+
+" elm-related shortcuts
+nnoremap <leader>el :ElmEvalLine<CR>
+vnoremap <leader>es :<C-u>ElmEvalSelection<CR>
+nnoremap <leader>em :ElmMakeCurrentFile<CR>
+
+call plug#begin('~/.vim/plugged')
+Plug 'elmcast/elm-vim'
+call plug#end()

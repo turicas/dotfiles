@@ -22,3 +22,7 @@ alias erl='rlwrap -a erl'
 
 # Git
 alias gf='git fetch --all --prune'
+
+# Ledger
+alias balance='ledger --price-db ~/money/prices.dat -f ~/money/ledger.dat \
+	                  --no-total --current --market balance not Equity'

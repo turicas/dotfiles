@@ -14,6 +14,7 @@ apt-get -y install \
     git gitk mercurial bzr subversion \
     make fakeroot build-essential python-setuptools python-pip python-dev \
     python-requests markdown pandoc htmldoc \
+    python3.6 python3.6-dev \
     chromium chromium-inspector \
     gimp inkscape xchat suckless-tools vlc mplayer iotop powertop iftop \
     pm-utils libmariadbd-dev libssl-dev libxslt-dev libxml2-dev \
@@ -21,7 +22,8 @@ apt-get -y install \
     libffi-dev libtiff-dev libjpeg-dev libwebp-dev \
     libopenjpeg-dev nodejs npm docker.io flashplugin-nonfree \
     rlwrap erlang erlang-dev erlang-doc \
-    xchat pm-utils x11-xserver-utils uim
+    xchat pm-utils x11-xserver-utils uim \
+    kazam beep dnsutils
 apt-get -y remove apache2 exim4
 apt-get upgrade
 apt-get dist-upgrade
@@ -53,6 +55,8 @@ sudo -u turicas git clone https://github.com/muennich/urxvt-perls.git
 sudo -u turicas git clone https://github.com/majutsushi/urxvt-font-size.git
 cp urxvt-font-size/font-size $UXRVT_PERL
 cp urxvt-perls/{clipboard,keyboard-select,url-select} $URXVT_PERL
+wget -c -t 0 https://media.unpythonic.net/emergent-files/01340900642/unichr \
+	-O $URXVT_PERL/unichr
 
 
 # vim-erlang

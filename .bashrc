@@ -26,7 +26,7 @@ dcvs_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ git\[\1\]/'
     hg branch 2> /dev/null | sed -e 's/\(.*\)/ hg\[\1\]/'
 }
-PS1='\u@$(cat /etc/hostname):\[\033[01;34m\]\w\[\033[00m\]$(dcvs_branch)\n$ '
+PS1='\u@$(cat /etc/hostname):\[\033[01;34m\]\w\[\033[00m\] $(dcvs_branch)\n$ '
 
 
 # (virtualenv & virtualenvwrapper)-related things
@@ -50,8 +50,8 @@ fi
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
 hack() {
-	workon $1
 	cd ~/projects/$1
+	workon $1
 }
 
 ghc() {  # GitHub clone
@@ -61,3 +61,10 @@ ghc() {  # GitHub clone
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+# added by travis gem
+#[ -f /home/turicas/.travis/travis.sh ] && source /home/turicas/.travis/travis.sh
+
+# Add RVM to PATH for scripting
+#export PATH="$PATH:$HOME/.rvm/bin"
+#source /home/turicas/.rvm/scripts/rvm

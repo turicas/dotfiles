@@ -67,7 +67,7 @@ bindsym $mod+f fullscreen
 # change container layout (stacked, tabbed, default)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout default
+bindsym $mod+x layout default
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -110,7 +110,7 @@ bindsym $mod+Shift+C reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+R restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+E exit
+bindsym $mod+Shift+O exit
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -160,8 +160,8 @@ bar {
         status_command i3status -c ~/.i3/i3status.conf | ~/.i3/wrapper.py
         mode dock
         workspace_buttons yes
-        output LVDS1
-        tray_output LVDS1
+        output LVDS-1
+        tray_output LVDS-1
         position bottom
 
         colors {
@@ -197,28 +197,28 @@ bar {
 }
 
 bar {
-    output HDMI1
+    output HDMI-1
     workspace_buttons yes
     tray_output none
     #mode hide
 }
 
 bar {
-    output VGA1
+    output VGA-1
     workspace_buttons yes
     tray_output none
     mode hide
 }
 
 bar {
-    output DP1
+    output DP-1
     workspace_buttons yes
     tray_output none
     mode hide
 }
 
 bar {
-    output DP2
+    output DP-2
     workspace_buttons yes
     tray_output none
     mode hide
@@ -258,7 +258,13 @@ bindsym Ctrl+Mod1+l exec xscreensaver-command -lock
 
 # displaying monitors
 bindsym $mod+m exec monitors
-bindsym $mod+c exec mplayer -tv driver=v4l2:gain=1:width=640:height=480:device=/dev/video0:fps=10:outfmt=rgb16 tv://
+#bindsym $mod+c exec mplayer -tv driver=v4l2:gain=1:width=640:height=480:device=/dev/video0:fps=10:outfmt=rgb16 tv://
+bindsym $mod+c exec mplayer -tv driver=v4l2:gain=1:device=/dev/video1 -vo gl2 tv://
+bindsym $mod+n exec mplayer -tv driver=v4l2:gain=1:device=/dev/video0 -vo gl2 tv://
+
+# screen bightness
+bindsym $mod+equal exec /home/turicas/bin/brightness inc
+bindsym $mod+minus exec /home/turicas/bin/brightness dec
 
 # 'monitors' is a shell script to toggle displays (notebook,
 # notebook + HDMI monitor, notebook + VGA monitor, projector)
