@@ -1,0 +1,5 @@
+debian
+mailhog/mailhog
+postgres
+redis
+ubuntu
