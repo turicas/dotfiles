@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Run as root
+
+set -e
+
 # APT packages
 apt update
 apt -y install $(cat server-apt-packages.txt) $(cat desktop-apt-packages.txt)
@@ -16,7 +20,3 @@ pip3 install -r desktop-pip-packages.txt
 adduser turicas docker
 adduser turicas sudo
 adduser turicas dialout
-
-mkdir ~/software
-git clone git@github.com/pyenv/pyenv.git ~/software/pyenv
-git clone https://github.com/pyenv/pyenv-virtualenv.git ~/software/pyenv/plugins/pyenv-virtualenv

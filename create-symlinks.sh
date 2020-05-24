@@ -2,10 +2,21 @@
 
 path=$(pwd)
 this=$(basename $0)
-do_not_copy=("$this" "." ".." ".git" ".gitignore" "install-desktop.sh"
-             "install-server.sh" "server-apt-packages.txt"
-             "server-pip-packages.txt" "desktop-apt-packages.txt"
-             "desktop-pip-packages.txt")
+do_not_copy=(
+   "$this"
+   "."
+   ".."
+   ".git"
+   ".gitignore"
+   "desktop-apt-packages.txt"
+   "desktop-install.sh"
+   "desktop-pip-packages.txt"
+   "desktop-post-install.sh"
+   "server-apt-packages.txt"
+   "server-docker-images.txt"
+   "server-install.sh"
+   "server-pip-packages.txt"
+)
 
 for file in .* * .config/*; do
     allowed=yes
@@ -18,8 +29,8 @@ for file in .* * .config/*; do
     if [ $allowed = "no" ]; then
         echo "*** Ignoring file '$file'"
     else
-        if [ ! -e ~/$file ]; then
-            ln -s "$path/$file" ~/$file
+        if [ ! -e "$HOME/$file" ]; then
+            ln -s "$path/$file" "$HOME/$file"
             echo "*** Created link to '$file'"
         else
             echo "*** Link to '$file' NOT created! File already exists."

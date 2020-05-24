@@ -105,6 +105,10 @@ eval "$(pyenv virtualenv-init -)"
 
 
 # Custom commands
+if [ -e $HOME/.env ]; then
+   source $HOME/.env
+fi
+
 hack() {
 	cd ~/projects/$1
 	if [ -f ".activate" ]; then

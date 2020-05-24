@@ -35,7 +35,6 @@ lynx
 make
 markdown
 mercurial
-mongo-tools
 mtr
 nmap
 nmon
@@ -44,9 +43,6 @@ pandoc
 parted
 postgresql-client
 psmisc
-python-dev
-python-pip
-python-setuptools
 python3-dev
 python3-pip
 python3-setuptools
@@ -67,9 +63,11 @@ tree
 unrar
 unzip
 vim-nox
-virtualbox
 w3m
 wget
+wireguard
+wireguard-dkms
+wireguard-tools
 xauth
 xz-utils
 zip

@@ -1,7 +1,6 @@
 beep
 cheese
 chromium
-chromium-inspector
 cups
 cups-client
 cups-common
@@ -9,9 +8,6 @@ cups-core-drivers
 cups-daemon
 cups-ipp-utils
 cups-server-common
-erlang
-erlang-dev
-erlang-doc
 firefox-esr
 firmware-iwlwifi
 gimp
@@ -26,13 +22,12 @@ kazam
 kdenlive
 libjpeg-dev
 libmariadbd-dev
-libopenjpeg-dev
 libreoffice
-libssl1.0-dev
+libssl-dev
 libtiff-dev
 libwebp-dev
 libxml2-dev
-libxslt-dev
+libxslt1-dev
 mplayer
 nautilus
 nitrogen
@@ -41,7 +36,6 @@ openssh-server
 pm-utils
 powertop
 printer-driver-dymo
-quicksynergy
 rlwrap
 rxvt-unicode
 screen
@@ -51,7 +45,6 @@ task-gnome-desktop
 terminator
 tigervnc-viewer
 totem
-vim-gnome
 vlc
 wireless-tools
 x11-xserver-utils
