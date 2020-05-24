@@ -20,7 +20,7 @@ font pango:DejaVu Sans Mono 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvtc
+bindsym $mod+Return exec gnome-terminal
 #i3-sensible-terminal
 
 # kill focused window
@@ -157,7 +157,7 @@ bindsym $mod+b border toggle
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status -c ~/.i3/i3status.conf | ~/.i3/wrapper.py
+        status_command i3status -c ~/.i3/i3status.conf
         mode dock
         workspace_buttons yes
         output LVDS-1
@@ -178,10 +178,10 @@ bar {
 
 bar {
         status_command i3status -c ~/.i3/i3status.conf | ~/.i3/wrapper.py
-        mode dock
+        mode hide
         workspace_buttons yes
-        output eDP1
-        tray_output eDP1
+        output eDP-1
+        tray_output eDP-1
         position bottom
 
         colors {
@@ -259,7 +259,7 @@ bindsym Ctrl+Mod1+l exec xscreensaver-command -lock
 # displaying monitors
 bindsym $mod+m exec monitors
 #bindsym $mod+c exec mplayer -tv driver=v4l2:gain=1:width=640:height=480:device=/dev/video0:fps=10:outfmt=rgb16 tv://
-bindsym $mod+c exec mplayer -tv driver=v4l2:gain=1:device=/dev/video1 -vo gl2 tv://
+bindsym $mod+c exec mplayer -tv driver=v4l2:gain=1:device=/dev/video2 -vo gl2 tv://
 bindsym $mod+n exec mplayer -tv driver=v4l2:gain=1:device=/dev/video0 -vo gl2 tv://
 
 # screen bightness
@@ -295,7 +295,6 @@ exec --no-startup-id nm-applet
 exec --no-startup-id urxvtd -q -o -f
 
 # configure my workspaces
-exec --no-startup-id i3-msg 'workspace 1; exec urxvtc'
-exec --no-startup-id i3-msg 'workspace 2; exec firefox'
-exec --no-startup-id i3-msg 'workspace 3; exec xchat; exec pidgin'
-exec --no-startup-id i3-msg 'workspace 1'
+exec --no-startup-id i3-msg 'workspace 1; exec gnome-terminal'
+exec --no-startup-id i3-msg 'workspace 2; exec google-chrome'
+exec --no-startup-id i3-msg 'workspace 2'

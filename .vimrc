@@ -133,8 +133,8 @@ call pathogen#helptags()
 
 " autocomplete
 autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript,js,jsx setlocal omnifunc=javascriptcomplete#CompleteJS shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
