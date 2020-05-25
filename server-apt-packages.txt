@@ -50,7 +50,6 @@ rar
 rsync
 sl
 software-properties-common
-sqlite
 sqlite3
 subversion
 sudo
