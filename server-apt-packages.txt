@@ -29,6 +29,7 @@ libpq-dev
 libreadline-dev
 libsqlite3-dev
 libssl-dev
+linux-image-amd64
 llvm
 lsof
 lynx
