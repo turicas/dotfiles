@@ -60,6 +60,7 @@ tigervnc-standalone-server
 tk-dev
 tmux
 tree
+tsocks
 unrar
 unzip
 vim-nox
