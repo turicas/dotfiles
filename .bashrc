@@ -74,6 +74,7 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+export PS1='($(pyenv version-name)) '$PS1
 
 # env vars exports
 export GOPATH=$HOME/.go
@@ -96,21 +97,42 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# pyenv configurations
-# to install: git clone git@github.com/pyenv/pyenv.git ~/software/pyenv
-export PYENV_ROOT="$HOME/software/pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-
 # Custom commands
 if [ -e $HOME/.env ]; then
    source $HOME/.env
 fi
 
 hack() {
-	cd ~/projects/$1
+	project_name="$1"
+	projects_home=~/projects
+
+	if [ -z "$project_name" ]; then
+		echo "ERROR - Usage: $0 <project-name>"
+		exit 1
+	fi
+
+	project_path=$projects_home/$project_name
+	env_file=$project_path/.env
+	docker_compose_file=$project_path/docker-compose.yml
+	cd $project_path
+
+	# Export environment variables
+	if [ -f "$env_file" ]; then
+		set -o allexport
+		source "$env_file"
+		set +o allexport
+	fi
+
+	# Activate virtualenv
+	if [[ -e "$(which pyenv)" && -e "$(pyenv prefix $project_name)" ]]; then
+		pyenv activate $project_name
+	fi
+
+	# Run needed containers
+	if [ -f "$docker_compose_file" ]; then
+		docker-compose -p $project_name -f $docker_compose_file up -d
+	fi
+
 	if [ -f ".activate" ]; then
 		source .activate
 	fi
@@ -134,3 +156,10 @@ mp4togif() {
 json_escape () {
     printf '%s' $1 | python -c 'import json,sys; print(json.dumps(sys.stdin.read()))'
 }
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1

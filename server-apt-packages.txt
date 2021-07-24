@@ -8,6 +8,7 @@ bzr
 ca-certificates
 curl
 dnsutils
+duc
 fakeroot
 file
 git
@@ -23,6 +24,7 @@ iperf
 iptraf-ng
 libbz2-dev
 libffi-dev
+liblzma-dev
 libncurses5-dev
 libncursesw5-dev
 libpq-dev
@@ -37,6 +39,8 @@ make
 markdown
 mercurial
 mtr
+ncdu
+ndppd
 nmap
 nmon
 ntpdate
@@ -66,6 +70,7 @@ unzip
 vim-nox
 w3m
 wget
+whois
 wireguard
 wireguard-dkms
 wireguard-tools

@@ -1,6 +1,7 @@
 " Álvaro Justen's VIM configuration
 " https://github.com/turicas/dotfiles/
 
+set nocompatible
 
 " Colors
 "colorscheme macvim-light

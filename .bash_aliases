@@ -13,3 +13,5 @@ alias ssh="LC_ALL=en_US.UTF-8 ssh"
 
 # Git
 alias gf='git fetch --all --prune'
+
+alias mysync='rsync -aAXvzP'

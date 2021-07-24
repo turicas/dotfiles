@@ -8,6 +8,7 @@ cups-core-drivers
 cups-daemon
 cups-ipp-utils
 cups-server-common
+ffmpeg
 firefox-esr
 firmware-iwlwifi
 gimp
@@ -21,13 +22,16 @@ inkscape
 kazam
 kdenlive
 libjpeg-dev
+libleptonica-dev
 libmariadbd-dev
 libreoffice
 libssl-dev
+libtesseract-dev
 libtiff-dev
 libwebp-dev
 libxml2-dev
 libxslt1-dev
+libzbar-dev
 mplayer
 nautilus
 nitrogen
