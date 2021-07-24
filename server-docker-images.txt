@@ -3,3 +3,4 @@ mailhog/mailhog
 postgres
 redis
 ubuntu
+python
