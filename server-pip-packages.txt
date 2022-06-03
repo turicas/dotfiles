@@ -1,6 +1,4 @@
-docker-compose
 httpie
 ipython
 s3cmd
-s4cmd
 youtube-dl

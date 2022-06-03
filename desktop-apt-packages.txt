@@ -1,6 +1,8 @@
 beep
+blueman
 cheese
 chromium
+console-common
 cups
 cups-client
 cups-common
@@ -14,6 +16,7 @@ firmware-iwlwifi
 gimp
 gitk
 glabels
+gnome
 gparted
 i3
 i3status
@@ -32,11 +35,12 @@ libwebp-dev
 libxml2-dev
 libxslt1-dev
 libzbar-dev
-mplayer
+mpv
 nautilus
 nitrogen
 obs-studio
 openssh-server
+pavucontrol
 pm-utils
 powertop
 printer-driver-dymo
@@ -44,6 +48,7 @@ rlwrap
 rxvt-unicode
 screen
 scrot
+sqlitebrowser
 suckless-tools
 task-gnome-desktop
 terminator
@@ -54,6 +59,5 @@ wireless-tools
 x11-xserver-utils
 xarchiver
 xbacklight
-xchat
 xscreensaver
 xsel
