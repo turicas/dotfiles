@@ -76,10 +76,6 @@ xterm*|rxvt*)
 esac
 export PS1='($(pyenv version-name)) '$PS1
 
-# env vars exports
-export GOPATH=$HOME/.go
-export PATH="$HOME/bin:$GOPATH/bin:$HOME/node_modules/.bin:$PATH"
-
 
 # source more bashrc files
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
@@ -98,9 +94,6 @@ if ! shopt -oq posix; then
 fi
 
 # Custom commands
-if [ -e $HOME/.env ]; then
-   source $HOME/.env
-fi
 
 hack() {
 	project_name="$1"
@@ -130,7 +123,7 @@ hack() {
 
 	# Run needed containers
 	if [ -f "$docker_compose_file" ]; then
-		docker-compose -p $project_name -f $docker_compose_file up -d
+		docker compose -p $project_name -f $docker_compose_file up -d
 	fi
 
 	if [ -f ".activate" ]; then
@@ -157,8 +150,11 @@ json_escape () {
     printf '%s' $1 | python -c 'import json,sys; print(json.dumps(sys.stdin.read()))'
 }
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+
+# env vars exports
+export GOPATH=$HOME/.go
+export PYENV_ROOT="$HOME/software/pyenv"
+export PATH="$HOME/bin:$GOPATH/bin:$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"

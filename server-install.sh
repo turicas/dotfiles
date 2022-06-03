@@ -15,7 +15,7 @@ pip3 install -r server-pip-packages.txt
 # Docker base install
 apt remove docker docker.io containerd runc
 curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian buster stable"
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian bullseye stable"
 apt update
 apt -y install docker-ce docker-ce-cli containerd.io
 
