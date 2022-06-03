@@ -12,6 +12,7 @@ duc
 fakeroot
 file
 git
+gnupg
 gnupg-agent
 gnupg2
 golang
@@ -33,6 +34,7 @@ libsqlite3-dev
 libssl-dev
 linux-image-amd64
 llvm
+lsb-release
 lsof
 lynx
 make
