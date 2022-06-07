@@ -54,6 +54,7 @@ task-gnome-desktop
 terminator
 tigervnc-viewer
 totem
+vim-gtk3
 vlc
 wireless-tools
 x11-xserver-utils

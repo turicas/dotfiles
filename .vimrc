@@ -59,7 +59,7 @@ augroup END
 set mouse=a
 
 " Ctrl+c to copy to clipboard (only works when VIM is open)
-map <C-c> "+y<CR>
+noremap <C-c> "+y
 
 " Show trailing characters and undesirable spaces
 set list
