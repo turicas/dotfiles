@@ -46,6 +46,7 @@ ndppd
 nmap
 nmon
 ntpdate
+nvme-cli
 pandoc
 parted
 postgresql-client
