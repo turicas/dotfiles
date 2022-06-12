@@ -106,7 +106,10 @@ hack() {
 
 	project_path=$projects_home/$project_name
 	env_file=$project_path/.env
-	docker_compose_file=$project_path/docker-compose.yml
+	docker_compose_file_1=$project_path/compose.yaml
+	docker_compose_file_2=$project_path/compose.yml
+	docker_compose_file_3=$project_path/docker-compose.yaml
+	docker_compose_file_4=$project_path/docker-compose.yml
 	cd $project_path
 
 	# Export environment variables
@@ -122,8 +125,14 @@ hack() {
 	fi
 
 	# Run needed containers
-	if [ -f "$docker_compose_file" ]; then
-		docker compose -p $project_name -f $docker_compose_file up -d
+	if [ -f "$docker_compose_file_1" ]; then
+		docker compose -p $project_name -f $docker_compose_file_1 up -d
+	elif [ -f "$docker_compose_file_2" ]; then
+		docker compose -p $project_name -f $docker_compose_file_2 up -d
+	elif [ -f "$docker_compose_file_3" ]; then
+		docker compose -p $project_name -f $docker_compose_file_3 up -d
+	elif [ -f "$docker_compose_file_4" ]; then
+		docker compose -p $project_name -f $docker_compose_file_4 up -d
 	fi
 
 	if [ -f ".activate" ]; then
