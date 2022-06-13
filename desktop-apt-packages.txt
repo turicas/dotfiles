@@ -55,6 +55,7 @@ terminator
 tigervnc-viewer
 totem
 vim-gtk3
+virt-manager
 vlc
 wireless-tools
 x11-xserver-utils
