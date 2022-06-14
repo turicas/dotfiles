@@ -33,6 +33,7 @@ echo "deb https://packagecloud.io/dokku/dokku/ubuntu/ ${OS_ID} main" | sudo tee 
 sudo apt-get update -qq >/dev/null
 sudo apt-get install -qq -y dokku
 sudo dokku plugin:install-dependencies --core
+sudo dokku config:set --global DOKKU_RM_CONTAINER=1
 
 # Install Dokku plugins:
 dokku plugin:install https://github.com/dokku/dokku-maintenance.git maintenance

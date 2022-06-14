@@ -37,6 +37,6 @@ rm "/tmp/google-chrome.deb"
 pip3 install -r desktop-pip-packages.txt
 
 # Users and groups
-adduser turicas docker
-adduser turicas sudo
-adduser turicas dialout
+for group in dialout docker libvirt sudo; do
+	adduser turicas $group
+done
