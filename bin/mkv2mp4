@@ -1,0 +1,15 @@
+#!/bin/bash
+
+input="$1"
+output="$2"
+
+if [[ -z $input ]]; then
+	echo "ERROR - Usage: $(basename $0) <input.mkv> [output.mp4]"
+	exit 1
+fi
+
+if [[ -z $output ]]; then
+	output=$(echo "$input" | sed 's/.mkv$/.mp4/i')
+fi
+
+ffmpeg -i "$input" -vcodec libx265 -crf 24 -movflags +faststart "$output"
