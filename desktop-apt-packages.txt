@@ -13,6 +13,8 @@ cups-server-common
 ffmpeg
 firefox-esr
 firmware-iwlwifi
+gedit
+gedit-plugins
 gimp
 gitk
 glabels
