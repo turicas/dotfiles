@@ -120,7 +120,7 @@ hack() {
 	fi
 
 	# Activate virtualenv
-	if [[ -e "$(which pyenv)" && -e "$(pyenv prefix $project_name)" ]]; then
+	if [[ -e "$(which pyenv)" && -e "$(pyenv prefix $project_name 2> /dev/null)" ]]; then
 		pyenv activate $project_name
 	fi
 

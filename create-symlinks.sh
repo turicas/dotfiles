@@ -1,6 +1,7 @@
 #!/bin/bash
 
 path=$(pwd)
+# TODO: ignore .git
 for filename in .*; do
     if [ ! -e "$HOME/$filename" ]; then
         ln -s "$path/$filename" "$HOME/$filename"
