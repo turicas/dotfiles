@@ -15,8 +15,8 @@
 -- was not closed. Default: '%/%R%x%# '
 -- Prompt 3 is issued when you are running an SQL COPY FROM STDIN command and
 -- you need to type in a row value on the terminal. Default: '>> '
-\set PROMPT1 '%M:%> %n@%/%R%#%x '
-\set PROMPT2 '%M:%> %n@%/ (%l) %R%#%x '
+\set PROMPT1 '%n@%M:%>/%/%R%#%x '
+\set PROMPT2 '%n@%M:%>/%/ (%l) %R%#%x '
 \set PROMPT3 '>> '
 
 -- \timing [ on | off ]
