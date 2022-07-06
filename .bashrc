@@ -162,6 +162,16 @@ json_escape () {
     printf '%s' $1 | python -c 'import json,sys; print(json.dumps(sys.stdin.read()))'
 }
 
+msync() {  # rsync with my preferred options
+	#-a: --archive
+	#-c: --checksum
+	#-z: --compress
+	#-P: --partial --progress
+	#-h: --human-readable
+	#-v: --verbose
+	rsync -aczPhhhv $@
+}
+
 # env vars exports
 export GOPATH=$HOME/.go
 export PYENV_ROOT="$HOME/.pyenv"
