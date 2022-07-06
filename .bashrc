@@ -97,6 +97,9 @@ fi
 
 hack() {
 	project_name="$1"
+	if [[ $project_name = "." ]]; then
+		project_name=$(basename $(pwd))
+	fi
 	projects_home=~/projects
 
 	if [ -z "$project_name" ]; then
