@@ -23,6 +23,7 @@ httrack
 iotop
 iperf
 iptraf-ng
+kubernetes-client
 libbz2-dev
 libffi-dev
 liblzma-dev
@@ -65,6 +66,7 @@ sudo
 tcptraceroute
 tigervnc-common
 tigervnc-standalone-server
+time
 tk-dev
 tmux
 tree
