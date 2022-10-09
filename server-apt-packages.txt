@@ -1,6 +1,7 @@
 apt-listbugs
 apt-transport-https
 aria2
+asciinema
 bash-completion
 build-essential
 byobu

@@ -38,6 +38,7 @@ libwebp-dev
 libxml2-dev
 libxslt1-dev
 libzbar-dev
+mailutils
 mpv
 nautilus
 nitrogen
@@ -45,6 +46,7 @@ obs-studio
 openssh-server
 pavucontrol
 pm-utils
+postfix
 powertop
 printer-driver-dymo
 rlwrap
