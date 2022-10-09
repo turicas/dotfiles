@@ -1,0 +1,27 @@
+#!/usr/bin/python3
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("input_filename")
+    parser.add_argument("--force", "-f", action="store_true")
+    parser.add_argument("--output-filename", "-o")
+    parser.add_argument("--indent", "-i", type=int, default=2)
+    args = parser.parse_args()
+
+    if not args.force and (args.output_filename is None or args.input_filename == args.output_filename):
+        filename = Path(args.input_filename)
+        answer = input(f"Do you want to overwrite file '{filename.name}'? (y/n) ")
+        if answer.strip().lower() not in ("y", "yes"):
+            print("Aborting")
+            exit(1)
+
+    with open(args.input_filename) as fobj:
+        data = json.load(fobj)
+    with open(args.output_filename or args.input_filename, mode="w") as fobj:
+        json.dump(data, fobj, indent=args.indent)
