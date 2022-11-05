@@ -11,8 +11,8 @@ set background=dark
 " Show line numbers
 set number
 
-" 80-th column limit
-set textwidth=79
+" 120-th column limit
+set textwidth=119
 set colorcolumn=+1
 highlight ColorColumn term=reverse cterm=reverse gui=reverse
 
