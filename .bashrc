@@ -163,13 +163,17 @@ json_escape () {
 }
 
 msync() {  # rsync with my preferred options
+	#-P: --partial --progress
 	#-a: --archive
 	#-c: --checksum
-	#-z: --compress
-	#-P: --partial --progress
 	#-h: --human-readable
 	#-v: --verbose
+	#-z: --compress
 	rsync -aczPhhhv $@
+}
+
+http-server() {
+    docker run -p 8000:80 -v $(pwd):/usr/share/nginx/html nginx
 }
 
 # env vars exports

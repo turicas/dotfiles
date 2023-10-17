@@ -28,6 +28,7 @@ bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec bash -i dmenu_run
+bindsym $mod+p exec flameshot gui
 
 # change focus
 bindsym $mod+j focus left

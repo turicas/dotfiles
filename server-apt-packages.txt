@@ -72,6 +72,7 @@ tk-dev
 tmux
 tree
 tsocks
+unar
 unrar
 unzip
 vim-nox
