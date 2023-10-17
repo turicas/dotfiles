@@ -65,6 +65,7 @@ sqlite3
 subversion
 sudo
 tcptraceroute
+telnet
 tigervnc-common
 tigervnc-standalone-server
 time
