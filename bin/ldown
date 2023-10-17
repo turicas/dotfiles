@@ -1,0 +1,7 @@
+#!/bin/bash
+
+output="eDP-1"
+newValue=$(echo $(xrandr --verbose | grep --color=no -i brightness | awk '{print $2}') - 0.1 | bc -l)
+xrandr \
+	--output "$output" \
+	--brightness "$newValue"
