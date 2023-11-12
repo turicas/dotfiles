@@ -13,6 +13,7 @@ duc
 fakeroot
 file
 git
+git-lfs
 gnupg
 gnupg-agent
 gnupg2
