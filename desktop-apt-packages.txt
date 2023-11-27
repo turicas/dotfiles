@@ -21,6 +21,7 @@ gitk
 glabels
 gnome
 gparted
+gvfs-backends
 i3
 i3status
 iftop
