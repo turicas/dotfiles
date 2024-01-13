@@ -169,7 +169,7 @@ msync() {  # rsync with my preferred options
 	#-h: --human-readable
 	#-v: --verbose
 	#-z: --compress
-	rsync -aczPhhhv $@
+	rsync -aAczXNPhhhv $@
 }
 
 http-server() {
