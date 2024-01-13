@@ -146,34 +146,11 @@ hack() {
 ghc() {  # GitHub Clone
 	cd ~/projects/
 	git clone git@github.com:$1.git
-}
-
-mp4togif() {
-	TEMP_DIR="/tmp/gif-$(basename $1)"
-	mkdir -p "$TEMP_DIR"
-
-	ffmpeg -i "$1" -r 30 "$TEMP_DIR/frame-%03d.jpg"
-	convert -delay 3 -loop 0 "$TEMP_DIR/*.jpg" $(pwd)/$(basename $1).gif
-
-	rm -rf "$TEMP_DIR"
+	cd $1
 }
 
 json_escape () {
     printf '%s' $1 | python -c 'import json,sys; print(json.dumps(sys.stdin.read()))'
-}
-
-msync() {  # rsync with my preferred options
-	#-P: --partial --progress
-	#-a: --archive
-	#-c: --checksum
-	#-h: --human-readable
-	#-v: --verbose
-	#-z: --compress
-	rsync -aAczXNPhhhv $@
-}
-
-http-server() {
-    docker run -p 8000:80 -v $(pwd):/usr/share/nginx/html nginx
 }
 
 # env vars exports

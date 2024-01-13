@@ -1,0 +1,16 @@
+#!/bin/bash
+
+mp4_filename=$1
+
+if [[ -z $mp4_filename ]]; then
+  echo "ERROR - Usage: $0 <mp4_filename>"
+  exit 1
+fi
+
+TEMP_DIR="/tmp/gif-$(basename mp4_filename)"
+mkdir -p "$TEMP_DIR"
+
+ffmpeg -i "$mp4_filename" -r 30 "$TEMP_DIR/frame-%03d.jpg"
+convert -delay 3 -loop 0 "$TEMP_DIR/*.jpg" $(pwd)/$(basename $mp4_filename).gif
+
+rm -rf "$TEMP_DIR"
