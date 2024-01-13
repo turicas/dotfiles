@@ -10,6 +10,7 @@ ca-certificates
 curl
 dnsutils
 duc
+ethtool
 fakeroot
 file
 git
@@ -38,6 +39,7 @@ libssl-dev
 linux-image-amd64
 llvm
 lsb-release
+lshw
 lsof
 lynx
 make
