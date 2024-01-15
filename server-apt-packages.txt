@@ -7,6 +7,7 @@ build-essential
 byobu
 bzr
 ca-certificates
+cbm
 curl
 dnsutils
 duc
