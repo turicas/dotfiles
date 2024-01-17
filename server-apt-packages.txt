@@ -3,6 +3,7 @@ apt-transport-https
 aria2
 asciinema
 bash-completion
+bridge-utils
 build-essential
 byobu
 bzr
