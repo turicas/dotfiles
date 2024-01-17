@@ -37,6 +37,7 @@ libpq-dev
 libreadline-dev
 libsqlite3-dev
 libssl-dev
+linux-cpupower
 linux-image-amd64
 llvm
 lsb-release
