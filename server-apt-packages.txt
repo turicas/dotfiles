@@ -83,6 +83,7 @@ unar
 unrar
 unzip
 vim-nox
+vnstat
 w3m
 wget
 whois
