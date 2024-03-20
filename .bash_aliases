@@ -9,7 +9,7 @@ alias egrep='egrep --color=yes'
 
 # Disks
 alias disk-destroy='sudo dd if=/dev/urandom bs=8M status=progress oflag=sync'
-alias mdd='time dd status=progress oflag=sync'
+alias mdd='time dd status=progress oflag=sync bs=1M'
 
 # SSH
 alias ssh="LC_ALL=en_US.UTF-8 ssh"
