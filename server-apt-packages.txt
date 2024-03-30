@@ -3,6 +3,7 @@ apt-transport-https
 aria2
 asciinema
 bash-completion
+bat
 bridge-utils
 build-essential
 byobu
@@ -21,6 +22,7 @@ gnupg
 gnupg-agent
 gnupg2
 golang
+gping
 hdparm
 htmldoc
 htop
@@ -28,6 +30,7 @@ httrack
 iotop
 iperf
 iptraf-ng
+jq
 kubernetes-client
 libbz2-dev
 libffi-dev
@@ -49,6 +52,7 @@ make
 markdown
 mercurial
 mtr
+nala
 ncdu
 ndppd
 nmap
@@ -64,6 +68,7 @@ python3-dev
 python3-pip
 python3-setuptools
 rar
+rg
 rsync
 sl
 software-properties-common
