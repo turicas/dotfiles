@@ -52,9 +52,6 @@ augroup resCur
   autocmd BufWinEnter * call ResCur()
 augroup END
 
-" Show line where you are:
-" set cursorline
-
 " Use the mouse
 set mouse=a
 
@@ -100,12 +97,6 @@ let mapleader = ","
 set wildmenu
 set wildmode=list:longest
 
-" These two options, when set together, will make /-style searches
-" case-sensitive only if there is a capital letter in the search expression.
-" *-style searches continue to be consistently case-sensitive.
-set ignorecase
-set smartcase
-
 " A running gvim will always have a window title, but when vim is run within an
 " xterm, by default it inherits the terminal’s current title.
 set title
@@ -121,32 +112,6 @@ set scrolloff=15
 " end.
 set ruler
 
-map <F3> :w !markdown \| pandoc -f html -t plain - \| wc<CR>
-
 " better indentation
 vnoremap > >gv
 vnoremap < <gv
-
-" pathogen initialization
-call pathogen#infect()
-call pathogen#helptags()
-
-
-" autocomplete
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript,js,jsx setlocal omnifunc=javascriptcomplete#CompleteJS shiftwidth=2 tabstop=2 softtabstop=2 expandtab
-autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
-
-
-" elm-related shortcuts
-nnoremap <leader>el :ElmEvalLine<CR>
-vnoremap <leader>es :<C-u>ElmEvalSelection<CR>
-nnoremap <leader>em :ElmMakeCurrentFile<CR>
-
-call plug#begin('~/.vim/plugged')
-Plug 'elmcast/elm-vim'
-call plug#end()
