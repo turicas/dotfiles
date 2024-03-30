@@ -159,6 +159,7 @@ bindsym $mod+b border toggle
 # finds out, if available)
 bar {
         status_command i3status -c ~/.i3/i3status.conf
+        font DejaVuSansM Nerd Font 10
         mode dock
         workspace_buttons yes
         output LVDS-1
