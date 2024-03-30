@@ -115,3 +115,7 @@ set ruler
 " better indentation
 vnoremap > >gv
 vnoremap < <gv
+
+" Move tabs
+nnoremap <C-h> :-tabmove<CR>
+nnoremap <C-l> :+tabmove<CR>
