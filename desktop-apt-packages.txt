@@ -53,6 +53,7 @@ printer-driver-dymo
 rlwrap
 rxvt-unicode
 screen
+screenkey
 scrot
 sqlitebrowser
 suckless-tools
