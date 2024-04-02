@@ -19,7 +19,7 @@ done
 rustup default stable
 
 # Other software
-./install-fonts.sh
-./install-neovim.sh
-./install-tree-sitter.sh
-./download-webdrivers.sh
+./install/fonts.sh
+./install/neovim.sh
+./install/tree-sitter.sh
+./install/webdrivers.sh
