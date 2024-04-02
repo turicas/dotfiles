@@ -2,6 +2,7 @@
 " https://github.com/turicas/dotfiles/
 
 set nocompatible
+set laststatus=2
 
 " Colors
 "colorscheme macvim-light
@@ -10,6 +11,7 @@ set background=dark
 
 " Show line numbers
 set number
+set relativenumber
 
 " 120-th column limit
 set textwidth=119
@@ -60,7 +62,7 @@ noremap <C-c> "+y
 
 " Show trailing characters and undesirable spaces
 set list
-set listchars=tab:▸\ ,trail:·,nbsp:~
+set listchars=tab:▸\ ,trail:·,nbsp:~,extends:→
 
 " Remove trailing spaces when save buffer
 autocmd BufWritePre * :%s/\s\+$//e
@@ -91,11 +93,13 @@ set smarttab      " insert tabs on the start of a line according to
 match Todo /\s\+$/
 
 " Changes leader key from "\" to ","
-let mapleader = ","
+let mapleader = " "
+nnoremap <leader>n :bn<CR>
+nnoremap <leader>p :bp<CR>
 
 " <TAB> completion in command-mode
 set wildmenu
-set wildmode=list:longest
+set wildmode=list:full
 
 " A running gvim will always have a window title, but when vim is run within an
 " xterm, by default it inherits the terminal’s current title.
@@ -106,6 +110,8 @@ set title
 " scrolling three lines before the border, keeping more context around where
 " you’re working.
 set scrolloff=15
+
+set hidden                     " Possibility to have more than one unsaved buffers.
 
 " in the bottom right corner of the status line there will be something like:
 " 529, 35 68%, representing line 529, column 35, about 68% of the way to the
@@ -119,3 +125,8 @@ vnoremap < <gv
 " Move tabs
 nnoremap <C-h> :-tabmove<CR>
 nnoremap <C-l> :+tabmove<CR>
+nnoremap <C-f> :g//#<Left><Left>
+
+" Main position for splits
+set splitbelow
+set splitright
