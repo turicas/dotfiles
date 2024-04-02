@@ -6,24 +6,25 @@ set -e
 
 # APT packages
 apt update
-apt -y install $(cat server-apt-packages.txt) $(cat desktop-apt-packages.txt)
-apt -y upgrade
-apt -y dist-upgrade
-apt clean
+apt install -y nala
+nala install -y $(cat server-apt-packages.txt) $(cat desktop-apt-packages.txt)
+nala upgrade -y
+nala dist-upgrade -y
+nala clean
 
 mkdir -p /etc/apt/keyrings
 
 # Docker (via APT)
-apt remove docker docker.io containerd runc
+nala remove -y docker docker.io containerd runc
 curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bullseye stable" | tee /etc/apt/sources.list.d/docker.list
-apt update
-apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
-apt clean
+nala update
+nala install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+nala clean
 
 # Dropbox (via DEB)
-apt install -y libpango1.0-0
-apt clean
+nala install -y libpango1.0-0
+nala clean
 wget -O "/tmp/dropbox.deb" "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb"
 dpkg -i "/tmp/dropbox.deb"
 rm "/tmp/dropbox.deb"
