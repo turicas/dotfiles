@@ -1,0 +1,54 @@
+{
+  "parser-directories": [
+    "/home/turicas/.local/opt/tree-sitter/"
+  ],
+  "theme": {
+    "property": 124,
+    "attribute": {
+      "color": 124,
+      "italic": true
+    },
+    "constant.builtin": {
+      "bold": true,
+      "color": 94
+    },
+    "punctuation.delimiter": 239,
+    "type": 23,
+    "variable.parameter": {
+      "underline": true
+    },
+    "function.builtin": {
+      "bold": true,
+      "color": 26
+    },
+    "tag": 18,
+    "string.special": 30,
+    "punctuation.bracket": 239,
+    "variable.builtin": {
+      "bold": true
+    },
+    "function": 26,
+    "constructor": 136,
+    "constant": 94,
+    "operator": {
+      "bold": true,
+      "color": 239
+    },
+    "comment": {
+      "italic": true,
+      "color": 245
+    },
+    "keyword": 56,
+    "module": 136,
+    "string": 28,
+    "number": {
+      "bold": true,
+      "color": 94
+    },
+    "type.builtin": {
+      "color": 23,
+      "bold": true
+    },
+    "embedded": null
+  }
+}

@@ -51,6 +51,7 @@ postfix
 powertop
 printer-driver-dymo
 rlwrap
+rustup
 rxvt-unicode
 screen
 screenkey
@@ -61,6 +62,7 @@ task-gnome-desktop
 terminator
 tigervnc-viewer
 totem
+universal-ctags
 vim-gtk3
 virt-manager
 vlc
