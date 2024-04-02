@@ -10,5 +10,6 @@ rm nvim-linux64.tar.gz
 rm -rf ~/.local/bin/nvim
 cd -
 
+mkdir -p ~/.local/bin/ ~/.config/nvim/
 ln -s ~/.local/opt/nvim-linux64/bin/nvim ~/.local/bin/nvim
 ln -s ~/.vimrc ~/.config/nvim/init.vim
