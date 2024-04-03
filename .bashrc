@@ -156,7 +156,7 @@ json_escape () {
 # env vars exports
 export GOPATH=$HOME/.go
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PATH:$HOME/projects/dotfiles/bin:$GOPATH/bin:$PYENV_ROOT/bin"
+export PATH="$PATH:$HOME/.local/bin:$HOME/projects/dotfiles/bin:$GOPATH/bin:$PYENV_ROOT/bin"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
