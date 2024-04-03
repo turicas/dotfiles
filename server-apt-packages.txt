@@ -22,7 +22,6 @@ gnupg
 gnupg-agent
 gnupg2
 golang
-gping
 hdparm
 htmldoc
 htop
