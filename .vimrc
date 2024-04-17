@@ -25,10 +25,11 @@ set relativenumber
 set textwidth=119
 set colorcolumn=+1
 
-
-" Highlight searches:
-set hlsearch      " highlight search terms
-set incsearch     " show search matches as you type
+" Search
+set hlsearch " highlight search terms
+set incsearch " show search matches as you type
+set ignorecase " ignore case when searching
+set smartcase " ignore case if search pattern is all lowercase, case-sensitive otherwise
 
 " Enable modeline so vim will reconfigure when open vim-configured files
 set modeline
@@ -72,7 +73,6 @@ set listchars=tab:▸\ ,trail:·,nbsp:~,extends:→
 " Remove trailing spaces when save buffer
 autocmd BufWritePre * :%s/\s\+$//e
 
-set showmatch                       "blink matching bracket, etc
 set visualbell                      "audio bell is evil
 
 " Explicit the character encoding
@@ -88,9 +88,6 @@ set copyindent    " copy the previous indentation on autoindenting
 set shiftwidth=4  " number of spaces to use for autoindenting
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set showmatch     " set show matching parenthesis
-set ignorecase    " ignore case when searching
-set smartcase     " ignore case if search pattern is all lowercase,
-                  "    case-sensitive otherwise
 set smarttab      " insert tabs on the start of a line according to
                   "    shiftwidth, not tabstop
 
