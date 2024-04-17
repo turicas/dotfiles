@@ -159,7 +159,7 @@ bindsym $mod+b border toggle
 # finds out, if available)
 bar {
         status_command i3status -c ~/.i3/i3status.conf
-        font DejaVuSansM Nerd Font 10
+        font "DejaVuSansM Nerd Font Mono"
         mode dock
         workspace_buttons yes
         output LVDS-1
@@ -271,37 +271,33 @@ bindsym --release Print exec scrot ~/screenshots/`date +"%Y-%m-%d_%H-%M-%S"`.png
 bindsym Ctrl+Mod1+l exec xscreensaver-command -lock
 
 # displaying monitors
+# 'monitors' is a shell script to toggle displays (notebook, notebook + HDMI monitor, notebook + VGA monitor,
+# projector)
 bindsym $mod+m exec monitors
 #bindsym $mod+c exec mplayer -tv driver=v4l2:gain=1:width=640:height=480:device=/dev/video0:fps=10:outfmt=rgb16 tv://
 bindsym $mod+c exec mplayer -tv driver=v4l2:gain=1:width=1920:height=1080:device=/dev/video2 -vo gl2 tv://
 bindsym $mod+n exec mplayer -tv driver=v4l2:gain=1:device=/dev/video0 -vo gl2 tv://
 
 # screen bightness
-bindsym $mod+equal exec /home/turicas/bin/brightness inc
-bindsym $mod+minus exec /home/turicas/bin/brightness dec
+bindsym $mod+equal exec /home/turicas/bin/lup
+bindsym $mod+minus exec /home/turicas/bin/ldown
 
-# 'monitors' is a shell script to toggle displays (notebook,
-# notebook + HDMI monitor, notebook + VGA monitor, projector)
 
 #TODO:
-
-#autostart applications (dropbox etc.)
 #tint2? volti?
 #bar:
 # volume control
 # system monitor (graphs)
-# battery (working)
 # logout / lockscreen
 # calendar
 # notify?
-#
 
-#autostart apps
+# autostart apps
 
-exec --no-startup-id /home/turicas/bin/daskeyboard
 
 # background daemons
-exec --no-startup-id gnome-settings-daemon
+exec --no-startup-id gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+exec --no-startup-id gnome /usr/libexec/gsd-xsettings
 exec --no-startup-id nitrogen --set-tiled /home/turicas/background.jpg
 exec --no-startup-id xscreensaver
 exec --no-startup-id dropbox start
@@ -311,4 +307,5 @@ exec --no-startup-id nm-applet
 # configure my workspaces
 exec --no-startup-id i3-msg 'workspace 1; exec gnome-terminal'
 exec --no-startup-id i3-msg 'workspace 2; exec google-chrome'
+exec --no-startup-id i3-msg 'workspace 3; exec firefox-esr'
 exec --no-startup-id i3-msg 'workspace 2'
