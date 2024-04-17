@@ -1,13 +1,21 @@
 " Álvaro Justen's VIM configuration
-" https://github.com/turicas/dotfiles/
+" <https://github.com/turicas/dotfiles/>
 
 set nocompatible
 set laststatus=2
 
 " Colors
-"colorscheme macvim-light
-"highlight clear
+highlight clear " Reset all highlighting to the defaults
 set background=dark
+colorscheme slate
+autocmd ColorScheme * highlight ColorColumn term=reverse cterm=reverse gui=reverse
+autocmd ColorScheme * highlight Normal ctermbg=black ctermfg=white guifg=white guibg=black
+autocmd ColorScheme * highlight NonText guifg=#707070 guibg=NONE gui=NONE ctermfg=darkgrey ctermbg=NONE cterm=NONE
+set termguicolors
+
+"highlight SpecialKey ctermfg=lightgray guifg=lightgray
+syntax on " Syntax highlight
+
 
 " Show line numbers
 set number
@@ -16,14 +24,11 @@ set relativenumber
 " 120-th column limit
 set textwidth=119
 set colorcolumn=+1
-highlight ColorColumn term=reverse cterm=reverse gui=reverse
+
 
 " Highlight searches:
 set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
-
-" Highlight syntax:
-syntax on
 
 " Enable modeline so vim will reconfigure when open vim-configured files
 set modeline
