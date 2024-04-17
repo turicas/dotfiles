@@ -40,13 +40,13 @@ filetype indent on
 filetype plugin on
 
 " Tell vim to remember certain things when we exit
-"  '10  -> marks will be remembered for up to 10 previously edited files
-"  "100 -> will save up to 100 lines for each register
-"  :20  -> up to 20 lines of command-line history will be remembered
+"  '1000 -> marks will be remembered for up to 1000 previously edited files
+"  "1000 -> will save up to 1000 lines for each register
+"  :1000-> up to 1000 lines of command-line history will be remembered
 "  %    -> saves and restores the buffer list
 "  n... -> where to save the viminfo files
-set viminfo='10,\"100,:20,%,n~/.viminfo
-set history=1000 " New history size
+set viminfo='1000,\"1000,:1000,%,n~/.viminfo
+set history=10000 " New history size
 
 " Reset cursor position:
 function! ResCur()
