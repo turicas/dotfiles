@@ -68,7 +68,7 @@ noremap <C-c> "+y
 
 " Show trailing characters and undesirable spaces
 set list
-set listchars=tab:▸\ ,trail:·,nbsp:~,extends:→
+set listchars=tab:▸\ ,leadmultispace:│\ \ \ ,trail:·,multispace:·,nbsp:~,extends:→,eol:󰌑
 
 " Remove trailing spaces when save buffer
 autocmd BufWritePre * :%s/\s\+$//e
