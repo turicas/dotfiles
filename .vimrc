@@ -19,7 +19,7 @@ syntax on " Syntax highlight
 
 " Show line numbers
 set number
-set relativenumber
+"set relativenumber  " TODO: may delete
 
 " 120-th column limit
 set textwidth=119
@@ -30,6 +30,8 @@ set hlsearch " highlight search terms
 set incsearch " show search matches as you type
 set ignorecase " ignore case when searching
 set smartcase " ignore case if search pattern is all lowercase, case-sensitive otherwise
+"TODO: add command to clear search highlight
+"nmap <silent> ,/ :nohlsearch<CR>?
 
 " Enable modeline so vim will reconfigure when open vim-configured files
 set modeline
@@ -63,8 +65,11 @@ augroup END
 " Use the mouse
 set mouse=a
 
-" Ctrl+c to copy to clipboard (only works when VIM is open)
-noremap <C-c> "+y
+" Clipboard and yank
+noremap <C-c> "+y  " Ctrl+c to copy to clipboard (only works when VIM is open)
+" TODO: may define clipboard name
+"set clipboard=unnamed
+"set clipboard=unnamedplus
 
 " Show trailing characters and undesirable spaces
 set list
@@ -132,3 +137,13 @@ nnoremap <C-f> :g//#<Left><Left>
 " Main position for splits
 set splitbelow
 set splitright
+
+" Tags
+"set tags=./.tags;,.tags;
+"TODO: configure tags creation (automatically) using universal-ctags and/or tree-sitter
+"       <https://gist.github.com/turicas/a83ac50833b78707a306385de315de8f>
+
+" TODO: add configs to easily change between buffers (like 'Junggling with buffers' in <https://stackoverflow.com/a/16084326/1299446>)
+" TODO: add configs to fuzzy search (like 'Juggling with files' in <https://stackoverflow.com/a/16084326/1299446>)
+
+" TODO: add configs to move lines, as in <https://stackoverflow.com/a/49053064/1299446>
