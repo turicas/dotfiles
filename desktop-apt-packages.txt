@@ -29,6 +29,7 @@ iftop
 inkscape
 kazam
 kdenlive
+keepassxc
 libjpeg-dev
 libleptonica-dev
 libmariadbd-dev
