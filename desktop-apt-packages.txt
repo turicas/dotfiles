@@ -46,6 +46,7 @@ mpv
 nautilus
 nitrogen
 obs-studio
+openresolv
 openssh-server
 pavucontrol
 pm-utils
