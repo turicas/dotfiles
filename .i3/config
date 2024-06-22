@@ -297,6 +297,8 @@ bindsym $mod+minus exec /home/turicas/bin/ldown
 
 # background daemons
 exec --no-startup-id gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+exec --no-startup-id blueman-manager
+exec --no-startup-id flameshot
 exec --no-startup-id gnome /usr/libexec/gsd-xsettings
 exec --no-startup-id nitrogen --set-tiled /home/turicas/background.jpg
 exec --no-startup-id xscreensaver
