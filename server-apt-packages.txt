@@ -9,6 +9,7 @@ build-essential
 byobu
 ca-certificates
 cbm
+cron
 curl
 dnsutils
 duc
