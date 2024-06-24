@@ -54,6 +54,7 @@ ntpdate
 nvme-cli
 p7zip
 parted
+postfix
 postgresql-client
 psmisc
 python3-dev
