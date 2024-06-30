@@ -11,6 +11,7 @@ cups-core-drivers
 cups-daemon
 cups-ipp-utils
 cups-server-common
+dosfstools
 ffmpeg
 firefox-esr
 firmware-iwlwifi
@@ -43,6 +44,7 @@ libxslt1-dev
 libzbar-dev
 mailutils
 mpv
+mtools
 nautilus
 nitrogen
 obs-studio
