@@ -55,6 +55,7 @@ pm-utils
 postfix
 powertop
 printer-driver-dymo
+qgit
 rlwrap
 rustup
 rxvt-unicode
