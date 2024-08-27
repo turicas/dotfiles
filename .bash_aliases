@@ -32,3 +32,5 @@ alias msync='rsync -aAczXNPhhhv'
 # Docker
 alias dce='docker compose exec'
 alias http-server='docker run -p 8000:80 -v $(pwd):/usr/share/nginx/html nginx'
+
+alias yt-sub='yt-dlp --sub-langs=pt --write-auto-sub --skip-download --no-cache-dir --progress --output="%(id)s"'
