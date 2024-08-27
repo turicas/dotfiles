@@ -20,6 +20,7 @@ syntax on " Syntax highlight
 " Show line numbers
 set number
 "set relativenumber  " TODO: may delete
+set cursorline
 
 " 120-th column limit
 set textwidth=119
