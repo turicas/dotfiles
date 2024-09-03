@@ -18,6 +18,10 @@ done
 # Rust
 rustup default stable
 
+# exiftool GPX format
+mkdir -p "~/.local/share/exiftool"
+wget -O "~/.local/share/exiftool/gpx.fmt" "https://raw.githubusercontent.com/exiftool/exiftool/master/fmt_files/gpx.fmt"
+
 # Other software
 ./install/fonts.sh
 ./install/neovim.sh

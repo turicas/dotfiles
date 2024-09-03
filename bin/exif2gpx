@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+	echo "ERROR - Usage: $0 <mp4-filename> [gpx-filename]"
+	exit 1
+fi
+
+if [[ -z $2 ]]; then
+	exiftool -ee -p "$HOME/.local/share/exiftool/gpx.fmt" "$1"
+else
+	exiftool -ee -p "$HOME/.local/share/exiftool/gpx.fmt" "$1" > "$2"
+fi
