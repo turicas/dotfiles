@@ -52,7 +52,7 @@ nmap
 nmon
 ntpdate
 nvme-cli
-p7zip
+p7zip-full
 parted
 postfix
 postgresql-client
