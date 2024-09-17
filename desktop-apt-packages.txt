@@ -16,6 +16,7 @@ dosfstools
 ffmpeg
 firefox-esr
 firmware-iwlwifi
+flatpak
 gedit
 gedit-plugins
 gimp
@@ -50,7 +51,6 @@ mpv
 mtools
 nautilus
 nitrogen
-obs-studio
 openresolv
 openssh-server
 pavucontrol

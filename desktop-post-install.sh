@@ -23,6 +23,8 @@ mkdir -p "~/.local/share/exiftool"
 wget -O "~/.local/share/exiftool/gpx.fmt" "https://raw.githubusercontent.com/exiftool/exiftool/master/fmt_files/gpx.fmt"
 
 # Other software
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install --noninteractive flathub com.obsproject.Studio
 ./install/fonts.sh
 ./install/neovim.sh
 ./install/tree-sitter.sh
