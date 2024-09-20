@@ -297,13 +297,14 @@ bindsym $mod+minus exec /home/turicas/bin/ldown
 
 # background daemons
 exec --no-startup-id gsettings set org.gnome.desktop.interface color-scheme prefer-dark
-exec --no-startup-id blueman-manager
-exec --no-startup-id flameshot
 exec --no-startup-id gnome /usr/libexec/gsd-xsettings
-exec --no-startup-id nitrogen --set-tiled /home/turicas/background.jpg
-exec --no-startup-id xscreensaver
+exec --no-startup-id blueman-manager
 exec --no-startup-id dropbox start
+exec --no-startup-id flameshot
+exec --no-startup-id nitrogen --set-tiled /home/turicas/background.jpg
 exec --no-startup-id nm-applet
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id xscreensaver
 #exec --no-startup-id urxvtd -q -o -f
 
 # configure my workspaces

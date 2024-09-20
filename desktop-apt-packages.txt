@@ -16,6 +16,7 @@ dosfstools
 ffmpeg
 firefox-esr
 firmware-iwlwifi
+flameshot
 flatpak
 gedit
 gedit-plugins
@@ -80,5 +81,6 @@ wireless-tools
 x11-xserver-utils
 xarchiver
 xbacklight
+xfce4-power-manager
 xscreensaver
 xsel
