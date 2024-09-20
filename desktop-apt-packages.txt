@@ -70,6 +70,7 @@ suckless-tools
 task-gnome-desktop
 terminator
 tigervnc-viewer
+tk-dev
 totem
 universal-ctags
 vim-gtk3

@@ -10,3 +10,8 @@ for filename in .*; do
         echo "*** Link to '$filename' NOT created! File already exists."
     fi
 done
+
+# TODO: ignore
+# .git
+# .gitignore
+# .gitmodules

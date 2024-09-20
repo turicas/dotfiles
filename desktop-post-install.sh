@@ -19,8 +19,8 @@ done
 rustup default stable
 
 # exiftool GPX format
-mkdir -p "~/.local/share/exiftool"
-wget -O "~/.local/share/exiftool/gpx.fmt" "https://raw.githubusercontent.com/exiftool/exiftool/master/fmt_files/gpx.fmt"
+mkdir -p ~/.local/share/exiftool
+wget -O ~/.local/share/exiftool/gpx.fmt "https://raw.githubusercontent.com/exiftool/exiftool/master/fmt_files/gpx.fmt"
 
 # Other software
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
