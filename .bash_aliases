@@ -27,7 +27,7 @@ alias gf='git fetch --all --prune'
 #-P: --partial --progress
 #-h: --human-readable
 #-v: --verbose
-alias msync='rsync -aAczXNPhhhv'
+alias msync='rsync -aAczXPhhhv'
 
 # Docker
 alias dce='docker compose exec'
