@@ -61,6 +61,7 @@ postfix
 powertop
 printer-driver-dymo
 qgit
+resolvconf
 rlwrap
 rustup
 rxvt-unicode
@@ -78,6 +79,8 @@ universal-ctags
 vim-gtk3
 virt-manager
 vlc
+wireguard
+wireguard-tools
 wireless-tools
 x11-xserver-utils
 xarchiver
