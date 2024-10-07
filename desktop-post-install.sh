@@ -22,6 +22,10 @@ rustup default stable
 mkdir -p ~/.local/share/exiftool
 wget -O ~/.local/share/exiftool/gpx.fmt "https://raw.githubusercontent.com/exiftool/exiftool/master/fmt_files/gpx.fmt"
 
+# Link `ntfs-3g` executables so `fsck` will find it
+sudo ln -s /usr/bin/ntfsfix /sbin/fsck.ntfs
+sudo ln -s /usr/bin/ntfsfix /sbin/fsck.ntfs-3g
+
 # Other software
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install --noninteractive flathub com.obsproject.Studio

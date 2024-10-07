@@ -52,6 +52,7 @@ mpv
 mtools
 nautilus
 nitrogen
+ntfs-3g
 openresolv
 openssh-server
 pavucontrol
