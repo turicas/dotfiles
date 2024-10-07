@@ -104,7 +104,7 @@ hack() {
 
 	if [ -z "$project_name" ]; then
 		echo "ERROR - Usage: $0 <project-name>"
-		exit 1
+		return
 	fi
 
 	project_path=$projects_home/$project_name
@@ -151,6 +151,37 @@ ghc() {  # GitHub Clone
 
 json_escape () {
     printf '%s' $1 | python -c 'import json,sys; print(json.dumps(sys.stdin.read()))'
+}
+
+reencode() {
+    if [[ -z $2 ]]; then
+        echo "ERROR - usage: $0 <input-video> <output-video>"
+        return
+    fi
+    ffmpeg \
+        -nostdin \
+        -i "$1" \
+        -c:v libx265 -crf 28 \
+        -c:a aac -b:a 128k \
+        -preset medium \
+        -map_metadata 0 -map_chapters 0 -map 0 \
+        "$2"
+}
+
+reencode-to-full-hd() {
+    if [[ -z $2 ]]; then
+        echo "ERROR - usage: $0 <input-video> <output-video>"
+        return
+    fi
+    ffmpeg \
+        -nostdin \
+        -i "$1" \
+        -c:v libx265 -crf 28 \
+        -vf scale=1920:1080,setsar=1:1 \
+        -c:a aac -b:a 128k \
+        -preset medium \
+        -map_metadata 0 -map_chapters 0 -map 0 \
+        "$2"
 }
 
 # env vars exports

@@ -1,0 +1,12 @@
+#!/bin/bash
+# Reencode all MP4 files on the current folder to use libx265 codec and use less space
+
+newPath="reencoded"
+mkdir -p "$newPath"
+for filename in *.[Mm][Pp]4; do
+	newFilename="${newPath}/$(basename $filename)"
+	if [[ ! -e $newFilename ]]; then
+		echo "Reencoding $filename -> $newFilename"
+		time reencode ffmpeg -i "$filename" "$newFilename"
+	fi
+done
