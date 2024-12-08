@@ -76,8 +76,9 @@ noremap <C-c> "+y  " Ctrl+c to copy to clipboard (only works when VIM is open)
 set list
 set listchars=tab:▸\ ,leadmultispace:│\ \ \ ,trail:·,multispace:·,nbsp:~,extends:→,eol:󰌑
 
-" Remove trailing spaces when save buffer
-autocmd BufWritePre * :%s/\s\+$//e
+" Remove trailing spaces when save buffer (except for diff or patch files)
+autocmd BufWritePre * if index(['diff', 'patch'], &ft) < 0 | :%s/\s\+$//e | endif
+" autocmd BufWritePre * :%s/\s\+$//e
 
 set visualbell                      "audio bell is evil
 
