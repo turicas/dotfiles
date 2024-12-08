@@ -8,7 +8,7 @@ alias fgrep='fgrep --color=yes'
 alias egrep='egrep --color=yes'
 
 # Disks
-alias disk-destroy='sudo dd if=/dev/urandom bs=8M status=progress oflag=sync'
+alias disk-destroy='sudo dd status=progress oflag=sync bs=8M if=/dev/urandom'
 alias mdd='time dd status=progress oflag=sync bs=1M'
 
 # SSH
@@ -134,4 +134,19 @@ reencode-to-full-hd() {
         -preset medium \
         -map_metadata 0 -map_chapters 0 -map 0 \
         "$2"
+}
+
+start-remote-vnc-server() {
+	remoteIP="$1"
+
+	if [[ -z $remoteIP ]]; then
+		echo "ERROR - usage: $0 <remote-ip>"
+		exit
+	fi
+
+	ssh -t -L 5900:localhost:5900 "$remoteIP" 'x11vnc -localhost -display :0'
+}
+
+start-vnc-client() {
+	vncviewer -PreferredEncoding=ZRLE localhost:0
 }

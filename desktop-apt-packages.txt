@@ -83,6 +83,7 @@ wireguard
 wireguard-tools
 wireless-tools
 x11-xserver-utils
+x11vnc
 xarchiver
 xbacklight
 xfce4-power-manager
