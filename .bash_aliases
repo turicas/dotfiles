@@ -39,6 +39,10 @@ alias yt-sub='yt-dlp --sub-langs=pt --write-auto-sub --skip-download --no-cache-
 alias mc='docker run --rm -v $(pwd):/data -v $HOME/.mc:/root/.mc minio/mc'
 
 
+# Python
+alias ipython="ipython3"
+alias ipy="ipython3"
+
 # Custom commands
 
 hack() {
