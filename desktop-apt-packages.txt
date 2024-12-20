@@ -43,6 +43,7 @@ libreoffice
 libssl-dev
 libtesseract-dev
 libtiff-dev
+libvirt-daemon-system
 libwebp-dev
 libxml2-dev
 libxslt1-dev
@@ -78,6 +79,8 @@ tigervnc-viewer
 tk-dev
 totem
 universal-ctags
+vagrant
+vagrant-libvirt
 vim-gtk3
 virt-manager
 vlc
