@@ -168,3 +168,22 @@ workspace-refresh() {
 		xrandr --output HDMI-1 --off
 	fi
 }
+
+pdf-search() {
+	# Searches for text inside PDF files in the current directory, recursively
+	query=$1
+
+	if [[ -z $query ]]; then
+		echo "ERROR - usage: ${FUNCNAME[0]} <query>"
+		return
+	fi
+
+	find -iname '*.pdf' | while read filename; do
+		result=$(pdftotext -enc UTF-8 -layout "$filename" - | grep -E "$query")
+		if [[ ! -z $result ]]; then
+			echo "${filename}:"
+			echo "$result"
+			echo
+		fi
+	done
+}
