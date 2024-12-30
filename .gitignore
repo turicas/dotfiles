@@ -1,3 +1,7 @@
 .pip/pip.log
+.ssh/authorized_keys*
+.ssh/id_*
+.ssh/known_hosts*
+.ssh/tmp
 .vim/.netrwhist
 .vim/bundle/vim-erlang-*
