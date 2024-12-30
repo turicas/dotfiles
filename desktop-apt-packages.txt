@@ -53,6 +53,7 @@ merkaartor
 mpv
 mtools
 nautilus
+network-manager-applet
 nitrogen
 ntfs-3g
 openssh-server
