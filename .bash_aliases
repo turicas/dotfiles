@@ -187,3 +187,13 @@ pdf-search() {
 		fi
 	done
 }
+
+
+repo-contents() {
+	git ls-tree -r HEAD --name-only \
+		| grep -Ev '^(\.gitignore|LICENSE)$' \
+		| sort \
+		| while read filename; do
+		echo -e "---------- START: $filename ----------\n$(cat $filename)\n---------- END: $filename ----------\n\n"
+	done
+}
