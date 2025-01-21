@@ -4,6 +4,7 @@ beep
 blueman
 cheese
 chromium
+cloc
 console-common
 cups
 cups-client
@@ -14,6 +15,7 @@ cups-ipp-utils
 cups-server-common
 dosfstools
 ffmpeg
+filezilla
 firefox-esr
 firmware-iwlwifi
 flameshot
