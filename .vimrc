@@ -108,7 +108,7 @@ nnoremap <leader>p :bp<CR>
 
 " <TAB> completion in command-mode
 set wildmenu
-set wildmode=list:full
+set wildmode=longest:full,full
 
 " A running gvim will always have a window title, but when vim is run within an
 " xterm, by default it inherits the terminal’s current title.
