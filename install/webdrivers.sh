@@ -11,7 +11,7 @@ chromedriver_url=$(
 	| grep -oE --color=no '(https://[^ ]+\.zip)' \
 	| grep --color=no chromedriver \
 	| grep --color=no linux64 \
-	| sort -r \
+	| sort \
 	| head -1
 )
 wget -O chromedriver.zip "$chromedriver_url"
