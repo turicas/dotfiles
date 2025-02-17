@@ -13,3 +13,6 @@ if [[ -z $output ]]; then
 fi
 
 ffmpeg -i "$input" -vcodec libx265 -crf 24 -movflags +faststart "$output"
+
+# For usage in WhatsApp Web:
+#ffmpeg -i "$input" -vf "scale=1920:1080" -c:v libx264 -crf 24 -preset medium -c:a aac -b:a 128k -movflags +faststart "$output"
