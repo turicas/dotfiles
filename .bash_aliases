@@ -197,3 +197,19 @@ repo-contents() {
 		echo -e "---------- START: $filename ----------\n$(cat $filename)\n---------- END: $filename ----------\n\n"
 	done
 }
+
+conngraph() {
+	ssh_info="$1"; shift
+
+	if [[ -z $ssh_info ]]; then
+		echo "ERROR - Usage: $0 <ssh-info>"
+		exit 1
+	fi
+	filename=$(mktemp --suffix=.png)
+	ssh $ssh_info sudo lsof -n -F \
+		| lsofgraph \
+		| unflatten -l 1 -c 6 \
+		| dot -T png > "$filename"
+	eog $filename
+	rm $filename
+}

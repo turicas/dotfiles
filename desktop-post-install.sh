@@ -33,3 +33,4 @@ flatpak install --noninteractive flathub com.obsproject.Studio
 ./install/neovim.sh
 ./install/tree-sitter.sh
 ./install/webdrivers.sh
+./install/scripts.sh
