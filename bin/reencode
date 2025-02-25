@@ -1,0 +1,88 @@
+#!/bin/bash
+
+fullhd=false
+hd=false
+h264=false
+debug=false
+ARGS=()
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -d|--debug)
+            debug=true
+            shift
+            ;;
+        --fullhd)
+            fullhd=true
+            shift
+            ;;
+        --hd)
+            hd=true
+            shift
+            ;;
+        --h264)
+            h264=true
+            shift
+            ;;
+        *)
+            ARGS+=("$1")
+            shift
+            ;;
+    esac
+done
+
+if [[ ${#ARGS[@]} -lt 2 ]]; then
+    echo "ERROR - Usage: $(basename "$0") [options] <input.ext> <output.mp4>"
+    echo "Options:"
+    echo "  -d, --debug Show the complete ffmpeg command before executing"
+    echo "  --fullhd    Scales to Full HD resolution (1920x1080)"
+    echo "  --hd        Scales to HD resolution (1280x720)"
+	echo "  --h264      Converts to H264 instead of HEVC (useful for sharing on WhatsApp Web)"
+    exit 1
+fi
+
+if [[ $fullhd == true && $hd == true ]]; then
+    echo "ERROR - You cannot use both --fullhd and --hd at the same time."
+    exit 1
+fi
+
+input="${ARGS[0]}"
+output="${ARGS[1]}"
+
+if [[ $h264 == true ]]; then
+    videoCodec="h264_vaapi"
+else
+    videoCodec="hevc_vaapi"
+fi
+
+if [[ $fullhd == true ]]; then
+    videoOptions="-vf scale_vaapi=w=1920:h=1080:force_original_aspect_ratio=decrease"
+elif [[ $hd == true ]]; then
+    videoOptions="-vf scale_vaapi=w=1280:h=720:force_original_aspect_ratio=decrease"
+else
+    videoOptions=""
+fi
+
+
+cmd="ffmpeg \
+    -hide_banner \
+    -loglevel info \
+    -stats \
+    -nostdin \
+    -threads 0 \
+    -hwaccel vaapi \
+    -hwaccel_output_format vaapi \
+    -vaapi_device /dev/dri/renderD128 \
+    -i \"$input\" \
+    -c:v \"$videoCodec\" -b:v 0 $videoOptions \
+    -qp 28 \
+    -c:a aac -b:a 128k \
+    -movflags +faststart \
+    -map_metadata 0 \
+    -map_chapters 0 \
+    -map 0 \
+    \"$output\""
+
+if [[ $debug == true ]]; then
+    echo "Executing: $cmd"
+fi
+eval "$cmd"

@@ -33,6 +33,7 @@ i3
 i3status
 iftop
 inkscape
+intel-gpu-tools
 ipython3
 kazam
 kdenlive
@@ -84,6 +85,7 @@ totem
 universal-ctags
 vagrant
 vagrant-libvirt
+vainfo
 vim-gtk3
 virt-manager
 vlc

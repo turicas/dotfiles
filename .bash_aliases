@@ -103,43 +103,6 @@ json_escape () {
     printf '%s' $1 | python -c 'import json,sys; print(json.dumps(sys.stdin.read()))'
 }
 
-reencode() {
-    if [[ -z $2 ]]; then
-        echo "ERROR - usage: $0 <input-video> <output-video>"
-        return
-    fi
-    ffmpeg \
-        -nostdin \
-        -loglevel quiet \
-        -stats \
-        -i "$1" \
-        -c:v libx265 -crf 28 \
-        -x265-params log-level=quiet \
-        -c:a aac -b:a 128k \
-        -preset medium \
-        -map_metadata 0 -map_chapters 0 -map 0 \
-        "$2"
-}
-
-reencode-to-full-hd() {
-    if [[ -z $2 ]]; then
-        echo "ERROR - usage: $0 <input-video> <output-video>"
-        return
-    fi
-    ffmpeg \
-        -nostdin \
-        -loglevel quiet \
-        -stats \
-        -i "$1" \
-        -c:v libx265 -crf 28 \
-        -x265-params log-level=quiet \
-        -vf scale=1920:1080,setsar=1:1 \
-        -c:a aac -b:a 128k \
-        -preset medium \
-        -map_metadata 0 -map_chapters 0 -map 0 \
-        "$2"
-}
-
 start-remote-vnc-server() {
 	remoteIP="$1"
 
