@@ -43,6 +43,7 @@ systemctl enable ndppd
 Edit `/etc/docker/daemon.json`:
 ```
 {
+  "live-restore": true,
   "debug": false,
   "ipv6": true,
   "fixed-cidr-v6": "<ipv6-network>/80"
