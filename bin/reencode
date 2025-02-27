@@ -48,6 +48,8 @@ fi
 input="${ARGS[0]}"
 output="${ARGS[1]}"
 
+# TODO: add support to other GPUs (AMD, using amf; Nvidia, using cuda/nvenc)
+
 if [[ $h264 == true ]]; then
     videoCodec="h264_vaapi"
 else
@@ -73,8 +75,8 @@ cmd="ffmpeg \
     -hwaccel_output_format vaapi \
     -vaapi_device /dev/dri/renderD128 \
     -i \"$input\" \
-    -c:v \"$videoCodec\" -b:v 0 $videoOptions \
-    -qp 28 \
+    -c:v \"$videoCodec\" -b:v 0 -qp 28 -filter:v "fps=30" \
+    $videoOptions \
     -c:a aac -b:a 128k \
     -movflags +faststart \
     -map_metadata 0 \
