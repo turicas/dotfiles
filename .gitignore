@@ -1,3 +1,4 @@
+.tags
 .pip/pip.log
 .ssh/authorized_keys*
 .ssh/id_*

@@ -1,6 +1,102 @@
 " Álvaro Justen's VIM configuration
 " <https://github.com/turicas/dotfiles/>
 
+" TODO: migrate to vim9script
+" System requirements: apt install git universal-ctags ripgrep
+
+" Global configurations
+set nomodeline
+set tags=./.tags;,$HOME/.tags; " Try to find `.tags` in current directory or in parent ones; if not found, use from $HOME
+let g:func_cache = {}
+let g:filetypes_to_preserve_whitespace = ['diff', 'patch']
+let g:mapleader = "\ "
+
+
+" Utility functions
+function FuncCacheCall(func, args)
+    let l:key = string(a:func) . ":" . string(a:args)
+    if has_key(g:func_cache, l:key)
+        return g:func_cache[l:key]
+    endif
+    let l:result = call(a:func, a:args)
+    let g:func_cache[l:key] = l:result
+    return l:result
+endfunction
+
+function TrimWhiteSpace()
+    " Remove trailing spaces and empty lines in the end of the file (except for binary, diff or patch files)
+    if &binary == 0 && index(g:filetypes_to_preserve_whitespace, &filetype) < 0
+        mkview
+        silent! keeppatterns keepjumps %s/\s\+$//e
+        silent! keeppatterns keepjumps %s/\($\n\s*\)\+\%$//e
+        loadview
+    endif
+endfunction
+
+function Benchmark(func, args, runs)
+    " Run `func` with `args` for `runs` times and calculate the average time spent
+    let l:total = 0
+    for i in range(a:runs)
+        let l:start = reltime()
+        call call(a:func, a:args)
+        let l:end = reltime(l:start)
+        let l:total += str2float(reltimestr(l:end))
+    endfor
+    return l:total / a:runs
+endfunction
+
+function GitRootNoCache(path)
+    " Return the root path of a git repository if inside one, or empty string if not.
+    let l:git_cmd = ['git', '-C', shellescape(a:path)]
+    if trim(system(join(git_cmd + ['rev-parse', '--is-inside-work-tree']))) == 'true'
+        return trim(system(join(git_cmd + ['rev-parse', '--show-toplevel'])))
+    else
+        return ''
+    endif
+endfunction
+function GitRoot(path)
+    return FuncCacheCall("GitRootNoCache", [a:path])
+endfunction
+
+function ListProjectFilesCommand()
+    " Return the git command to list all git tracked files if inside a repository. If not, returns `rg --files`.
+    " The git command will return all tracked files, no matter if file is not directly in the root repository path.
+    let l:current_path = expand('%:p:h')
+    let l:git_root = GitRoot(l:current_path)
+    if !empty(l:git_root)
+        return ['git', '-C', shellescape(l:git_root), 'ls-files']
+    else
+        return ['rg', '--files', shellescape(l:current_path)]
+    endif
+endfunction
+
+function GenerateProjectTags()
+    " Generate tags file if inside git repository
+    let l:list_files_cmd = ListProjectFilesCommand()
+    if l:list_files_cmd[0] == 'git'
+        let l:git_root = GitRoot(expand('%:p:h'))
+        let l:tags_file = l:git_root . '/.tags'
+        let l:cmd = ['cd', shellescape(l:git_root)]
+        let l:cmd += ['&&'] + l:list_files_cmd
+        let l:cmd += ['|', 'ctags', '-L', '-', '--tag-relative=yes', '--quiet', '--append', '-f', shellescape(l:tags_file)]
+        call system(join(l:cmd) . '&')
+        " XXX: may use tree-siter instead of ctags <https://gist.github.com/turicas/a83ac50833b78707a306385de315de8f>
+    endif
+endfunction
+
+function FzyCommand(choice_command, vim_command)
+  try
+    let output = system(a:choice_command . ' | fzy')
+  catch /Vim:Interrupt/
+    " Swallow errors from ^C, allow redraw! below
+  endtry
+  redraw!
+  if v:shell_error == 0 && !empty(output)
+    exec a:vim_command . ' ' . output
+  endif
+endfunction
+
+
 " General configurations
 set nocompatible
 set title " Force window title
@@ -54,12 +150,10 @@ set incsearch " show search matches as you type
 set ignorecase " ignore case when searching
 set smartcase " ignore case if search pattern is all lowercase, case-sensitive otherwise
 " Clear search highlight:
-nmap <silent> ,/ :nohlsearch<CR>
-nnoremap <C-f> :g//#<Left><Left> " Search and show all occurrences
+nnoremap <Leader>/ :nohlsearch<CR>
+" Search and show all occurrences:
+nnoremap <C-f> :g//#<Left><Left>
 
-let mapleader = ","
-nnoremap <leader>n :bn<CR>
-nnoremap <leader>p :bp<CR>
 " better indentation
 vnoremap > >gv
 vnoremap < <gv
@@ -80,6 +174,7 @@ endif
 "  n... -> where to save the viminfo files
 set viminfo='1000,\"1000,:1000,%,n~/.viminfo
 set history=10000 " New history size
+" TODO: use different files for vim and nvim (nvim can't read vim file)
 
 " Clipboard and yank
 noremap <C-c> "+y " Ctrl+c to copy to clipboard (only works when VIM is open)
@@ -91,25 +186,13 @@ noremap <C-c> "+y " Ctrl+c to copy to clipboard (only works when VIM is open)
 nnoremap <C-h> :-tabmove<CR>
 nnoremap <C-l> :+tabmove<CR>
 
-" Tags
-"set tags=./.tags;,.tags;
-"TODO: configure tags creation (automatically) using universal-ctags and/or tree-sitter
-"       <https://gist.github.com/turicas/a83ac50833b78707a306385de315de8f>
-
 " TODO: add configs to easily change between buffers (like 'Junggling with buffers' in <https://stackoverflow.com/a/16084326/1299446>)
 " TODO: add configs to fuzzy search (like 'Juggling with files' in <https://stackoverflow.com/a/16084326/1299446>)
-
 " TODO: add configs to move lines, as in <https://stackoverflow.com/a/49053064/1299446>
 
 " Show trailing characters and undesirable spaces
 set list
 set listchars=tab:▸\ ,leadmultispace:│\ \ \ ,trail:·,multispace:·,nbsp:~,extends:→,eol:󰌑
-
-" Save view before closing and restores after opening (view includes cursor position)
-autocmd BufLeave,BufWinLeave * silent! mkview
-autocmd BufReadPost * silent! loadview
-" Remove trailing spaces and empty lines in the end of the file (except for binary, diff or patch files)
-autocmd BufWritePre <buffer> if &binary == 0 && index(['diff', 'patch'], &filetype) < 0 | mkview | %s/\(\s*$\|\_s\%$\)//e | loadview | endif
 
 " Tab/spaces
 set nowrap " Don't wrap lines
@@ -126,3 +209,16 @@ set fixendofline
 autocmd FileType c,cpp,go,php,python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType css,html,javascript,javascriptreact,less,scss,typescript,typescriptreact,json,yaml,toml,markdown,sh,bash,sql,xml,svg setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType make setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=0
+
+" Buffers
+nnoremap <leader>n :bn<CR>
+nnoremap <leader>p :bp<CR>
+
+" Open files inside project
+nnoremap <leader>o :call FzyCommand(join(ListProjectFilesCommand()), ':tabedit')<CR>
+
+" Save view before closing and restores after opening (view includes cursor position)
+autocmd BufLeave,BufWinLeave * if &filetype !=# 'gitcommit' | silent! mkview | endif
+autocmd BufReadPost * if &filetype !=# 'gitcommit' | silent! loadview | endif
+autocmd BufWritePre * call TrimWhiteSpace()
+autocmd BufWritePost * call GenerateProjectTags()

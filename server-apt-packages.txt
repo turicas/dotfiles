@@ -16,6 +16,7 @@ duc
 ethtool
 fakeroot
 file
+fzy
 git
 git-lfs
 gnupg
