@@ -1,8 +1,23 @@
 " Álvaro Justen's VIM configuration
 " <https://github.com/turicas/dotfiles/>
 
+" General configurations
 set nocompatible
-set laststatus=2
+set title " Force window title
+set number " Show line numbers
+set cursorline " Highlight current line
+set mouse=a " Use the mouse
+set visualbell " Audio bell is evil
+set scrolloff=15 " Keep the context around the current line
+set hidden " Possibility to have more than one unsaved buffers.
+set ruler " Line and column number
+set splitbelow splitright " Main position for splits
+set textwidth=119 " max_line_length = 119
+set colorcolumn=+1 " Highlight column limit
+set encoding=utf-8
+set fileencoding=utf-8 " charset = utf-8
+set fileformat=unix " end_of_line = lf
+set endofline " insert_final_newline = true
 
 " Colors
 highlight clear " Reset all highlighting to the defaults
@@ -12,35 +27,48 @@ autocmd ColorScheme * highlight ColorColumn term=reverse cterm=reverse gui=rever
 autocmd ColorScheme * highlight Normal ctermbg=black ctermfg=white guifg=white guibg=black
 autocmd ColorScheme * highlight NonText guifg=#707070 guibg=NONE gui=NONE ctermfg=darkgrey ctermbg=NONE cterm=NONE
 set termguicolors
-
-"highlight SpecialKey ctermfg=lightgray guifg=lightgray
 syntax on " Syntax highlight
+match Todo /\s\+$/ " Highlight To-dos
 
+" Status line
+set laststatus=2 " Last window will always have a status line
+set statusline=
+set statusline+=\ %{mode()}
+set statusline+=\ %m " Modified
+set statusline+=\ %r " Read-Only
+set statusline+=\ %y " File type
+set statusline+=\ %f " Relative filename
+set statusline+=%= " Split
+set statusline+=\ %3.(%c%)\ @ " Column
+set statusline+=\ %5.(%l/%L%) " Current line/total lines
+set statusline+=\ %P " Line percentage
 
-" Show line numbers
-set number
-"set relativenumber  " TODO: may delete
-set cursorline
-
-" 120-th column limit
-set textwidth=119
-set colorcolumn=+1
+" <TAB> completion in command-mode
+set wildmenu
+set wildmode=longest:full,full
 
 " Search
+set showmatch " Show matching parenthesis
 set hlsearch " highlight search terms
 set incsearch " show search matches as you type
 set ignorecase " ignore case when searching
 set smartcase " ignore case if search pattern is all lowercase, case-sensitive otherwise
-"TODO: add command to clear search highlight
-"nmap <silent> ,/ :nohlsearch<CR>?
+" Clear search highlight:
+nmap <silent> ,/ :nohlsearch<CR>
+nnoremap <C-f> :g//#<Left><Left> " Search and show all occurrences
 
-" Enable modeline so vim will reconfigure when open vim-configured files
-set modeline
+let mapleader = ","
+nnoremap <leader>n :bn<CR>
+nnoremap <leader>p :bp<CR>
+" better indentation
+vnoremap > >gv
+vnoremap < <gv
 
 " plugins
 filetype on
 filetype indent on
 filetype plugin on
+packadd editorconfig
 
 " Tell vim to remember certain things when we exit
 "  '1000 -> marks will be remembered for up to 1000 previously edited files
@@ -51,94 +79,15 @@ filetype plugin on
 set viminfo='1000,\"1000,:1000,%,n~/.viminfo
 set history=10000 " New history size
 
-" Reset cursor position:
-function! ResCur()
-  if line("'\"") <= line("$")
-    normal! g`"
-    return 1
-  endif
-endfunction
-augroup resCur
-  autocmd!
-  autocmd BufWinEnter * call ResCur()
-augroup END
-
-" Use the mouse
-set mouse=a
-
 " Clipboard and yank
-noremap <C-c> "+y  " Ctrl+c to copy to clipboard (only works when VIM is open)
+noremap <C-c> "+y " Ctrl+c to copy to clipboard (only works when VIM is open)
 " TODO: may define clipboard name
 "set clipboard=unnamed
 "set clipboard=unnamedplus
 
-" Show trailing characters and undesirable spaces
-set list
-set listchars=tab:▸\ ,leadmultispace:│\ \ \ ,trail:·,multispace:·,nbsp:~,extends:→,eol:󰌑
-
-" Remove trailing spaces when save buffer (except for diff or patch files)
-autocmd BufWritePre * if index(['diff', 'patch'], &ft) < 0 | :%s/\s\+$//e | endif
-" autocmd BufWritePre * :%s/\s\+$//e
-
-set visualbell                      "audio bell is evil
-
-" Explicit the character encoding
-set encoding=utf-8
-
-" Tab/spaces
-set nowrap        " don't wrap lines
-set tabstop=4     " a tab is four spaces
-set backspace=indent,eol,start
-                  " allow backspacing over everything in insert mode
-set autoindent    " always set autoindenting on
-set copyindent    " copy the previous indentation on autoindenting
-set shiftwidth=4  " number of spaces to use for autoindenting
-set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
-set showmatch     " set show matching parenthesis
-set smarttab      " insert tabs on the start of a line according to
-                  "    shiftwidth, not tabstop
-
-" Highlight To-dos
-match Todo /\s\+$/
-
-" Changes leader key from "\" to ","
-let mapleader = " "
-nnoremap <leader>n :bn<CR>
-nnoremap <leader>p :bp<CR>
-
-" <TAB> completion in command-mode
-set wildmenu
-set wildmode=longest:full,full
-
-" A running gvim will always have a window title, but when vim is run within an
-" xterm, by default it inherits the terminal’s current title.
-set title
-
-" When the cursor is moved outside the viewport of the current window, the
-" buffer is scrolled by a single line. Setting the option below will start the
-" scrolling three lines before the border, keeping more context around where
-" you’re working.
-set scrolloff=15
-
-set hidden                     " Possibility to have more than one unsaved buffers.
-
-" in the bottom right corner of the status line there will be something like:
-" 529, 35 68%, representing line 529, column 35, about 68% of the way to the
-" end.
-set ruler
-
-" better indentation
-vnoremap > >gv
-vnoremap < <gv
-
 " Move tabs
 nnoremap <C-h> :-tabmove<CR>
 nnoremap <C-l> :+tabmove<CR>
-nnoremap <C-f> :g//#<Left><Left>
-
-" Main position for splits
-set splitbelow
-set splitright
 
 " Tags
 "set tags=./.tags;,.tags;
@@ -149,3 +98,29 @@ set splitright
 " TODO: add configs to fuzzy search (like 'Juggling with files' in <https://stackoverflow.com/a/16084326/1299446>)
 
 " TODO: add configs to move lines, as in <https://stackoverflow.com/a/49053064/1299446>
+
+" Show trailing characters and undesirable spaces
+set list
+set listchars=tab:▸\ ,leadmultispace:│\ \ \ ,trail:·,multispace:·,nbsp:~,extends:→,eol:󰌑
+
+" Save view before closing and restores after opening (view includes cursor position)
+autocmd BufLeave,BufWinLeave * silent! mkview
+autocmd BufReadPost * silent! loadview
+" Remove trailing spaces and empty lines in the end of the file (except for binary, diff or patch files)
+autocmd BufWritePre <buffer> if &binary == 0 && index(['diff', 'patch'], &filetype) < 0 | mkview | %s/\(\s*$\|\_s\%$\)//e | loadview | endif
+
+" Tab/spaces
+set nowrap " Don't wrap lines
+set backspace=indent,eol,start " Allow backspacing over everything in insert mode
+set autoindent " Always set autoindenting on
+set copyindent " Copy the previous indentation on autoindenting
+set shiftround " Use multiple of shiftwidth when indenting with '<' and '>'
+set tabstop=4 " tab_width = 4 (a tab is 4 spaces by default)
+set shiftwidth=4 " indent_size = 4 (number of spaces to use for autoindenting)
+set softtabstop=4 " backspace removes 4 spaces
+set smarttab " Insert tabs on the start of a line according to shiftwidth, not tabstop
+set expandtab " indent_style = space
+set fixendofline
+autocmd FileType c,cpp,go,php,python setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd FileType css,html,javascript,javascriptreact,less,scss,typescript,typescriptreact,json,yaml,toml,markdown,sh,bash,sql,xml,svg setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType make setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=0
