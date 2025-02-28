@@ -68,7 +68,9 @@ vnoremap < <gv
 filetype on
 filetype indent on
 filetype plugin on
-packadd editorconfig
+if !has('nvim')
+    packadd editorconfig
+endif
 
 " Tell vim to remember certain things when we exit
 "  '1000 -> marks will be remembered for up to 1000 previously edited files
