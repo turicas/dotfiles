@@ -119,7 +119,8 @@ start-vnc-client() {
 }
 
 workspace-refresh() {
-	hdmiConnected=$(xrandr --query | grep --color=no ' connected ' | sed 's/ .*//' | sort | grep --color=no HDMI-1 | wc -l)
+	# First, check if HDMI is connected and enable/disable it
+	hdmiConnected=$(xrandr --query | grep --color=no ' connected ' | sed 's/ .*//' | grep --color=no HDMI-1 | wc -l)
 	if [[ $hdmiConnected == 1 ]]; then
 		xrandr --output HDMI-1 --auto --left-of eDP-1
 		i3-msg '[workspace="1"]' move workspace to output HDMI-1
@@ -130,6 +131,10 @@ workspace-refresh() {
 	else
 		xrandr --output HDMI-1 --off
 	fi
+
+	# Then, force keyboard layout and remap caps lock to escape
+	ibus engine xkb:us:intl:eng
+	source ~/.xprofile
 }
 
 pdf-search() {
