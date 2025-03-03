@@ -164,6 +164,7 @@ filetype indent on
 filetype plugin on
 if !has('nvim')
     packadd editorconfig
+    packadd comment
 endif
 
 " Tell vim to remember certain things when we exit
