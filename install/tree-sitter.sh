@@ -4,25 +4,32 @@ set -e
 
 pushd ~/.local/bin
 treesitter_url=$(
-	wget --quiet -O - https://github.com/tree-sitter/tree-sitter/releases \
-	| grep -oE --color=no 'href="(/[^ ]+-linux-x64.gz)"' \
-	| sed 's|href="|https://github.com|; s|"$||' \
-	| head -1
+  wget --quiet -O - https://github.com/tree-sitter/tree-sitter/releases \
+    | grep -oE --color=no 'href="(/[^ ]+-linux-x64.gz)"' \
+    | sed 's|href="|https://github.com|; s|"$||' \
+    | head -1
 )
-wget -O tree-sitter.gz "$treesitter_url"
-gunzip -f tree-sitter.gz
-chmod +x tree-sitter
+rm -f "tree-sitter.gz" "tree-sitter"
+wget -O "tree-sitter.gz" "$treesitter_url"
+gunzip -f "tree-sitter.gz"
+chmod +x "tree-sitter"
 popd
 
 mkdir -p ~/.local/opt/tree-sitter
 pushd ~/.local/opt/tree-sitter
-# TODO: php and typescript were not working =/
-for lang in bash c cpp css go html java javascript json python regex ruby rust; do
-	rm -rf tree-sitter-${lang}
-	git clone --depth 1 https://github.com/tree-sitter/tree-sitter-${lang}.git
-	cd tree-sitter-${lang}
-	~/.local/bin/tree-sitter build
-	cd ..
+for lang in bash c cpp css go html javascript json php python regex rust typescript; do
+  echo "-----> Compiling parser for ${lang}"
+  rm -rf "tree-sitter-${lang}"
+  git clone --depth 1 "https://github.com/tree-sitter/tree-sitter-${lang}.git"
+  if [[ $lang == "php" || $lang == "typescript" ]]; then
+    langdir="tree-sitter-${lang}/${lang}"
+  else
+    langdir="tree-sitter-${lang}"
+  fi
+  pushd "$langdir"
+  ~/.local/bin/tree-sitter build
+  popd
+  echo
 done
 popd
 
