@@ -115,40 +115,40 @@ bindsym $mod+Shift+O exit
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+    # These bindings trigger as soon as you enter the resize mode
 
-        # They resize the border in the direction you pressed, e.g.
-        # when pressing left, the window is resized so that it has
-        # more space on its left
+    # They resize the border in the direction you pressed, e.g.
+    # when pressing left, the window is resized so that it has
+    # more space on its left
 
-bindsym j resize shrink left 10 px or 10 ppt
-bindsym Shift+J resize grow   left 10 px or 10 ppt
+    bindsym j resize shrink left 10 px or 10 ppt
+    bindsym Shift+J resize grow   left 10 px or 10 ppt
 
-bindsym k resize shrink down 10 px or 10 ppt
-bindsym Shift+K resize grow   down 10 px or 10 ppt
+    bindsym k resize shrink down 10 px or 10 ppt
+    bindsym Shift+K resize grow   down 10 px or 10 ppt
 
-bindsym l resize shrink up 10 px or 10 ppt
-bindsym Shift+L resize grow   up 10 px or 10 ppt
+    bindsym l resize shrink up 10 px or 10 ppt
+    bindsym Shift+L resize grow   up 10 px or 10 ppt
 
-bindsym ccedilla resize shrink right 10 px or 10 ppt
-bindsym Shift+Ccedilla resize grow   right 10 px or 10 ppt
+    bindsym ccedilla resize shrink right 10 px or 10 ppt
+    bindsym Shift+Ccedilla resize grow   right 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-bindsym Left resize shrink left 10 px or 10 ppt
-bindsym Shift+Left resize grow   left 10 px or 10 ppt
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink left 10 px or 10 ppt
+    bindsym Shift+Left resize grow   left 10 px or 10 ppt
 
-bindsym Down resize shrink down 10 px or 10 ppt
-bindsym Shift+Down resize grow   down 10 px or 10 ppt
+    bindsym Down resize shrink down 10 px or 10 ppt
+    bindsym Shift+Down resize grow   down 10 px or 10 ppt
 
-bindsym Up resize shrink up 10 px or 10 ppt
-bindsym Shift+Up resize grow   up 10 px or 10 ppt
+    bindsym Up resize shrink up 10 px or 10 ppt
+    bindsym Shift+Up resize grow   up 10 px or 10 ppt
 
-bindsym Right resize shrink right 10 px or 10 ppt
-bindsym Shift+Right resize grow   right 10 px or 10 ppt
+    bindsym Right resize shrink right 10 px or 10 ppt
+    bindsym Shift+Right resize grow   right 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
-bindsym Return mode "default"
-bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -158,45 +158,44 @@ bindsym $mod+b border toggle
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status -c ~/.i3/i3status.conf
-        font "DejaVuSansM Nerd Font Mono"
-        mode dock
-        workspace_buttons yes
-        output LVDS-1
-        tray_output LVDS-1
-        position bottom
+    status_command i3status -c ~/.i3/i3status.conf
+    font "DejaVuSansM Nerd Font Mono"
+    mode dock
+    workspace_buttons yes
+    output LVDS-1
+    tray_output LVDS-1
+    position bottom
 
-        colors {
-            background #000000
-            statusline #ffffff
-            separator #666666
-
-            focused_workspace  #4c7899 #285577 #ffffff
-            active_workspace   #333333 #5f676a #ffffff
-            inactive_workspace #333333 #222222 #888888
-            urgent_workspace   #2f343a #900000 #ffffff
-        }
+    colors {
+        background #000000
+        statusline #ffffff
+        separator #666666
+        focused_workspace  #4c7899 #285577 #ffffff
+        active_workspace   #333333 #5f676a #ffffff
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+    }
 }
 
 bar {
-        #status_command i3status -c ~/.i3/i3status.conf | python ~/.i3/wrapper.py
-        status_command i3status -c ~/.i3/i3status.conf
-        mode hide
-        workspace_buttons yes
-        output eDP-1
-        tray_output eDP-1
-        position bottom
+    #status_command i3status -c ~/.i3/i3status.conf | python ~/.i3/wrapper.py
+    status_command i3status -c ~/.i3/i3status.conf
+    mode hide
+    workspace_buttons yes
+    output eDP-1
+    tray_output eDP-1
+    position bottom
 
-        colors {
-            background #000000
-            statusline #ffffff
-            separator #666666
+    colors {
+        background #000000
+        statusline #ffffff
+        separator #666666
 
-            focused_workspace  #4c7899 #285577 #ffffff
-            active_workspace   #333333 #5f676a #ffffff
-            inactive_workspace #333333 #222222 #888888
-            urgent_workspace   #2f343a #900000 #ffffff
-        }
+        focused_workspace  #4c7899 #285577 #ffffff
+        active_workspace   #333333 #5f676a #ffffff
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+    }
 }
 
 bar {
@@ -270,10 +269,10 @@ bindsym --release Print exec scrot ~/screenshots/`date +"%Y-%m-%d_%H-%M-%S"`.png
 # lock screen
 bindsym Ctrl+Mod1+l exec xscreensaver-command -lock
 
-# displaying monitors
-# 'monitors' is a shell script to toggle displays (notebook, notebook + HDMI monitor, notebook + VGA monitor,
-# projector)
+# Reconfigure workspace
 bindsym $mod+m exec workspace-refresh
+
+# Cameras
 #bindsym $mod+c exec mplayer -tv driver=v4l2:gain=1:width=640:height=480:device=/dev/video0:fps=10:outfmt=rgb16 tv://
 bindsym $mod+c exec mplayer -tv driver=v4l2:gain=1:width=1920:height=1080:device=/dev/video2 -vo gl2 tv://
 bindsym $mod+n exec mplayer -tv driver=v4l2:gain=1:device=/dev/video0 -vo gl2 tv://
