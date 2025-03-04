@@ -1,7 +1,6 @@
 " Álvaro Justen's VIM configuration
 " <https://github.com/turicas/dotfiles/>
 
-" TODO: migrate to vim9script
 " System requirements: apt install git universal-ctags ripgrep
 
 " Global configurations
@@ -186,6 +185,9 @@ noremap <C-c> "+y " Ctrl+c to copy to clipboard (only works when VIM is open)
 " Move tabs
 nnoremap <C-h> :-tabmove<CR>
 nnoremap <C-l> :+tabmove<CR>
+
+" Go to file (in a new tab):
+nnoremap <C-w>gf :tabedit <cfile><CR>
 
 " TODO: add configs to easily change between buffers (like 'Junggling with buffers' in <https://stackoverflow.com/a/16084326/1299446>)
 " TODO: add configs to fuzzy search (like 'Juggling with files' in <https://stackoverflow.com/a/16084326/1299446>)
