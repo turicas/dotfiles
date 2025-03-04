@@ -273,7 +273,7 @@ bindsym Ctrl+Mod1+l exec xscreensaver-command -lock
 # displaying monitors
 # 'monitors' is a shell script to toggle displays (notebook, notebook + HDMI monitor, notebook + VGA monitor,
 # projector)
-bindsym $mod+m exec monitors
+bindsym $mod+m exec workspace-refresh
 #bindsym $mod+c exec mplayer -tv driver=v4l2:gain=1:width=640:height=480:device=/dev/video0:fps=10:outfmt=rgb16 tv://
 bindsym $mod+c exec mplayer -tv driver=v4l2:gain=1:width=1920:height=1080:device=/dev/video2 -vo gl2 tv://
 bindsym $mod+n exec mplayer -tv driver=v4l2:gain=1:device=/dev/video0 -vo gl2 tv://

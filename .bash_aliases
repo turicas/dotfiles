@@ -118,25 +118,6 @@ start-vnc-client() {
 	vncviewer -PreferredEncoding=ZRLE localhost:0
 }
 
-workspace-refresh() {
-	# First, check if HDMI is connected and enable/disable it
-	hdmiConnected=$(xrandr --query | grep --color=no ' connected ' | sed 's/ .*//' | grep --color=no HDMI-1 | wc -l)
-	if [[ $hdmiConnected == 1 ]]; then
-		xrandr --output HDMI-1 --auto --left-of eDP-1
-		i3-msg '[workspace="1"]' move workspace to output HDMI-1
-		i3-msg '[workspace="2"]' move workspace to output eDP-1
-		i3-msg '[workspace="3"]' move workspace to output HDMI-1
-		i3-msg '[workspace="4"]' move workspace to output eDP-1
-		i3-msg '[workspace="5"]' move workspace to output eDP-1
-	else
-		xrandr --output HDMI-1 --off
-	fi
-
-	# Then, force keyboard layout and remap caps lock to escape
-	ibus engine xkb:us:intl:eng
-	source ~/.xprofile
-}
-
 pdf-search() {
 	# Searches for text inside PDF files in the current directory, recursively
 	query=$1
