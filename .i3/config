@@ -9,12 +9,14 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+set $binPath /home/turicas/projects/dotfiles/bin
+
 # set super key as mod
 set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango:DejaVu Sans Mono 10
+font pango:DejaVuSansM Nerd Font Mono 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -270,7 +272,7 @@ bindsym --release Print exec scrot ~/screenshots/`date +"%Y-%m-%d_%H-%M-%S"`.png
 bindsym Ctrl+Mod1+l exec xscreensaver-command -lock
 
 # Reconfigure workspace
-bindsym $mod+m exec workspace-refresh
+bindsym $mod+m exec $binPath/workspace-refresh
 
 # Cameras
 #bindsym $mod+c exec mplayer -tv driver=v4l2:gain=1:width=640:height=480:device=/dev/video0:fps=10:outfmt=rgb16 tv://
@@ -278,8 +280,8 @@ bindsym $mod+c exec mplayer -tv driver=v4l2:gain=1:width=1920:height=1080:device
 bindsym $mod+n exec mplayer -tv driver=v4l2:gain=1:device=/dev/video0 -vo gl2 tv://
 
 # screen bightness
-bindsym $mod+equal exec /home/turicas/bin/lup
-bindsym $mod+minus exec /home/turicas/bin/ldown
+bindsym $mod+equal exec $binPath/lup
+bindsym $mod+minus exec $binPath/ldown
 
 
 #TODO:
@@ -299,7 +301,7 @@ exec --no-startup-id gnome /usr/libexec/gsd-xsettings
 exec --no-startup-id blueman-manager
 exec --no-startup-id dropbox start
 exec --no-startup-id flameshot
-exec --no-startup-id wallpaper
+exec --no-startup-id $binPath/wallpaper
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xscreensaver
