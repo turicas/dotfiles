@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Selects a random Debian wallpaper
+
+filename=$(
+  find /usr/share/desktop-base/ -wholename '*/wallpaper/contents/images/1920x1080.svg' \
+  | shuf \
+  | head -1
+)
+nitrogen --set-tiled "$filename"
