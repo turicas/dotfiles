@@ -15,7 +15,10 @@ alias mdd='time dd status=progress oflag=sync bs=1M'
 alias ssh="LC_ALL=en_US.UTF-8 ssh"
 
 # Git
-alias gf='git fetch --all --prune'
+alias gfa='git fetch --all'
+alias gfp='git fetch --all --prune'
+alias gst='git status'
+alias gka='gitk --all &'
 
 # GitHub Clone
 ghc() {
