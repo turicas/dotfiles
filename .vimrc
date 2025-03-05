@@ -172,7 +172,11 @@ endif
 "  :1000-> up to 1000 lines of command-line history will be remembered
 "  %    -> saves and restores the buffer list
 "  n... -> where to save the viminfo files
-set viminfo='1000,\"1000,:1000,%,n~/.viminfo
+if !has('nvim')
+    set viminfo='1000,\"1000,:1000,%,n~/.viminfo
+else
+    set viminfo='1000,\"1000,:1000,%
+endif
 set history=10000 " New history size
 " TODO: use different files for vim and nvim (nvim can't read vim file)
 
@@ -225,3 +229,6 @@ autocmd BufLeave,BufWinLeave * if &filetype !=# 'gitcommit' | silent! mkview | e
 autocmd BufReadPost * if &filetype !=# 'gitcommit' | silent! loadview | endif
 autocmd BufWritePre * call TrimWhiteSpace()
 autocmd BufWritePost * call GenerateProjectTags()
+
+" TODO: add a snippet system
+" TODO: search inside files (run `rg` inside vim) + quickfix list
