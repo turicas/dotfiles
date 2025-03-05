@@ -1,9 +1,11 @@
-" Álvaro Justen's VIM configuration
-" <https://github.com/turicas/dotfiles/>
+" # Álvaro Justen's VIM configuration <https://github.com/turicas/dotfiles/>
 
-" System requirements: apt install git universal-ctags ripgrep
+" ## System requirements: apt install git universal-ctags ripgrep
+" ## Global configurations
 
-" Global configurations
+" If a .vimrc is present (even if empty), Vim disables the `defaults.vim`, which has good defaults
+" <https://stackoverflow.com/questions/59788781/vim-overrides-default-settings-when-adding-new-vimrc-file>
+runtime defaults.vim
 set nomodeline
 set tags=./.tags;,$HOME/.tags; " Try to find `.tags` in current directory or in parent ones; if not found, use from $HOME
 let g:func_cache = {}
@@ -11,7 +13,7 @@ let g:filetypes_to_preserve_whitespace = ['diff', 'patch']
 let g:mapleader = "\ "
 
 
-" Utility functions
+" ## Utility functions
 function FuncCacheCall(func, args)
     let l:key = string(a:func) . ":" . string(a:args)
     if has_key(g:func_cache, l:key)
@@ -96,7 +98,7 @@ function FzyCommand(choice_command, vim_command)
 endfunction
 
 
-" General configurations
+" ## General configurations
 set nocompatible
 set title " Force window title
 set number " Show line numbers
@@ -114,7 +116,7 @@ set fileencoding=utf-8 " charset = utf-8
 set fileformat=unix " end_of_line = lf
 set endofline " insert_final_newline = true
 
-" Colors
+" ## Colors
 highlight clear " Reset all highlighting to the defaults
 set background=dark
 colorscheme slate
@@ -125,7 +127,7 @@ set termguicolors
 syntax on " Syntax highlight
 match Todo /\s\+$/ " Highlight To-dos
 
-" Status line
+" ## Status line
 set laststatus=2 " Last window will always have a status line
 set statusline=
 set statusline+=\ %{mode()}
@@ -138,11 +140,11 @@ set statusline+=\ %3.(%c%)\ @ " Column
 set statusline+=\ %5.(%l/%L%) " Current line/total lines
 set statusline+=\ %P " Line percentage
 
-" <TAB> completion in command-mode
+" ## <TAB> completion in command-mode
 set wildmenu
 set wildmode=longest:full,full
 
-" Search
+" ## Search
 set showmatch " Show matching parenthesis
 set hlsearch " highlight search terms
 set incsearch " show search matches as you type
@@ -153,17 +155,18 @@ nnoremap <Leader>/ :nohlsearch<CR>
 " Search and show all occurrences:
 nnoremap <C-f> :g//#<Left><Left>
 
-" better indentation
+" ## Indentation
 vnoremap > >gv
 vnoremap < <gv
 
-" plugins
+" ## Plugins
 filetype plugin indent on
 if !has('nvim')
     packadd editorconfig
     packadd comment
 endif
 
+" ## History
 " Tell vim to remember certain things when we exit
 "  '1000 -> marks will be remembered for up to 1000 previously edited files
 "  "1000 -> will save up to 1000 lines for each register
@@ -176,30 +179,22 @@ else
     set viminfo='1000,\"1000,:1000,%
 endif
 set history=10000 " New history size
-" TODO: use different files for vim and nvim (nvim can't read vim file)
 
-" Clipboard and yank
+" ## Clipboard and yank
 noremap <C-c> "+y " Ctrl+c to copy to clipboard (only works when VIM is open)
 " TODO: may define clipboard name
 "set clipboard=unnamed
 "set clipboard=unnamedplus
 
-" Move tabs
+" ## Tabs (not `\t`s) and buffers
 nnoremap <C-h> :-tabmove<CR>
 nnoremap <C-l> :+tabmove<CR>
-
 " Go to file (in a new tab):
 nnoremap <C-w>gf :tabedit <cfile><CR>
+nnoremap <leader>n :bn<CR>
+nnoremap <leader>p :bp<CR>
 
-" TODO: add configs to easily change between buffers (like 'Junggling with buffers' in <https://stackoverflow.com/a/16084326/1299446>)
-" TODO: add configs to fuzzy search (like 'Juggling with files' in <https://stackoverflow.com/a/16084326/1299446>)
-" TODO: add configs to move lines, as in <https://stackoverflow.com/a/49053064/1299446>
-
-" Show trailing characters and undesirable spaces
-set list
-set listchars=tab:▸\ ,leadmultispace:│\ \ \ ,trail:·,multispace:·,nbsp:~,extends:→,eol:󰌑
-
-" Tab/spaces
+" ## Tabs (`\t`s) and spaces
 set nowrap " Don't wrap lines
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
 set autoindent " Always set autoindenting on
@@ -214,11 +209,11 @@ set fixendofline
 autocmd FileType c,cpp,go,php,python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType css,html,javascript,javascriptreact,less,scss,typescript,typescriptreact,json,yaml,toml,markdown,sh,bash,sql,xml,svg setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType make setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=0
+" Show trailing characters and undesirable spaces
+set list
+set listchars=tab:▸\ ,leadmultispace:│\ \ \ ,trail:·,multispace:·,nbsp:~,extends:→,eol:󰌑
 
-" Buffers
-nnoremap <leader>n :bn<CR>
-nnoremap <leader>p :bp<CR>
-
+" ## File management
 " Open files inside project
 nnoremap <leader>o :call FzyCommand(join(ListProjectFilesCommand()), ':tabedit')<CR>
 
@@ -229,4 +224,7 @@ autocmd BufWritePre * call TrimWhiteSpace()
 autocmd BufWritePost * call GenerateProjectTags()
 
 " TODO: add a snippet system
-" TODO: search inside files (run `rg` inside vim) + quickfix list
+" TODO: search file contents (run `rg` inside vim) + quickfix list
+" TODO: add configs to fuzzy search (like 'Juggling with files' in <https://stackoverflow.com/a/16084326/1299446>)
+" TODO: add configs to easily change between buffers (like 'Junggling with buffers' in <https://stackoverflow.com/a/16084326/1299446>)
+" TODO: add configs to move lines, as in <https://stackoverflow.com/a/49053064/1299446>
