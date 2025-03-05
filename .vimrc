@@ -158,9 +158,7 @@ vnoremap > >gv
 vnoremap < <gv
 
 " plugins
-filetype on
-filetype indent on
-filetype plugin on
+filetype plugin indent on
 if !has('nvim')
     packadd editorconfig
     packadd comment
