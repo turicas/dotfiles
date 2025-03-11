@@ -6,6 +6,7 @@
 " If a .vimrc is present (even if empty), Vim disables the `defaults.vim`, which has good defaults
 " <https://stackoverflow.com/questions/59788781/vim-overrides-default-settings-when-adding-new-vimrc-file>
 runtime defaults.vim
+" TODO: document all the features expected from defaults.vim
 set nomodeline
 set tags=./.tags;,$HOME/.tags; " Try to find `.tags` in current directory or in parent ones; if not found, use from $HOME
 let g:func_cache = {}
@@ -218,6 +219,7 @@ set listchars=tab:▸\ ,leadmultispace:│\ \ \ ,trail:·,multispace:·,nbsp:~,e
 nnoremap <leader>o :call FzyCommand(join(ListProjectFilesCommand()), ':tabedit')<CR>
 
 " Save view before closing and restores after opening (view includes cursor position)
+" TODO: isn't it already in defaults.vim?
 autocmd BufLeave,BufWinLeave * if &filetype !=# 'gitcommit' | silent! mkview | endif
 autocmd BufReadPost * if &filetype !=# 'gitcommit' | silent! loadview | endif
 autocmd BufWritePre * call TrimWhiteSpace()
