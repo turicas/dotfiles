@@ -179,3 +179,19 @@ conngraph() {
   eog "$filename"
   rm "$filename"
 }
+
+randstr() {
+  echo $(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c 16)
+}
+
+docker-ls-files() {
+  image_name=$(echo "build-context-$(randstr)" | tr 'A-Z' 'a-z')
+  docker image build --cache-from busybox --no-cache -t "$image_name" -f - . <<EOF
+FROM busybox
+WORKDIR /app
+COPY . /app
+CMD ["find", "/app", "-type", "f"]
+EOF
+  docker run --rm "$image_name" | sed 's/^\/app\///' | sort
+  docker image rm "$image_name" > /dev/null
+}
