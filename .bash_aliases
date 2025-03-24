@@ -17,12 +17,16 @@ alias ssh="LC_ALL=en_US.UTF-8 ssh"
 # Git
 alias gdc='git diff --cached'
 alias gdf='git diff'
+alias gdn='git diff --no-index'
 alias gfa='git fetch --all'
 alias gfp='git fetch --all --prune'
 alias gka='gitk --all &'
 alias gra='git rebase --abort'
 alias grc='git rebase --continue'
 alias gri='git rebase -i origin/develop'
+alias gsl='git stash list'
+alias gsp='git stash pop'
+alias gss='git stash save'
 alias gst='git status'
 
 # GitHub Clone
