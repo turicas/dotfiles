@@ -15,6 +15,9 @@ alias mdd='time dd status=progress oflag=sync bs=1M'
 alias ssh="LC_ALL=en_US.UTF-8 ssh"
 
 # Git
+alias gap='git add -p'
+alias gca='git commit --amend'
+alias gci='git commit'
 alias gdc='git diff --cached'
 alias gdf='git diff'
 alias gdn='git diff --no-index'
