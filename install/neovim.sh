@@ -4,12 +4,21 @@ set -e
 
 mkdir -p ~/.local/opt
 cd ~/.local/opt
-wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
-tar xfvz nvim-linux64.tar.gz
-rm nvim-linux64.tar.gz
+nvim_url=$(
+  wget --quiet -O - https://github.com/neovim/neovim/releases \
+    | grep -oE --color=no 'href="(/[^ ]+/nvim-linux-x86_64.tar.gz)"' \
+    | sed 's|href="|https://github.com|; s|"$||' \
+    | head -1
+)
+wget "$nvim_url"
+filename=$(basename "$nvim_url")
+tar xfvz "$filename"
+rm "$filename"
 rm -rf ~/.local/bin/nvim
 cd -
 
 mkdir -p ~/.local/bin/ ~/.config/nvim/
-ln -s ~/.local/opt/nvim-linux64/bin/nvim ~/.local/bin/nvim
-ln -s ~/.vimrc ~/.config/nvim/init.vim
+ln -s ~/.local/opt/nvim-linux-x86_64/bin/nvim ~/.local/bin/nvim
+if [[ ! -e ~/.config/nvim/init.vim ]]; then
+  ln -s ~/.vimrc ~/.config/nvim/init.vim
+fi
