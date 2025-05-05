@@ -34,3 +34,8 @@ flatpak install --noninteractive flathub com.obsproject.Studio
 ./install/tree-sitter.sh
 ./install/webdrivers.sh
 ./install/scripts.sh
+
+
+# CSS for pandoc (markdown -> HTML)
+mkdir -p ~/.local/css
+wget -O ~/.local/css/pandoc.css https://gist.githubusercontent.com/killercup/5917178/raw/40840de5352083adb2693dc742e9f75dbb18650f/pandoc.css

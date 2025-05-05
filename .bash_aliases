@@ -204,3 +204,22 @@ EOF
   docker run --rm "$image_name" | sed 's/^\/app\///' | sort
   docker image rm "$image_name" > /dev/null
 }
+
+md() {
+  markdownPath="$1"; shift
+  htmlPath="$1"
+
+  if [[ -z $htmlPath ]]; then
+    htmlPath="-"
+  fi
+
+  pandoc \
+    --from gfm \
+    --to html5 \
+    --css "$HOME/.local/css/pandoc.css" \
+    --standalone --embed-resources \
+    --toc=true \
+    "$markdownPath" \
+    -o "$htmlPath" \
+    2> /dev/null
+}
