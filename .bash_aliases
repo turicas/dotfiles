@@ -27,10 +27,12 @@ alias gka='gitk --all &'
 alias gra='git rebase --abort'
 alias grc='git rebase --continue'
 alias gri='git rebase -i origin/develop'
+alias grs='git restore --staged'
 alias gsl='git stash list'
 alias gsp='git stash pop'
 alias gss='git stash save'
 alias gst='git status'
+alias gsv='git show -v'
 
 # GitHub Clone
 ghc() {
