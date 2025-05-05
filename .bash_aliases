@@ -8,8 +8,8 @@ alias fgrep='fgrep --color=yes'
 alias egrep='egrep --color=yes'
 
 # Disks
-alias disk-destroy='sudo dd status=progress oflag=sync bs=8M if=/dev/urandom'
-alias mdd='time dd status=progress oflag=sync bs=1M'
+alias disk-destroy='time sudo dd status=progress oflag=sync bs=8M if=/dev/urandom'
+alias mdd='time sudo dd status=progress oflag=sync bs=1M'
 
 # SSH
 alias ssh="LC_ALL=en_US.UTF-8 ssh"
