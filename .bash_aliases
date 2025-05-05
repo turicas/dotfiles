@@ -168,8 +168,8 @@ gitcontents() {
     | sort \
     | while read filename; do
         echo "---------- START: $filename ----------"
-        cat $filename
-        echo -e "---------- END: $filename ----------\n"
+        cat "$filename"
+        echo -e "\n---------- END: $filename ----------\n"
       done
 }
 
