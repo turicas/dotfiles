@@ -51,7 +51,6 @@ ncdu
 ndppd
 nmap
 nmon
-ntpdate
 nvme-cli
 p7zip-full
 parted
@@ -64,7 +63,6 @@ python3-pip
 python3-setuptools
 ripgrep
 rsync
-software-properties-common
 sqlite3
 sudo
 tcptraceroute
