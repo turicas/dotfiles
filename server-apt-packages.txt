@@ -4,6 +4,7 @@ aria2
 asciinema
 bash-completion
 bat
+bind9-dnsutils
 bridge-utils
 build-essential
 byobu
@@ -11,7 +12,6 @@ ca-certificates
 cbm
 cron
 curl
-dnsutils
 duc
 ethtool
 fakeroot
@@ -32,8 +32,7 @@ jq
 libbz2-dev
 libffi-dev
 liblzma-dev
-libncurses5-dev
-libncursesw5-dev
+libncurses-dev
 libpq-dev
 libreadline-dev
 libsqlite3-dev
