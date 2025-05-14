@@ -19,7 +19,6 @@ filezilla
 firefox-esr
 firmware-iwlwifi
 flameshot
-flatpak
 gedit
 gedit-plugins
 gimp
@@ -59,6 +58,8 @@ nautilus
 network-manager-applet
 nitrogen
 ntfs-3g
+obs-plugins
+obs-studio
 openssh-server
 pandoc
 pavucontrol
