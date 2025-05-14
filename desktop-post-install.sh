@@ -1,8 +1,11 @@
 #!/bin/bash
 
-# Run as regular user
-
 set -e
+
+if [[ $(id -u) == 0 ]]; then
+	echo "ERROR: must not be run as root!"
+	exit 1;
+fi
 
 ./create-symlinks.sh
 

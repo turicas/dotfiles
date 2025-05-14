@@ -1,8 +1,11 @@
 #!/bin/bash
 
-# Run as root
-
 set -e
+
+if [[ $(id -u) != 0 ]]; then
+       echo "ERROR: must be run as root!"
+       exit 1;
+fi
 
 # APT packages
 apt update
