@@ -30,6 +30,9 @@ sudo ln -s /usr/bin/ntfsfix /sbin/fsck.ntfs
 sudo ln -s /usr/bin/ntfsfix /sbin/fsck.ntfs-3g
 
 # Other software
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install --noninteractive flathub com.obsproject.Studio
+flatpak install --noninteractive flathub org.kde.kdenlive
 ./install/fonts.sh
 ./install/neovim.sh
 ./install/tree-sitter.sh

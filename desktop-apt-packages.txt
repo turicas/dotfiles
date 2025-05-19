@@ -19,6 +19,7 @@ filezilla
 firefox-esr
 firmware-iwlwifi
 flameshot
+flatpak
 gedit
 gedit-plugins
 gimp
