@@ -151,7 +151,7 @@ pdfsearch() {
     return
   fi
 
-  find -iname '*.pdf' | while read filename; do
+  find -iname '*.pdf' | sort | while read filename; do
     result=$(pdftotext -enc UTF-8 -layout "$filename" - | grep -E "$query")
     if [[ ! -z $result ]]; then
       echo "${filename}:"
