@@ -2,13 +2,27 @@
 
 # First, check if HDMI is connected and enable/disable it
 hdmiConnected=$(xrandr --query | grep --color=no ' connected ' | sed 's/ .*//' | grep --color=no HDMI-1 | wc -l)
+atHome=1
+
 if [[ $hdmiConnected == 1 ]]; then
-    xrandr --output HDMI-1 --auto --left-of eDP-1
-    i3-msg '[workspace="1"]' move workspace to output HDMI-1
-    i3-msg '[workspace="2"]' move workspace to output eDP-1
-    i3-msg '[workspace="3"]' move workspace to output HDMI-1
-    i3-msg '[workspace="4"]' move workspace to output eDP-1
-    i3-msg '[workspace="5"]' move workspace to output eDP-1
+
+  if [[ $atHome == 1 ]]; then
+    hdmiOption="--right-of"
+    mainScreen="HDMI-1"
+    secondaryScreen="eDP1-1"
+  else
+    hdmiOption="--left-of"
+    mainScreen="eDP1-1"
+    secondaryScreen="HDMI-1"
+  fi
+
+  xrandr --output HDMI-1 --auto $hdmiOption eDP-1
+  i3-msg '[workspace="1"]' move workspace to output $secondaryScreen
+  i3-msg '[workspace="2"]' move workspace to output $mainScreen
+  i3-msg '[workspace="3"]' move workspace to output $secondaryScreen
+  i3-msg '[workspace="4"]' move workspace to output $mainScreen
+  i3-msg '[workspace="5"]' move workspace to output $mainScreen
+
 else
     xrandr --output HDMI-1 --off
 fi
