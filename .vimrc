@@ -86,18 +86,38 @@ function GenerateProjectTags()
     endif
 endfunction
 
-function FzyCommand(choice_command, vim_command)
-  try
-    let output = system(a:choice_command . ' | fzy')
-  catch /Vim:Interrupt/
-    " Swallow errors from ^C, allow redraw! below
-  endtry
-  redraw!
-  if v:shell_error == 0 && !empty(output)
-    exec a:vim_command . ' ' . output
+function! FzyProjectFiles()
+  let l:current_path = expand('%:p:h')
+  let l:git_root = GitRoot(l:current_path)
+
+  if !empty(l:git_root) " Inside a Git repository
+    let l:list_command = 'git -C ' . shellescape(l:git_root) . ' ls-files | fzy'
+    try
+      let l:relative_path = system(l:list_command)
+    catch /Vim:Interrupt/
+      redraw!
+      return
+    endtry
+    redraw!
+
+    if v:shell_error == 0 && !empty(l:relative_path)
+      let l:full_path = l:git_root . '/' . trim(l:relative_path)
+      exec ':tabedit ' . fnameescape(l:full_path)
+    endif
+  else " Current path is not a Git repository
+    let l:list_command = 'rg --files --no-messages ' . shellescape(l:current_path) . ' | fzy'
+    try
+      let l:file_path = system(l:list_command)
+    catch /Vim:Interrupt/
+      redraw!
+      return
+    endtry
+    redraw!
+    if v:shell_error == 0 && !empty(l:file_path)
+      exec ':tabedit ' . fnameescape(trim(l:file_path))
+    endif
   endif
 endfunction
-
 
 " ## General configurations
 set nocompatible
@@ -216,7 +236,7 @@ set listchars=tab:▸\ ,leadmultispace:│\ \ \ ,trail:·,multispace:·,nbsp:~,e
 
 " ## File management
 " Open files inside project
-nnoremap <leader>o :call FzyCommand(join(ListProjectFilesCommand()), ':tabedit')<CR>
+nnoremap <leader>o :call FzyProjectFiles()<CR>
 
 " Save view before closing and restores after opening (view includes cursor position)
 " TODO: isn't it already in defaults.vim?
