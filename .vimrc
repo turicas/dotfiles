@@ -67,6 +67,7 @@ function ListProjectFilesCommand()
     let l:git_root = GitRoot(l:current_path)
     if !empty(l:git_root)
         return ['git', '-C', shellescape(l:git_root), 'ls-files']
+        " TODO: add `git ls-files -o` to also list untracked files?
     else
         return ['rg', '--files', shellescape(l:current_path)]
     endif
