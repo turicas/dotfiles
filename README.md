@@ -6,4 +6,4 @@
   - `.gitignore`
   - `.gitmodules`
   - `.tags`
-- Install auto complete to bash aliases using [complete-alias](https://github.com/cykerway/complete-alias/)
+- Install auto complete to all bash aliases using [complete-alias](https://github.com/cykerway/complete-alias/)

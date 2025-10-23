@@ -42,6 +42,37 @@ alias gss='git stash save'
 alias gst='git status'
 alias gsv='git show -v'
 
+# grep --color=no -E '^alias g[a-z][a-z]=' ~/.bash_aliases | grep -v 'alias gka' | sed "s/alias \(g[a-z]\+\)='git \([^ ']\+\).*/__git_complete \1 _git_\2/"
+if [ -f /usr/share/bash-completion/completions/git ]; then
+  source /usr/share/bash-completion/completions/git
+
+  __git_complete gap _git_add
+  __git_complete gca _git_commit
+  __git_complete gci _git_commit
+  __git_complete gco _git_checkout
+  __git_complete gdc _git_diff
+  __git_complete gdf _git_diff
+  __git_complete gdn _git_diff
+  __git_complete gfa _git_fetch
+  __git_complete gfp _git_fetch
+  __git_complete gmn _git_merge
+  __git_complete gpl _git_pull
+  __git_complete gpr _git_pull
+  __git_complete gra _git_rebase
+  __git_complete grc _git_rebase
+  __git_complete grd _git_rebase
+  __git_complete grh _git_reset
+  __git_complete gri _git_rebase
+  __git_complete grm _git_rebase
+  __git_complete grs _git_restore
+  __git_complete grt _git_restore
+  __git_complete gsl _git_stash
+  __git_complete gsp _git_stash
+  __git_complete gss _git_stash
+  __git_complete gst _git_status
+  __git_complete gsv _git_show
+fi
+
 # GitHub Clone
 ghc() {
   cd ~/projects/
