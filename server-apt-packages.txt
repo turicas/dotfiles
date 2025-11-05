@@ -27,7 +27,7 @@ golang
 hdparm
 htop
 iotop
-iperf
+iperf3
 iptraf-ng
 jq
 libbz2-dev
