@@ -15,6 +15,7 @@ cron
 curl
 duc
 ethtool
+ethtool
 fakeroot
 file
 fzy
