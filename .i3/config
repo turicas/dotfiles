@@ -283,11 +283,14 @@ bindsym $mod+n exec mplayer -tv driver=v4l2:gain=1:device=/dev/video0 -vo gl2 tv
 bindsym $mod+equal exec $binPath/lup
 bindsym $mod+minus exec $binPath/ldown
 
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 
 #TODO:
 #tint2? volti?
 #bar:
-# volume control
 # system monitor (graphs)
 # logout / lockscreen
 # calendar
