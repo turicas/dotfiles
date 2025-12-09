@@ -1,6 +1,7 @@
 ark
 audacity
 beep
+binaryen
 blueman
 cheese
 chromium
@@ -92,6 +93,7 @@ vainfo
 vim-gtk3
 virt-manager
 vlc
+wabt
 wireguard
 wireguard-tools
 wireless-tools
