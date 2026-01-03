@@ -14,6 +14,9 @@ ca-certificates
 cbm
 cron
 curl
+docker-buildx
+docker-compose
+docker.io
 duc
 ethtool
 fakeroot

@@ -23,13 +23,6 @@ apt install -y $(cat server-apt-packages.txt)
 # DNS=8.8.8.8,1.1.1.1
 # Then: systemctl restart systemd-resolved
 
-# Docker base install
-apt remove docker docker.io containerd runc
-curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian bullseye stable"
-apt update
-apt install -y docker-ce docker-ce-cli containerd.io
-
 # Pre-pull some docker images
 cat server-docker-images.txt | while read image; do
    docker pull $image
