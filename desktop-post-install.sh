@@ -7,7 +7,13 @@ if [[ $(id -u) == 0 ]]; then
 	exit 1;
 fi
 
-./create-symlinks.sh
+# Create symlinks in $HOME using GNU stow
+for package in */; do
+  if [[ $package != "install/" ]]; then
+    echo "Creating symlinks for package ${package}..."
+    stow --target=$HOME $package
+  fi
+done
 
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
