@@ -51,6 +51,7 @@ make
 mtr
 ncdu
 ndppd
+netselect-apt
 nmap
 nmon
 nvme-cli

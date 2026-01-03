@@ -7,6 +7,13 @@ if [[ $(id -u) != 0 ]]; then
        exit 1;
 fi
 
+# Choose the best mirror
+apt update && apt install -y netselect-apt
+# TODO: change country if machine is outside Brazil
+netselect-apt -n -t 600 -c Brazil testing
+mv sources.list /etc/apt
+apt modernize-sources
+
 # System packages
 apt update
 apt full-upgrade -y
