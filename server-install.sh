@@ -9,19 +9,19 @@ fi
 
 # System packages
 apt update
-apt install -y nala
-nala full-upgrade -y
-nala install -y $(cat server-apt-packages.txt)
-
-# Python packages
-pip3 install -r server-pip-packages.txt
+apt full-upgrade -y
+apt install -y $(cat server-apt-packages.txt)
+# Add to /etc/systemd/resolve.conf:
+# [Resolve]
+# DNS=8.8.8.8,1.1.1.1
+# Then: systemctl restart systemd-resolved
 
 # Docker base install
-nala emove docker docker.io containerd runc
+apt remove docker docker.io containerd runc
 curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian bullseye stable"
-nala update
-nala install -y docker-ce docker-ce-cli containerd.io
+apt update
+apt install -y docker-ce docker-ce-cli containerd.io
 
 # Pre-pull some docker images
 cat server-docker-images.txt | while read image; do
@@ -34,8 +34,8 @@ wget -nv -O - https://packagecloud.io/dokku/dokku/gpgkey | apt-key add -
 OS_ID="$(lsb_release -cs 2>/dev/null || echo "bionic")"
 echo "xenial bionic focal" | grep -q "$OS_ID" || OS_ID="bionic"
 echo "deb https://packagecloud.io/dokku/dokku/ubuntu/ ${OS_ID} main" | tee /etc/apt/sources.list.d/dokku.list
-nala update
-nala install -y dokku
+apt update
+apt install -y dokku
 dokku plugin:install-dependencies --core
 dokku config:set --global DOKKU_RM_CONTAINER=1
 
@@ -53,5 +53,5 @@ dokku plugin:install https://github.com/dokku/dokku-redis.git redis
 # mount /var/lib/dokku/services
 
 # Finish installation
-nala autoremove -y
-nala clean
+apt autoremove -y
+apt clean

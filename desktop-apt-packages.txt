@@ -3,7 +3,6 @@ audacity
 beep
 binaryen
 blueman
-cheese
 chromium
 cloc
 console-common
@@ -27,6 +26,7 @@ gimp
 gitk
 glabels
 gnome
+gnome-snapshot
 gparted
 gping
 gvfs-backends
@@ -38,7 +38,7 @@ intel-gpu-tools
 ipython3
 kazam
 kdenlive
-keepassxc
+keepassxc-minimal
 libimage-exiftool-perl
 libjpeg-dev
 libleptonica-dev
@@ -71,7 +71,7 @@ powertop
 printer-driver-dymo
 python-is-python3
 qgit
-resolvconf
+radeontop
 rlwrap
 rustup
 rxvt-unicode
@@ -87,8 +87,6 @@ tigervnc-viewer
 tk-dev
 totem
 universal-ctags
-vagrant
-vagrant-libvirt
 vainfo
 vim-gtk3
 virt-manager

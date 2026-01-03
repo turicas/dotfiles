@@ -40,9 +40,6 @@ wget -O "/tmp/google-chrome.deb" https://dl.google.com/linux/direct/google-chrom
 dpkg -i "/tmp/google-chrome.deb"
 rm "/tmp/google-chrome.deb"
 
-# pip packages
-pip3 install -r desktop-pip-packages.txt
-
 # Users and groups
 for group in dialout docker libvirt sudo; do
 	adduser turicas $group

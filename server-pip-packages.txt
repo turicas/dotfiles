@@ -1,4 +1,0 @@
-httpie
-ipython
-s3cmd
-yt-dlp

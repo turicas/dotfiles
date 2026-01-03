@@ -1,3 +1,0 @@
--r server-pip-packages.txt
-
-jupyter

@@ -1,3 +1,4 @@
+7zip
 apt-listbugs
 apt-transport-https
 aria2
@@ -15,7 +16,6 @@ cron
 curl
 duc
 ethtool
-ethtool
 fakeroot
 file
 fzy
@@ -30,6 +30,7 @@ htop
 iotop
 iperf3
 iptraf-ng
+ipython3
 jq
 libbz2-dev
 libffi-dev
@@ -48,13 +49,11 @@ lua5.4
 lynx
 make
 mtr
-nala
 ncdu
 ndppd
 nmap
 nmon
 nvme-cli
-p7zip-full
 parted
 postfix
 postgresql-client
@@ -65,6 +64,7 @@ python3-pip
 python3-setuptools
 ripgrep
 rsync
+s3cmd
 smartmontools
 sqlite3
 sudo
@@ -83,5 +83,6 @@ w3m
 wget
 whois
 xz-utils
+yt-dlp
 zip
 zlib1g-dev
