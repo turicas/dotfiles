@@ -2,3 +2,4 @@
 .*.sw?
 .tags
 __pycache__
+vim/.vim/view/
