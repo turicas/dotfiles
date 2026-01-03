@@ -35,12 +35,15 @@ sudo ln -s /usr/bin/ntfsfix /sbin/fsck.ntfs-3g
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install --noninteractive flathub com.obsproject.Studio
 flatpak install --noninteractive flathub org.kde.kdenlive
+#./install/scripts.sh
+#./install/tree-sitter.sh
+./install/duckdb.sh
 ./install/fonts.sh
 ./install/neovim.sh
-./install/tree-sitter.sh
+./install/ruff.sh
+./install/wasmtime.sh
 ./install/webdrivers.sh
-./install/scripts.sh
-
+./install/zig.sh
 
 # CSS for pandoc (markdown -> HTML)
 mkdir -p ~/.local/css
