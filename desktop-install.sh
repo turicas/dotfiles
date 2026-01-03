@@ -23,13 +23,6 @@ apt clean
 
 install -m 0755 -d /etc/apt/keyrings
 
-# Dropbox (via DEB)
-apt install -y libpango-1.0-0
-apt clean
-wget -O "/tmp/dropbox.deb" "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2024.04.17_amd64.deb"
-dpkg -i "/tmp/dropbox.deb"
-rm "/tmp/dropbox.deb"
-
 # Google Chrome (via .deb)
 wget -O "/tmp/google-chrome.deb" https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 dpkg -i "/tmp/google-chrome.deb"

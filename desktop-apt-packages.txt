@@ -80,6 +80,7 @@ screenkey
 scrot
 sqlitebrowser
 suckless-tools
+syncthing
 task-gnome-desktop
 terminator
 tesseract-ocr-all

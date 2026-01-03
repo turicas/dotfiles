@@ -302,7 +302,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 exec --no-startup-id gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 exec --no-startup-id gnome /usr/libexec/gsd-xsettings
 exec --no-startup-id blueman-manager
-exec --no-startup-id dropbox start
+exec --no-startup-id syncthing
 exec --no-startup-id flameshot
 exec --no-startup-id $binPath/wallpaper
 exec --no-startup-id nm-applet
