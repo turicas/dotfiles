@@ -4,6 +4,7 @@ beep
 binaryen
 blueman
 chromium
+chromium-driver
 cloc
 console-common
 cups

@@ -21,13 +21,6 @@ apt upgrade -y
 apt dist-upgrade -y
 apt clean
 
-install -m 0755 -d /etc/apt/keyrings
-
-# Google Chrome (via .deb)
-wget -O "/tmp/google-chrome.deb" https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-dpkg -i "/tmp/google-chrome.deb"
-rm "/tmp/google-chrome.deb"
-
 # Users and groups
 for group in dialout docker libvirt sudo; do
 	adduser turicas $group
