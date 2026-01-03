@@ -15,13 +15,9 @@ for package in */; do
   fi
 done
 
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
-git clone https://github.com/pyenv/pyenv-update.git ~/.pyenv/plugins/pyenv-update
-
-source ~/.bashrc
-for version in 3.9 3.10 3.11 3.12 3.13; do
-	pyenv install $(pyenv install --list | egrep --color=no "^ *${version}" | tail -1 | sed 's/ *//')
+git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+for version in 3.8 3.9 3.10 3.11 3.12 3.13 3.14; do
+	pyenv install $version
 done
 
 # Rust
