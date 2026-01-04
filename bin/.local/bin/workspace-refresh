@@ -1,32 +1,37 @@
 #!/bin/bash
 
+atHome=$(lsusb | grep 'Das Keyboard' | wc -l)
+machine=$(hostname)
+
 # First, check if HDMI is connected and enable/disable it
-hdmiConnected=$(xrandr --query | grep --color=no ' connected ' | sed 's/ .*//' | grep --color=no HDMI-1 | wc -l)
-atHome=1
+if [[ $machine == "minideb" ]]; then
+  primaryDisplay="DisplayPort-0"
+  secondaryDisplay="HDMI-A-0"
+elif [[ $machine == "thinkpad" ]]; then
+  primaryDisplay="HDMI-1"
+  secondaryDisplay="eDP-1"
+fi
 
-if [[ $hdmiConnected == 1 ]]; then
+primaryConnected=$(xrandr --query | grep --color=no ' connected ' | grep "$primaryDisplay" | wc -l)
+secondaryConnected=$(xrandr --query | grep --color=no ' connected ' | grep "$secondaryDisplay" | wc -l)
 
-  if [[ $atHome == 1 ]]; then
-    hdmiOption="--right-of"
-    mainScreen="HDMI-1"
-    secondaryScreen="eDP-1"
-  else
-    hdmiOption="--left-of"
-    mainScreen="eDP-1"
-    secondaryScreen="HDMI-1"
-  fi
-
-  echo "Main: $mainScreen - Secondary: $secondaryScreen"
-
-  xrandr --output HDMI-1 --auto $hdmiOption eDP-1
-  i3-msg '[workspace="1"]' move workspace to output "$secondaryScreen"
-  i3-msg '[workspace="2"]' move workspace to output "$mainScreen"
-  i3-msg '[workspace="3"]' move workspace to output "$secondaryScreen"
-  i3-msg '[workspace="4"]' move workspace to output "$mainScreen"
-  i3-msg '[workspace="5"]' move workspace to output "$mainScreen"
+if [[ $secondaryConnected == 0 ]]; then
+  xrandr --output "$secondaryDisplay" --off
 
 else
-    xrandr --output HDMI-1 --off
+  if [[ $atHome == 1 ]]; then
+    option="--left-of"
+  else
+    option="--right-of"
+  fi
+
+  echo "Displays: primary: $primaryDisplay, secondary: $secondaryDisplay."
+  xrandr --output "$secondaryDisplay" --auto $option "$primaryDisplay"
+  i3-msg '[workspace="1"]' move workspace to output "$secondaryDisplay"
+  i3-msg '[workspace="2"]' move workspace to output "$primaryDisplay"
+  i3-msg '[workspace="3"]' move workspace to output "$secondaryDisplay"
+  i3-msg '[workspace="4"]' move workspace to output "$primaryDisplay"
+  i3-msg '[workspace="5"]' move workspace to output "$primaryDisplay"
 fi
 
 # Then, force keyboard layout and remap caps lock to escape

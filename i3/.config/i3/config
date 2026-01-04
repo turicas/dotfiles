@@ -14,8 +14,7 @@ set $binPath /home/turicas/projects/dotfiles/bin
 # set super key as mod
 set $mod Mod4
 
-# font for window titles. ISO 10646 = Unicode
-#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# font for window titles
 font pango:DejaVuSansM Nerd Font Mono 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -160,39 +159,23 @@ bindsym $mod+b border toggle
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command i3status -c ~/.i3/i3status.conf
-    font "DejaVuSansM Nerd Font Mono"
-    mode dock
+    mode hide
+    position bottom
+    font pango:DejaVuSansM Nerd Font Mono 10
     workspace_buttons yes
+    #status_command i3status -c ~/.config./i3/i3status.conf | python ~/.config/i3/wrapper.py
+    status_command i3status -c ~/.config/i3/i3status.conf
     output LVDS-1
-    tray_output LVDS-1
-    position bottom
-
-    colors {
-        background #000000
-        statusline #ffffff
-        separator #666666
-        focused_workspace  #4c7899 #285577 #ffffff
-        active_workspace   #333333 #5f676a #ffffff
-        inactive_workspace #333333 #222222 #888888
-        urgent_workspace   #2f343a #900000 #ffffff
-    }
-}
-
-bar {
-    #status_command i3status -c ~/.i3/i3status.conf | python ~/.i3/wrapper.py
-    status_command i3status -c ~/.i3/i3status.conf
-    mode hide
-    workspace_buttons yes
     output eDP-1
+    output DisplayPort-0
     tray_output eDP-1
-    position bottom
+    tray_output DisplayPort-0
+    tray_output LVDS-1
 
     colors {
         background #000000
         statusline #ffffff
-        separator #666666
-
+        separator  #666666
         focused_workspace  #4c7899 #285577 #ffffff
         active_workspace   #333333 #5f676a #ffffff
         inactive_workspace #333333 #222222 #888888
@@ -201,31 +184,13 @@ bar {
 }
 
 bar {
+    mode hide
+    position bottom
+    font pango:DejaVuSansM Nerd Font Mono 10
+    workspace_buttons yes
+    output HDMI-A-0
     output HDMI-1
-    workspace_buttons yes
     tray_output none
-    #mode hide
-}
-
-bar {
-    output VGA-1
-    workspace_buttons yes
-    tray_output none
-    mode hide
-}
-
-bar {
-    output DP-1
-    workspace_buttons yes
-    tray_output none
-    mode hide
-}
-
-bar {
-    output DP-2
-    workspace_buttons yes
-    tray_output none
-    mode hide
 }
 
 # do not focus windows when mouse cursor reach them
@@ -250,7 +215,6 @@ force_display_urgency_hint 500 ms
 
 
 # per-window configuration
-#for_window [instance="screenkey"] floating enable
 for_window [instance="wicd-client.py"] floating enable
 for_window [instance="xfce4-notifyd"] floating enable
 
