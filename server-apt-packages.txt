@@ -20,6 +20,7 @@ docker.io
 duc
 ethtool
 fakeroot
+fastfetch
 file
 fzy
 git
