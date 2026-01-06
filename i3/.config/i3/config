@@ -9,7 +9,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $binPath /home/turicas/projects/dotfiles/bin
+set $binPath /home/turicas/.local/bin
 
 # set super key as mod
 set $mod Mod4
