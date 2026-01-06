@@ -2,4 +2,5 @@
 .*.sw?
 .tags
 __pycache__
+pip/.pip/pip.log
 vim/.vim/view/
