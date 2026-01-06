@@ -2,7 +2,7 @@
 
 set -e
 
-mkdir -p ~/.local/opt
+mkdir -p ~/.local/opt ~/.local/bin
 cd ~/.local/opt
 nvim_url=$(
   wget --quiet -O - https://github.com/neovim/neovim/releases \

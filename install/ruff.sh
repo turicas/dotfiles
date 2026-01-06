@@ -2,6 +2,7 @@
 
 set -e
 
+mkdir -p ~/.local/bin
 pushd ~/.local/bin
 downloadUrl=$(
 	wget --quiet -O - https://github.com/astral-sh/ruff/releases \

@@ -2,7 +2,7 @@
 
 set -e
 
-mkdir -p ~/.local/opt
+mkdir -p ~/.local/opt ~/.local/bin
 pushd ~/.local/opt
 VERSION="0.15.2"
 URL="https://ziglang.org/download/${VERSION}/zig-x86_64-linux-${VERSION}.tar.xz"

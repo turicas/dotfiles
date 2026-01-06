@@ -2,6 +2,7 @@
 
 set -e
 
+mkdir -p ~/.local/opt ~/.local/bin
 pushd ~/.local/bin
 treesitter_url=$(
   wget --quiet -O - https://github.com/tree-sitter/tree-sitter/releases \

@@ -2,6 +2,7 @@
 
 set -e
 
+mkdir -p ~/.local/bin
 pushd ~/.local/bin
 duckdb_url=$(
 	wget --quiet -O - https://github.com/duckdb/duckdb/releases \

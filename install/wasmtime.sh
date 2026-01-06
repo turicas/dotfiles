@@ -2,7 +2,7 @@
 
 set -e
 
-mkdir -p ~/.local/opt
+mkdir -p ~/.local/opt ~/.local/bin
 pushd ~/.local/opt
 VERSION="39.0.1"
 URL="https://github.com/bytecodealliance/wasmtime/releases/expanded_assets/v${VERSION}"
