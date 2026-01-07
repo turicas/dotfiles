@@ -1,0 +1,32 @@
+services:
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    devices:
+      - "/dev/dri:/dev/dri"
+    volumes:
+      - ./data/ollama/:/root/.ollama
+    environment:
+      - OLLAMA_VULKAN=1
+      - OLLAMA_KEEP_ALIVE=5m
+      - OLLAMA_MAX_LOADED_MODELS=1
+      - OLLAMA_NUM_PARALLEL=1
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    restart: unless-stopped
+    ports:
+      - "0.0.0.0:3000:8080"
+    volumes:
+      - ./openwebui_data:/app/backend/data
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - ENABLE_OLLAMA_API=true
+      - ENABLE_WEBSOCKET_SUPPORT=false
+    depends_on:
+      - ollama
