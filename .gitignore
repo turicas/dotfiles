@@ -3,4 +3,5 @@
 .tags
 __pycache__
 pip/.pip/pip.log
+vim/.vim/.netrwhist
 vim/.vim/view/
