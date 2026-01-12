@@ -73,6 +73,7 @@ rsync
 s3cmd
 smartmontools
 sqlite3
+stow
 sudo
 systemd-resolved
 tcptraceroute
