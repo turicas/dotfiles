@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo -e "path\tremote_name\tremote_url"
+for dir in ~/projects/*; do
+  if [[ ! -e $dir/.git ]]; then
+    echo -e "${dir}\t-\t-"
+  else
+    git -C $dir remote -v | sed 's/(fetch)$//; s/(push)$//' | sort -u | while read line; do
+      echo -e "${dir}\t${line}"
+    done
+  fi
+done
