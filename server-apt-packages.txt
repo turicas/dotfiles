@@ -82,6 +82,7 @@ time
 tmux
 tree
 tsocks
+ufw
 unar
 unzip
 vim-nox
