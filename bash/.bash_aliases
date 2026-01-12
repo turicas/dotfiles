@@ -169,13 +169,16 @@ json_escape () {
 
 vnc-start-remote-server() {
   remoteIP="$1"
+  VNC_COMMAND="x11vnc -display :0 -localhost -rfbport 5900 -rfbauth ~/.vnc/passwd -noxdamage"
 
   if [[ -z $remoteIP ]]; then
     echo "ERROR - usage: $0 <remote-ip>"
     exit
   fi
 
-  ssh -t -L 5900:localhost:5900 "$remoteIP" 'x11vnc -localhost -display :0'
+  # First, create password if it's not set
+  ssh -t "$remoteIP" 'if [[ ! -e ~/.vnc/passwd ]]; then x11vnc -storepasswd ~/.vnc/passwd; fi'
+  ssh -t -L 5900:localhost:5900 "$remoteIP" "$VNC_COMMAND"
 }
 
 vnc-start-client() {
