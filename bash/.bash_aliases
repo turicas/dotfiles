@@ -15,6 +15,7 @@ alias mdd='time sudo dd status=progress oflag=sync bs=1M'
 alias ssh="LC_ALL=en_US.UTF-8 ssh"
 
 # Git
+alias gad='git add'
 alias gap='git add -p'
 alias gca='git commit --amend'
 alias gci='git commit'
@@ -34,7 +35,7 @@ alias grc='git rebase --continue'
 alias grd='git rebase -i develop'
 alias grh='git reset --hard'
 alias gri='git rebase -i'
-alias grm='git rebase -i main'
+alias grm='git rm'
 alias grs='git restore --staged'
 alias grt='git restore'
 alias gsl='git stash list'
