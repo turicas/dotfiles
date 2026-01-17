@@ -40,6 +40,7 @@ flatpak install --noninteractive flathub org.kde.kdenlive
 ./install/duckdb.sh
 ./install/fonts.sh
 ./install/neovim.sh
+./install/rclone.sh
 ./install/ruff.sh
 ./install/wasmtime.sh
 ./install/webdrivers.sh
