@@ -48,3 +48,13 @@ flatpak install --noninteractive flathub org.kde.kdenlive
 # CSS for pandoc (markdown -> HTML)
 mkdir -p ~/.local/css
 wget -O ~/.local/css/pandoc.css https://gist.githubusercontent.com/killercup/5917178/raw/40840de5352083adb2693dc742e9f75dbb18650f/pandoc.css
+
+# TODO: configure wireguard VPNs (put files in /etc/wireguard/wgX.conf) and then:
+# for i in 1 2 ...; do sudo systemctl enable wg-quick@wg${i}; sudo systemctl start wg-quick@wg${i}; done
+
+# TODO: configure ufw:
+# ufw allow in on wg0 to any port 22
+# ufw allow in on wg0 to any port 5000
+# ufw allow in on wg1 to any port 22
+# ufw allow in on wg1 to any port 5000
+# ufw enable
