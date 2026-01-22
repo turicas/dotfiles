@@ -42,6 +42,7 @@ flatpak install --noninteractive flathub org.kde.kdenlive
 ./install/neovim.sh
 ./install/rclone.sh
 ./install/ruff.sh
+./install/vim-spell-ptbr.sh
 ./install/wasmtime.sh
 ./install/webdrivers.sh
 ./install/zig.sh

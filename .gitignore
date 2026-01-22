@@ -5,3 +5,4 @@ __pycache__
 pip/.pip/pip.log
 vim/.vim/.netrwhist
 vim/.vim/view/
+vim/.vim/spell/

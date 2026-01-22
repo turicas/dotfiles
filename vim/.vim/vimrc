@@ -251,3 +251,7 @@ autocmd BufWritePost * call GenerateProjectTags()
 " TODO: add configs to fuzzy search (like 'Juggling with files' in <https://stackoverflow.com/a/16084326/1299446>)
 " TODO: add configs to easily change between buffers (like 'Junggling with buffers' in <https://stackoverflow.com/a/16084326/1299446>)
 " TODO: add configs to move lines, as in <https://stackoverflow.com/a/49053064/1299446>
+
+" Spell check
+set spelllang=en_us,pt_br
+nnoremap <leader>s :set spell!<CR>
