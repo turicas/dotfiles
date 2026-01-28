@@ -60,3 +60,7 @@ wget -O ~/.local/css/pandoc.css https://gist.githubusercontent.com/killercup/591
 # ufw allow in on wg1 to any port 22
 # ufw allow in on wg1 to any port 5000
 # ufw enable
+
+
+# TODO: fix docker DNS
+# echo '{"dns": ["1.1.1.1", "8.8.8.8"], "dns-search": []}' | sudo tee # /etc/docker/daemon.json
