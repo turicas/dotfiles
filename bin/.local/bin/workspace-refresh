@@ -1,6 +1,6 @@
 #!/bin/bash
 
-atHome=$(lsusb | grep 'Das Keyboard' | wc -l)
+atHome=$([[ $(hostname) = minideb ]] && echo 1 || echo 0)
 machine=$(hostname)
 
 # First, check if HDMI is connected and enable/disable it
