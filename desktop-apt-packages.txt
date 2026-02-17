@@ -71,6 +71,7 @@ postfix
 powertop
 printer-driver-dymo
 python-is-python3
+qgis
 qgit
 radeontop
 rlwrap
