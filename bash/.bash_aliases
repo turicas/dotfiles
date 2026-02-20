@@ -30,6 +30,7 @@ alias ggp='git grep'
 alias gka='gitk --all &'
 alias gmn='git merge --no-ff'
 alias gmv='git mv'
+alias got='git ls-files --others --ignored --exclude-standard' # Git - "OTher" files
 alias gpl='git pull'
 alias gpr='git pull --rebase'
 alias gra='git rebase --abort'
@@ -65,6 +66,7 @@ if [ -f /usr/share/bash-completion/completions/git ]; then
   __git_complete ggp _git_grep
   __git_complete gmn _git_merge
   __git_complete gmv _git_mv
+  __git_complete got _git_ls_files
   __git_complete gpl _git_pull
   __git_complete gpr _git_pull
   __git_complete gra _git_rebase
