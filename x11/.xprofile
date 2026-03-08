@@ -1,1 +1,2 @@
-setxkbmap -option caps:escape_shifted_capslock
+# TODO: this line is repeated in bin/workspace-refresh
+setxkbmap -layout us -variant intl -option caps:escape_shifted_capslock

@@ -39,9 +39,9 @@ fi
 # if grep 'Logitech Wireless Keyboard' /proc/bus/input/devices > /dev/null; then
 if [[ ! $atHome ]]; then
   # ABNT2 keyboard
-  ibus engine xkb:br::por
+  setxkbmap -layout br -model abnt2 -option caps:escape_shifted_capslock
 else
   # Original keyboard (EN-US)
-  ibus engine xkb:us:intl:eng
+  setxkbmap -layout us -variant intl -option caps:escape_shifted_capslock
 fi
 source ~/.xprofile
