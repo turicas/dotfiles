@@ -125,6 +125,10 @@ alias mc='docker run --rm -v $(pwd):/data -v $HOME/.mc:/root/.mc minio/mc'
 alias ipython="ipython3"
 alias ipy="ipython3"
 
+
+# ffmpeg
+alias extract-scenes='ffmpeg -vf "select=gt(scene\,0.15)" -vsync vfr -q:v 2 scene_%04d.jpg -i'
+
 # Custom commands
 
 hack() {
