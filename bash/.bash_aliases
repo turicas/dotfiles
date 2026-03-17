@@ -47,6 +47,8 @@ alias gsp='git stash pop'
 alias gss='git stash save'
 alias gst='git status'
 alias gsv='git show -v'
+alias Gfa='gits-fetch-all'
+alias Gcs='gits-commit-search'
 
 # grep --color=no -E '^alias g[a-z][a-z]=' ~/.bash_aliases | grep -v 'alias gka' | sed "s/alias \(g[a-z]\+\)='git \([^ ']\+\).*/  __git_complete \1 _git_\2/; s/-/_/g"
 if [ -f /usr/share/bash-completion/completions/git ]; then

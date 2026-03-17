@@ -1,0 +1,46 @@
+#!/usr/bin/bash
+# gits-commit-search - search for commits by date in all Git repositories inside ~/projects
+set -euo pipefail
+
+PROJECTS_DIR="$HOME/projects"
+
+if [[ $# -lt 1 ]]; then
+    echo "Usage: git-commit-search YYYY-MM-DD [--author=<pattern>]" >&2
+    exit 1
+fi
+
+DATE="$1"
+shift
+
+if ! [[ "$DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+    echo "ERROR: date must be in the format YYYY-MM-DD" >&2
+    exit 1
+fi
+
+EXTRA_ARGS=("$@")
+TZ_OFFSET=$(date +%z)
+AFTER="${DATE}T00:00:00${TZ_OFFSET}"
+BEFORE="${DATE}T23:59:59${TZ_OFFSET}"
+
+found=0
+for repo in "$PROJECTS_DIR"/*/; do
+    [[ -d "$repo/.git" ]] || continue
+    name=$(basename "$repo")
+    output=$(git -C "$repo" log \
+        --after="$AFTER" \
+        --before="$BEFORE" \
+        --format="${name}	%C(yellow)%h	%C(cyan)%ai	%C(magenta)%ci	%C(dim)%an	%C(reset)%s	%C(reset)" \
+        --all \
+        "${EXTRA_ARGS[@]}" 2>/dev/null) || continue
+    if [[ -n "$output" ]]; then
+        if [[ $found -eq 0 ]]; then
+        echo -e "repo	commit	author_date	commit_date	author	title"
+        fi
+        echo "$output"
+        echo
+        found=1
+    fi
+done
+if [[ $found -eq 0 ]]; then
+    echo "No commit found for $DATE"
+fi

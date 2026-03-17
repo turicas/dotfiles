@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+# gits-fetch-all - run `git fetch --all` inside all Git repositories in ~/projects
+set -euo pipefail
+
+PROJECTS_DIR="$HOME/projects"
+for repo in "$PROJECTS_DIR"/*/; do
+    [[ -d "$repo/.git" ]] || continue
+    git -C "$repo" fetch --all
+done
