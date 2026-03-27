@@ -255,3 +255,11 @@ autocmd BufWritePost * call GenerateProjectTags()
 " Spell check
 set spelllang=en_us,pt_br
 nnoremap <leader>s :set spell!<CR>
+
+" Automatically run Ruff after saving .py files
+autocmd BufWritePost *.py call FormatWithRuff()
+function! FormatWithRuff()
+  let l:filepath = expand('%:p')
+  silent execute '!ruff format --line-length 120 ' . shellescape(l:filepath)
+  edit!
+endfunction
