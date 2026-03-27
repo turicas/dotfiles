@@ -10,7 +10,7 @@ fi
 # Choose the best mirror
 apt update && apt install -y netselect-apt
 # TODO: change country if machine is outside Brazil
-netselect-apt -n -t 600 -c Brazil testing
+netselect-apt -n -t 600 -c Brazil stable
 mv sources.list /etc/apt
 apt modernize-sources
 
@@ -18,7 +18,7 @@ apt modernize-sources
 apt update
 apt full-upgrade -y
 apt install -y $(cat server-apt-packages.txt)
-# Add to /etc/systemd/resolve.conf:
+# Add to /etc/systemd/resolved.conf:
 # [Resolve]
 # DNS=8.8.8.8,1.1.1.1
 # Then: systemctl restart systemd-resolved
