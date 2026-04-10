@@ -45,6 +45,8 @@ libjpeg-dev
 libleptonica-dev
 libmariadbd-dev
 libreoffice
+libspa-0.2-bluetooth
+libspa-0.2-libcamera
 libssl-dev
 libtesseract-dev
 libtiff-dev
@@ -66,6 +68,11 @@ obs-studio
 openssh-server
 pandoc
 pavucontrol
+pipewire
+pipewire-alsa
+pipewire-audio
+pipewire-jack
+pipewire-pulse
 pm-utils
 postfix
 powertop
