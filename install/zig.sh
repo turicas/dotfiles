@@ -4,7 +4,7 @@ set -e
 
 mkdir -p ~/.local/opt ~/.local/bin
 pushd ~/.local/opt
-VERSION="0.15.2"
+VERSION="0.16.0"
 URL="https://ziglang.org/download/${VERSION}/zig-x86_64-linux-${VERSION}.tar.xz"
 FILENAME=$(basename "$URL")
 wget "$URL"
