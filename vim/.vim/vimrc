@@ -257,9 +257,15 @@ set spelllang=en_us,pt_br
 nnoremap <leader>s :set spell!<CR>
 
 " Automatically run Ruff after saving .py files
-autocmd BufWritePost *.py call FormatWithRuff()
-function! FormatWithRuff()
-  let l:filepath = expand('%:p')
-  silent execute '!ruff format --line-length 120 ' . shellescape(l:filepath)
-  edit!
+autocmd BufWritePre *.py call FormatWithRuffBuffer()
+function! FormatWithRuffBuffer()
+  let l:view = winsaveview()
+  let l:input = join(getline(1, '$'), "\n")
+  let l:output = system('ruff format --line-length 120 --stdin-filename ' . shellescape(expand('%:p')) . ' -', l:input)
+  if v:shell_error == 0
+    let l:output = substitute(l:output, '\n\+$', '', '')
+    silent %delete _
+    call setline(1, split(l:output, "\n", 1))
+  endif
+  call winrestview(l:view)
 endfunction
