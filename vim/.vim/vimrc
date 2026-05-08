@@ -256,16 +256,38 @@ autocmd BufWritePost * call GenerateProjectTags()
 set spelllang=en_us,pt_br
 nnoremap <leader>s :set spell!<CR>
 
-" Automatically run Ruff after saving .py files
+" Global toggle for autoformat on save (enabled by default). Can also be set per buffer (b:autofmt)
+if !exists('g:autofmt')
+  let g:autofmt = 1
+endif
+
+" Run Ruff before saving .py files
 autocmd BufWritePre *.py call FormatWithRuffBuffer()
+
 function! FormatWithRuffBuffer()
-  let l:view = winsaveview()
-  let l:input = join(getline(1, '$'), "\n")
-  let l:output = system('ruff format --stdin-filename ' . shellescape(expand('%:p')) . ' -', l:input)
-  if v:shell_error == 0
-    let l:output = substitute(l:output, '\n\+$', '', '')
-    silent %delete _
-    call setline(1, split(l:output, "\n", 1))
+  if !get(b:, 'autofmt', g:autofmt)
+    return
   endif
-  call winrestview(l:view)
+
+  let l:input = join(getline(1, '$'), "\n") " Get buffer contents as a string
+  " --stdin-filename is required so Ruff can locate the matching config (pyproject.toml etc.) for the real file path
+  let l:output = system('ruff format --stdin-filename ' . shellescape(expand('%:p')) . ' -', l:input)
+  if v:shell_error != 0 " Ruff execution failed - return
+    return
+  endif
+
+  let l:output = substitute(l:output, '\n\+$', '', '')
+  if l:output ==# l:input " No changes - return
+    return
+  endif
+
+  let l:view = winsaveview() " Save the view (cursor + scroll) to restore right after the new content is set
+  " No-op marker edit: records the original cursor position as the start of this undo block.
+  " Without it, ':u' after :%delete would jump to line 1 (where the deletion "happened")
+  silent exe "normal! i \<BS>\<Esc>"
+  try | silent undojoin | catch | endtry
+  silent %delete _
+  try | silent undojoin | catch | endtry " Join marker + delete + rewrite into one undo entry
+  call setline(1, split(l:output, "\n", 1))
+  call winrestview(l:view) " Restore the view
 endfunction
