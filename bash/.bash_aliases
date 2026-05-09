@@ -288,3 +288,36 @@ md() {
     -o "$htmlPath" \
     2> /dev/null
 }
+
+_zipdiff_manifest() {
+    unzip -Z1 "$1" | sort | while IFS= read -r f; do
+        case "$f" in */) continue ;; esac
+        printf "%s  %s\n" "$(unzip -p "$1" "$f" | sha256sum | cut -d' ' -f1)" "$f"
+    done
+}
+
+zipdiff() {
+    local verbose=0
+    if [[ "${1:-}" == "-v" || "${1:-}" == "--verbose" ]]; then
+        verbose=1
+        shift
+    fi
+    if [[ $# -ne 2 ]]; then
+        echo "Usage: ${FUNCNAME[0]} [-v|--verbose] <zip-a> <zip-b>" >&2
+        return 2
+    fi
+    [[ -f "$1" ]] || { echo "ERROR: not a file: $1" >&2; return 2; }
+    [[ -f "$2" ]] || { echo "ERROR: not a file: $2" >&2; return 2; }
+
+    if [[ $verbose -eq 1 ]]; then
+        local dirA dirB returnCode
+        dirA=$(mktemp -d)
+        dirB=$(mktemp -d)
+        unzip -q "$1" -d "$dirA" && unzip -q "$2" -d "$dirB"
+        diff -r "$dirA" "$dirB"; returnCode=$?
+        rm -rf "$dirA" "$dirB"
+        return $returnCode
+    fi
+
+    diff <(_zipdiff_manifest "$1") <(_zipdiff_manifest "$2")
+}
