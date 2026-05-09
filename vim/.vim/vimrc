@@ -261,7 +261,7 @@ if !exists('g:autofmt')
   let g:autofmt = 1
 endif
 
-" Run Ruff before saving .py files
+" Run Ruff (check --fix + format) before saving .py files
 autocmd BufWritePre *.py call FormatWithRuffBuffer()
 
 function! FormatWithRuffBuffer()
@@ -270,20 +270,35 @@ function! FormatWithRuffBuffer()
   endif
 
   let l:input = join(getline(1, '$'), "\n") " Get buffer contents as a string
-  " --stdin-filename is required so Ruff can locate the matching config (pyproject.toml etc.) for the real file path
-  let l:output = system('ruff format --stdin-filename ' . shellescape(expand('%:p')) . ' -', l:input)
-  if v:shell_error != 0 " Ruff execution failed - return
+  let l:filename = shellescape(expand('%:p'))
+
+  " `ruff` options:
+  " - `--stdin-filename` is required so Ruff can locate the matching config (pyproject.toml etc.) for the real file path
+  " - `--quiet` suppresses the 'Fixed N errors.' stderr summary, which would otherwise be merged with stdout by vim's
+  "   system() and corrupt the input passed to ruff format on the next step
+  let l:fixed = system('ruff check --fix-only --exit-zero --quiet --stdin-filename ' . l:filename . ' -', l:input)
+  if v:shell_error != 0 " Execution failed - return
     return
   endif
 
-  let l:output = substitute(l:output, '\n\+$', '', '')
+  let l:fixed = substitute(l:fixed, '\n\+$', '', '')
+  let l:output = system('ruff format --stdin-filename ' . l:filename . ' -', l:fixed)
+  if v:shell_error != 0 " Format failed: keep `check`'s fixes if they changed the buffer, otherwise return
+    if l:fixed ==# l:input
+      return
+    endif
+    let l:output = l:fixed
+  else
+    let l:output = substitute(l:output, '\n\+$', '', '')
+  endif
+
   if l:output ==# l:input " No changes - return
     return
   endif
 
   let l:view = winsaveview() " Save the view (cursor + scroll) to restore right after the new content is set
   " No-op marker edit: records the original cursor position as the start of this undo block.
-  " Without it, ':u' after :%delete would jump to line 1 (where the deletion "happened")
+  " Without it, ':u' after :%delete would jump to line 1 (where the deletion 'happened')
   silent exe "normal! i \<BS>\<Esc>"
   try | silent undojoin | catch | endtry
   silent %delete _
