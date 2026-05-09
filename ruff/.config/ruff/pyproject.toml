@@ -1,2 +1,31 @@
 [tool.ruff]
 line-length = 120
+target-version = "py313"
+extend-exclude = [
+    "*/migrations/*",
+    "*/static/CACHE/*",
+    ".local",
+    "collected-static",
+    "data",
+    "docker",
+    "docs",
+    "manage.py",
+    "project/asgi.py",
+    "project/wsgi.py",
+]
+
+[tool.ruff.lint]
+# - E/W: pycodestyle, equivalent to base flake8
+# - F:   pyflakes (F401 unused imports = autoflake --remove-all-unused-imports;
+#                  F841 unused variables = autoflake --remove-unused-variables)
+# - I:   ruff's native isort (replaces external isort + flake8-isort)
+select = ["E", "W", "F", "I"]
+ignore = [
+    "E203",  # whitespace before ':'
+    "E231",  # missing whitespace after ','
+    "E501",  # line too long
+    "E701",  # multiple statements on one line (colon)
+]
+
+[tool.ruff.lint.isort]
+split-on-trailing-comma = true
