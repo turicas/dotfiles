@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+# git-zip: create a ZIP of the latest committed state of the current branch.
+# Works from any subdirectory of the worktree. Reads from .git directly, so unpushed commits are included and
+# untracked/modified files are not.
+# Output: <repo-root>/<repo-name>-<branch-name>.zip
+# Branch name has filename-unfriendly characters (e.g. `/`) replaced with `-`.
+
+set -euo pipefail
+
+if ! repo_root=$(git rev-parse --show-toplevel 2>/dev/null); then
+    echo "ERROR: not inside a git repository" >&2
+    exit 1
+fi
+
+repo_name=$(basename "$repo_root")
+branch=$(git -C "$repo_root" rev-parse --abbrev-ref HEAD | sed 's#[/\\:*?"<>|]#-#g')
+output="${repo_root}/${repo_name}-${branch}.zip"
+git -C "$repo_root" archive --format=zip --output="$output" HEAD
