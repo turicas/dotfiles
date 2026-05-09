@@ -17,6 +17,7 @@ alias ssh="LC_ALL=en_US.UTF-8 ssh"
 # Git
 alias gad='git add'
 alias gap='git add -p'
+alias gbh='git log --reverse -p develop..HEAD'
 alias gca='git commit --amend'
 alias gci='git commit'
 alias gco='git checkout'
@@ -47,8 +48,10 @@ alias gsp='git stash pop'
 alias gss='git stash save'
 alias gst='git status'
 alias gsv='git show -v'
-alias Gfa='gits-fetch-all'
+
+# Git commands that read all repositories
 alias Gcs='gits-commit-search'
+alias Gfa='gits-fetch-all'
 
 # grep --color=no -E '^alias g[a-z][a-z]=' ~/.bash_aliases | grep -v 'alias gka' | sed "s/alias \(g[a-z]\+\)='git \([^ ']\+\).*/  __git_complete \1 _git_\2/; s/-/_/g"
 if [ -f /usr/share/bash-completion/completions/git ]; then
@@ -56,6 +59,7 @@ if [ -f /usr/share/bash-completion/completions/git ]; then
 
   __git_complete gad _git_add
   __git_complete gap _git_add
+  __git_complete gbh _git_log
   __git_complete gca _git_commit
   __git_complete gci _git_commit
   __git_complete gco _git_checkout
