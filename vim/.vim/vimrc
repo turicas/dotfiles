@@ -256,15 +256,24 @@ autocmd BufWritePost * call GenerateProjectTags()
 set spelllang=en_us,pt_br
 nnoremap <leader>s :set spell!<CR>
 
+
+" ===== AUTO FORMAT =====
+
 " Global toggle for autoformat on save (enabled by default). Can also be set per buffer (b:autofmt)
 if !exists('g:autofmt')
   let g:autofmt = 1
 endif
+" Max buffer size (in bytes) for JSON autoformat on save. Above this, skip formatting (0 = disable size check)
+if !exists('g:json_format_max_bytes')
+  let g:json_format_max_bytes = 5 * 1024 * 1024  " 5 MB (takes ~250ms avg in a simple benchmark)
+endif
 
-" Run Ruff (check --fix + format) before saving .py files
-autocmd BufWritePre *.py call FormatWithRuffBuffer()
+" Run formatter before saving the file
+autocmd BufWritePre *.py call FormatPythonBuffer()
+autocmd BufWritePre *.json call FormatJsonBuffer()
+autocmd BufWritePre *.vtt call FormatVttBuffer()
 
-function! FormatWithRuffBuffer()
+function! FormatPythonBuffer()
   if !get(b:, 'autofmt', g:autofmt)
     return
   endif
@@ -305,4 +314,59 @@ function! FormatWithRuffBuffer()
   try | silent undojoin | catch | endtry " Join marker + delete + rewrite into one undo entry
   call setline(1, split(l:output, "\n", 1))
   call winrestview(l:view) " Restore the view
+endfunction
+
+function! FormatJsonBuffer()
+  if !get(b:, 'autofmt', g:autofmt)
+    return
+  endif
+
+  " Skip large buffers to avoid stalling the save
+  if g:json_format_max_bytes > 0 && wordcount().bytes > g:json_format_max_bytes
+    return
+  endif
+
+  let l:input = join(getline(1, '$'), "\n")
+  let l:output = system('python3 -m json.tool --indent=2 -', l:input)
+  if v:shell_error != 0
+    return
+  endif
+  let l:output = substitute(l:output, '\n\+$', '', '')
+
+  if l:output ==# l:input
+    return
+  endif
+
+  let l:view = winsaveview()
+  silent exe "normal! i \<BS>\<Esc>"
+  try | silent undojoin | catch | endtry
+  silent %delete _
+  try | silent undojoin | catch | endtry
+  call setline(1, split(l:output, "\n", 1))
+  call winrestview(l:view)
+endfunction
+
+function! FormatVttBuffer()
+  if !get(b:, 'autofmt', g:autofmt)
+    return
+  endif
+
+  let l:input = join(getline(1, '$'), "\n")
+  let l:output = system('vtt-format -', l:input)
+  if v:shell_error != 0
+    return
+  endif
+  let l:output = substitute(l:output, '\n\+$', '', '')
+
+  if l:output ==# l:input
+    return
+  endif
+
+  let l:view = winsaveview()
+  silent exe "normal! i \<BS>\<Esc>"
+  try | silent undojoin | catch | endtry
+  silent %delete _
+  try | silent undojoin | catch | endtry
+  call setline(1, split(l:output, "\n", 1))
+  call winrestview(l:view)
 endfunction
