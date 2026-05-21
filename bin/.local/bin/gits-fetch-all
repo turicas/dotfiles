@@ -5,5 +5,6 @@ set -euo pipefail
 PROJECTS_DIR="$HOME/projects"
 for repo in "$PROJECTS_DIR"/*/; do
     [[ -d "$repo/.git" ]] || continue
+    echo "Entering ${repo}"
     git -C "$repo" fetch --all
 done

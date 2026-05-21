@@ -18,6 +18,7 @@ alias ssh="LC_ALL=en_US.UTF-8 ssh"
 alias gad='git add'
 alias gap='git add -p'
 alias gbh='git log --reverse -p develop..HEAD'
+alias gbl='git log --reverse develop..HEAD'
 alias gca='git commit --amend'
 alias gci='git commit'
 alias gco='git checkout'
@@ -60,6 +61,7 @@ if [ -f /usr/share/bash-completion/completions/git ]; then
   __git_complete gad _git_add
   __git_complete gap _git_add
   __git_complete gbh _git_log
+  __git_complete gbl _git_log
   __git_complete gca _git_commit
   __git_complete gci _git_commit
   __git_complete gco _git_checkout
