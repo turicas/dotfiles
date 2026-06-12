@@ -187,8 +187,21 @@ hack() {
   fi
 }
 
-json_escape () {
-  printf '%s' $1 | python -c 'import json,sys; print(json.dumps(sys.stdin.read()))'
+# Indent/pretty-print JSON from stdin, a string argument or a file (edited in-place).
+# Usage: json_indent                  (reads stdin)
+#        json_indent '{"a":1}'        (string argument)
+#        json_indent file.json        (in-place)
+json_indent() {
+  if [ $# -gt 0 ]; then
+    if [ -f "$1" ]; then
+      local tmp=$(mktemp)
+      python3 -m json.tool --indent=2 --no-ensure-ascii "$1" > "$tmp" && mv "$tmp" "$1"
+    else
+      python3 -m json.tool --indent=2 --no-ensure-ascii <<< "$1"
+    fi
+  else
+    python3 -m json.tool --indent=2 --no-ensure-ascii
+  fi
 }
 
 vnc-start-remote-server() {

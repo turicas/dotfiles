@@ -327,7 +327,7 @@ function! FormatJsonBuffer()
   endif
 
   let l:input = join(getline(1, '$'), "\n")
-  let l:output = system('python3 -m json.tool --indent=2 -', l:input)
+  let l:output = system('python3 -m json.tool --indent=2 --no-ensure-ascii -', l:input)
   if v:shell_error != 0
     return
   endif
