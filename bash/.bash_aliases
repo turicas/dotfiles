@@ -148,7 +148,7 @@ hack() {
 
   if [ -z "$project_name" ]; then
     echo "ERROR - Usage: $0 <project-name>"
-    return
+    return 1
   fi
 
   project_path=$projects_home/$project_name
@@ -210,7 +210,7 @@ vnc-start-remote-server() {
 
   if [[ -z $remoteIP ]]; then
     echo "ERROR - usage: $0 <remote-ip>"
-    exit
+    return 1
   fi
 
   # First, create password if it's not set
@@ -228,7 +228,7 @@ pdfsearch() {
 
   if [[ -z $query ]]; then
     echo "ERROR - usage: ${FUNCNAME[0]} <query>"
-    return
+    return 1
   fi
 
   find -iname '*.pdf' | sort | while read filename; do
@@ -257,7 +257,7 @@ conngraph() {
   ssh_info="$1"; shift
   if [[ -z $ssh_info ]]; then
     echo "ERROR - Usage: $0 <ssh-info>"
-    exit 1
+    return 1
   fi
 
   filename=$(mktemp --suffix=.png)
