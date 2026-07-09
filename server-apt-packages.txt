@@ -1,4 +1,5 @@
 7zip
+apptainer
 apt-listbugs
 apt-transport-https
 aria2
@@ -60,6 +61,8 @@ nmap
 nmon
 nvme-cli
 parted
+podman
+podman-compose
 postfix
 postgresql-client
 psmisc
