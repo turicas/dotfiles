@@ -48,3 +48,5 @@
 	defaultBranch = main
 [rebase]
 	autoSquash = true
+[diff]
+	algorithm = histogram
