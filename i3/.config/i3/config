@@ -29,7 +29,8 @@ bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec bash -i dmenu_run
-bindsym $mod+p exec flameshot gui
+#bindsym $mod+p exec flameshot gui
+bindsym $mod+p exec --no-startup-id scrot --select --freeze --pointer "$HOME/screenshots/%Y-%m-%d_%H-%M-%S.png"
 
 # change focus
 bindsym $mod+j focus left
