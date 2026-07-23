@@ -241,6 +241,25 @@ pdfsearch() {
   done
 }
 
+pdftoimg() {
+  # Render every PDF page as a 300 DPI PNG in a directory named after the PDF.
+  local pdfFilename="${1:-}"
+
+  if [[ -z $pdfFilename ]]; then
+    echo "ERROR - usage: ${FUNCNAME[0]} <pdf-filename>"
+    return 1
+  fi
+
+  if [[ ! -f $pdfFilename ]]; then
+    echo "ERROR - file not found: $pdfFilename" >&2
+    return 2
+  fi
+
+  local outputDir="${pdfFilename%.[Pp][Dd][Ff]}"
+  mkdir -p -- "$outputDir" || return 1
+  pdftocairo -png -r 300 -- "$pdfFilename" "$outputDir/page"
+ }
+
 
 gitcontents() {
   git ls-tree -r HEAD --name-only \
