@@ -16,7 +16,7 @@ services:
     entrypoint: ["whisper-server"]
     command:
       - "--model"
-      - "/models/ggml-small.bin"
+      - "/models/ggml-large-v3-turbo.bin"
       - "--host"
       - "0.0.0.0"
       - "--port"

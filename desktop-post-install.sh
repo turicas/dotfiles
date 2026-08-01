@@ -70,6 +70,6 @@ wget -O ~/.local/css/pandoc.css https://gist.githubusercontent.com/killercup/591
 mkdir -p ~/software/whisper
 cp ~/projects/dotfiles/software/whisper/* ~/software/whisper/
 pushd ~/software/whisper/
-./download-model.sh small
+./download-model.sh large-v3-turbo
 docker compose pull
 popd
