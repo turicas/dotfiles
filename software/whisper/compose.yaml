@@ -1,0 +1,26 @@
+services:
+
+  whisper:
+    image: ghcr.io/ggml-org/whisper.cpp:main-vulkan
+    container_name: whisper
+    restart: unless-stopped
+    ports:
+      - "8178:8080"
+    devices:
+      - "/dev/kfd:/dev/kfd"
+      - "/dev/dri:/dev/dri"
+    volumes:
+      - ./data/models:/models:ro
+    environment:
+      GGML_VK_VISIBLE_DEVICES: "0"
+    entrypoint: ["whisper-server"]
+    command:
+      - "--model"
+      - "/models/ggml-small.bin"
+      - "--host"
+      - "0.0.0.0"
+      - "--port"
+      - "8080"
+      - "--vad"
+      - "--vad-model"
+      - "/models/ggml-silero-v6.2.0.bin"

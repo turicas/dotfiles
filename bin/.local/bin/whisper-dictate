@@ -1,0 +1,100 @@
+#!/bin/bash
+# whisper-dictate: toggle de gravação + transcrição via whisper-server.
+#
+# Primeira chamada: inicia gravação (pw-record).
+# Segunda chamada: para gravação, salva áudio, transcreve, cola texto.
+#
+# i3 config: bindsym $mod+Shift+d exec --no-startup-id whisper-dictate
+#
+# Variáveis de ambiente opcionais:
+#   WHISPER_URL   (default: http://localhost:8178/inference)
+#   WHISPER_LANG  (default: pt)
+#   WHISPER_AUDIO_DIR (default: ~/audio/whisper)
+set -euo pipefail
+
+WHISPER_URL="${WHISPER_URL:-http://localhost:8178/inference}"
+WHISPER_LANG="${WHISPER_LANG:-pt}"
+AUDIO_DIR="${WHISPER_AUDIO_DIR:-${HOME}/software/whisper/audio}"
+COMPOSE_DIR="${WHISPER_COMPOSE_DIR:-${HOME}/software/whisper}"
+RUNTIME_DIR="${XDG_RUNTIME_DIR:-/tmp}"
+PID_FILE="${RUNTIME_DIR}/whisper-dictate.pid"
+REC_FILE="${RUNTIME_DIR}/whisper-dictate.wav"
+
+mkdir -p "${AUDIO_DIR}"
+
+notify() {
+    notify-send -a "whisper-dictate" -t "${2:-3000}" "Whisper" "$1" 2>/dev/null || true
+}
+
+ensure_server() {
+    # Checa se o container está rodando e respondendo
+    if curl -s --max-time 1 -o /dev/null "${WHISPER_URL%/*}/"; then
+        return 0
+    fi
+    # Container parado: inicia
+    notify "Iniciando whisper-server..." 10000
+    docker compose -f "${COMPOSE_DIR}/compose.yaml" up -d 2>/dev/null
+    # Espera ficar pronto (modelo precisa carregar)
+    for tentativa in $(seq 1 30); do
+        sleep 1
+        if curl -s --max-time 1 -o /dev/null "${WHISPER_URL%/*}/"; then
+            return 0
+        fi
+    done
+    notify "whisper-server não iniciou em 30s" 5000
+    return 1
+}
+
+if [ -f "${PID_FILE}" ]; then
+    # === PARAR gravação, transcrever, colar ===
+    pid=$(cat "${PID_FILE}")
+    kill "${pid}" 2>/dev/null || true
+    sleep 0.5  # pw-record finaliza o header WAV no SIGTERM
+    rm -f "${PID_FILE}"
+
+    if [ ! -s "${REC_FILE}" ]; then
+        notify "Arquivo de áudio vazio ou não encontrado" 5000
+        rm -f "${REC_FILE}"
+        exit 1
+    fi
+
+    # Salva cópia com timestamp (backup)
+    timestamp=$(date +%Y-%m-%dT%H:%M:%S)
+    saved="${AUDIO_DIR}/${timestamp}.wav"
+    cp "${REC_FILE}" "${saved}"
+
+    notify "Transcrevendo..." 30000
+
+    response=$(curl -s --max-time 120 -X POST "${WHISPER_URL}" \
+        -F "file=@${REC_FILE}" \
+        -F "language=${WHISPER_LANG}" \
+        -F "response_format=text" \
+    ) || {
+        notify "Erro na requisição ao whisper-server" 5000
+        exit 1
+    }
+
+    rm -f "${REC_FILE}"
+
+    response=$(echo "${response}" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
+    # Salva transcrição em .txt ao lado do .wav
+    printf '%s\n' "${response}" > "${AUDIO_DIR}/${timestamp}.txt"
+
+    if [ -z "${response}" ]; then
+        notify "Nenhuma fala detectada" 3000
+        exit 0
+    fi
+
+    # Cola via clipboard (xdotool type tem problemas com acentos/unicode)
+    printf '%s' "${response}" | xclip -selection clipboard
+    xdotool key --clearmodifiers ctrl+v
+    notify "Colado (${#response} chars)" 3000
+else
+    # === INICIAR gravação ===
+    ensure_server || exit 1
+    # 16kHz mono 16-bit: ~1.9 MB/min (suficiente para fala, economiza espaço)
+    pw-record --rate 16000 --channels 1 --format s16 "${REC_FILE}" &
+    echo $! > "${PID_FILE}"
+    notify "Gravando... (pressione novamente para parar)" 5000
+fi

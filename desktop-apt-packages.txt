@@ -44,6 +44,7 @@ libimage-exiftool-perl
 libjpeg-dev
 libleptonica-dev
 libmariadbd-dev
+libnotify-bin
 libreoffice
 libspa-0.2-bluetooth
 libspa-0.2-libcamera
@@ -108,6 +109,8 @@ x11-xserver-utils
 x11vnc
 xarchiver
 xbacklight
+xclip
+xdotool
 xfce4-power-manager
 xscreensaver
 xsel
