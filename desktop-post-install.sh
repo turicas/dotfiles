@@ -46,6 +46,7 @@ flatpak install --noninteractive flathub org.kde.kdenlive
 ./install/wasmtime.sh
 ./install/webdrivers.sh
 ./install/zig.sh
+python ./install/install_lightpanda.py
 
 # CSS for pandoc (markdown -> HTML)
 mkdir -p ~/.local/css
