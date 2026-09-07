@@ -74,6 +74,7 @@ pipewire-alsa
 pipewire-audio
 pipewire-jack
 pipewire-pulse
+pipx
 pm-utils
 postfix
 powertop
@@ -101,6 +102,7 @@ vainfo
 vim-gtk3
 virt-manager
 vlc
+vulkan-tools
 wabt
 wireguard
 wireguard-tools

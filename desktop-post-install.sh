@@ -15,6 +15,8 @@ for package in */; do
   fi
 done
 
+pipx install digue  # or `git clone git@github.com:PythonicCafe/digue.git ~/projects/digue && pipx install -e ~/projects/digue`
+
 git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
 for version in 3.8 3.9 3.10 3.11 3.12 3.13 3.14; do
 	pyenv install $version

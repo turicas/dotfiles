@@ -1,0 +1,79 @@
+[server]
+port = 8178                             # Host port for the whisper-server container
+# bind-ip = "127.0.0.1"                 # IP Docker binds the port to; 127.0.0.1 = local only.
+                                        #   Set to a LAN IP to expose it to that network (the server has no
+                                        #   authentication; prefer SSH tunnels)
+# data-dir = ""                         # Where models are stored (default: $XDG_DATA_HOME/digue -- XDG_DATA_HOME is
+                                        #   often unset, in which case: ~/.local/share/digue)
+backend = "amd"                         # "auto" (detect GPU), "nvidia", "amd", "intel", "cpu", or "remote" (server on
+                                        #   another machine via SSH tunnel)
+# remote-host = ""                      # For backend = "remote": the server host (LAN IP, hostname, or empty =
+                                        #   127.0.0.1 via SSH tunnel)
+image = "turicas/whisper.cpp:main-vulkan" # Docker image for whisper-server; empty = the backend's
+                                        #   default (see README for the compatibility matrix), e.g.
+                                        #   "ghcr.io/ggml-org/whisper.cpp:main" for CPUs where main-vulkan crashes.
+                                        #   `digue server start` recreates a container created from another image
+# container-name = "digue-whisper.cpp"  # Docker container name (`digue server start -n` overrides)
+
+[transcribe] # Defaults for transcribe, batch-transcribe and dictate
+language = "pt"                         # Language for transcription: "auto", "pt", "en", etc.
+# prompt = ""                           # Initial prompt to steer spelling of names/acronyms, e.g. "Turicas, Pythonic"
+# output-format = "text"                # Transcribe output: "vtt", "srt", "timestamps" ([00:00:12] text lines) or
+                                        #   "text" (plain)
+# max-line-length = 42                  # Subtitle cue wrapping (vtt/srt): max chars per line
+# max-lines = 2                         # Max lines per cue when wrapping
+# timeout = 600                         # Seconds to wait for the server's answer (the server only replies after
+                                        #   transcribing the whole file: long files on CPU need more)
+
+[dictate]
+# audio-dir = ""                        # Where recordings are saved (default: <data-dir>/audio/YYYY/MM)
+display-server = "x11"                  # "auto" (detect), "x11", or "wayland"
+input-mode = "paste"                    # "paste" (clipboard + paste-key) or "type" (simulate keystrokes)
+paste-key = "shift+insert"              # Key simulated by "paste": "ctrl+v" (GUI apps; terminals ignore it),
+                                        #   "ctrl+shift+v" (terminals, browsers; GTK/Qt apps ignore it) or
+                                        #   "shift+insert" (works in terminals, GTK, Qt, browsers, LibreOffice: the
+                                        #   choice when you dictate into both terminals and GUI apps)
+# save-audio = true                     # Save the recording as a backup
+# audio-format = "flac"                 # Format of the saved recording: "flac" (lossless, ~35% of WAV; default),
+                                        #   "opus" (~7%, lossy 24 kbit/s) or "wav".
+                                        #   pw-record writes flac natively when libsndfile has the container; otherwise
+                                        #  ffmpeg compresses a WAV (arecord always needs this)
+# max-duration = 300                    # Stop recording after N seconds (0 = unlimited)
+# recorder = "auto"                     # "auto" (pw-record or arecord), "pw-record", or "arecord"
+# device = ""                           # Capture source; empty = system default.
+                                        #   pw-record: --target NAME (node name or serial)
+                                        #   arecord: -D NAME (PCM; arecord -l lists cards)
+
+[models]
+nvidia = "large-v3-turbo-q8_0"
+amd = "large-v3-turbo-q8_0"
+intel = "large-v3-turbo-q8_0"
+cpu = "small-q8_0"
+# Available models (multilingual): tiny, base, small, medium, large-v1, large-v2, large-v3, large-v3-turbo.
+# Quantized copies (smaller, usually faster on CPU; q5 loses a little accuracy): tiny-q8_0, tiny-q5_1, base-q8_0,
+# base-q5_1, small-q8_0, small-q5_1, medium-q8_0, medium-q5_0, large-v2-q8_0, large-v2-q5_0, large-v3-q5_0,
+# large-v3-turbo-q8_0, large-v3-turbo-q5_0. English-only: tiny.en, base.en, small.en, medium.en and their -q8_0 / -q5_x
+# copies. See section "Quantized models" on README or run `digue models`.
+
+# Per-host overrides:
+# [host.<hostname>][section] tables override the global sections of the same name on that machine only
+# (defaults < global < host). The hostname matches exactly, or without the domain part on either side (thinkpad matches
+# "thinkpad.local" and vice versa; two tables differing only by domain are rejected as ambiguous).
+# Hostnames containing dots must be quoted, or TOML parses each dot as a nested table and the file is rejected:
+# [host."minipc.local".server]
+# Example:
+#
+# [host.thinkpad.server]
+# backend = "cpu"
+#
+# [host.thinkpad.dictate]
+# max-duration = 120
+[host.minideb.server]
+backend = "amd"
+bind-ip = "10.252.1.14"
+
+[host.thinkpad.server]
+backend = "remote"
+remote-host = "10.252.1.14"
+# backend = "intel"
+# remote-host = ""
