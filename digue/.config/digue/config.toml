@@ -14,6 +14,9 @@ image = "turicas/whisper.cpp:main-vulkan" # Docker image for whisper-server; emp
                                         #   "ghcr.io/ggml-org/whisper.cpp:main" for CPUs where main-vulkan crashes.
                                         #   `digue server start` recreates a container created from another image
 # container-name = "digue-whisper.cpp"  # Docker container name (`digue server start -n` overrides)
+# threads = "auto"                      # Server threads: "auto" (physical cores; benchmark: 4 -> RTF 0.22,
+                                        #   8 -> 0.15, 16 -> 0.17 on a 8-core Ryzen - SMT does not help) or an
+                                        #   integer, e.g. 6 to keep cores free for other work
 
 [transcribe] # Defaults for transcribe, batch-transcribe and dictate
 language = "pt"                         # Language for transcription: "auto", "pt", "en", etc.
@@ -24,6 +27,12 @@ language = "pt"                         # Language for transcription: "auto", "p
 # max-lines = 2                         # Max lines per cue when wrapping
 # timeout = 600                         # Seconds to wait for the server's answer (the server only replies after
                                         #   transcribing the whole file: long files on CPU need more)
+# vad = true                            # Voice Activity Detection: transcribe only speech, skipping silence and
+                                        #   noise. Toggled per request (no container recreation needed)
+# vad-threshold = 0.5                   # Speech probability threshold (0-1): lower keeps more audio as speech
+# vad-speech-pad-ms = 400               # Silence padding around each speech segment. The whisper-server default
+                                        #   (30) measurably cuts the start of short utterances; 400 matches
+                                        #   faster-whisper's default
 
 [dictate]
 # audio-dir = ""                        # Where recordings are saved (default: <data-dir>/audio/YYYY/MM)
@@ -61,13 +70,7 @@ cpu = "small-q8_0"
 # "thinkpad.local" and vice versa; two tables differing only by domain are rejected as ambiguous).
 # Hostnames containing dots must be quoted, or TOML parses each dot as a nested table and the file is rejected:
 # [host."minipc.local".server]
-# Example:
 #
-# [host.thinkpad.server]
-# backend = "cpu"
-#
-# [host.thinkpad.dictate]
-# max-duration = 120
 [host.minideb.server]
 backend = "amd"
 bind-ip = "10.252.1.14"
