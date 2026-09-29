@@ -4,12 +4,22 @@ fullhd=false
 hd=false
 h264=false
 debug=false
+quality="high"
 ARGS=()
+
 while [[ $# -gt 0 ]]; do
     case "$1" in
         -d|--debug)
             debug=true
             shift
+            ;;
+        -q|--quality)
+            if [[ -z ${2:-} ]]; then
+                echo "ERROR - $1 requires a quality level: low, medium, high or very-high"
+                exit 1
+            fi
+            quality="$2"
+            shift 2
             ;;
         --fullhd)
             fullhd=true
@@ -33,10 +43,11 @@ done
 if [[ ${#ARGS[@]} -lt 2 ]]; then
     echo "ERROR - Usage: $(basename "$0") [options] <input.ext> <output.mp4>"
     echo "Options:"
-    echo "  -d, --debug Show the complete ffmpeg command before executing"
-    echo "  --fullhd    Scales to Full HD resolution (1920x1080)"
-    echo "  --hd        Scales to HD resolution (1280x720)"
-	echo "  --h264      Converts to H264 instead of HEVC (useful for sharing on WhatsApp Web)"
+    echo " -d, --debug            Show the complete ffmpeg command before executing"
+    echo " -q, --quality QUALITY  Set video quality: low, medium, high (default) or very-high"
+    echo " --fullhd               Scales to Full HD resolution (1920x1080)"
+    echo " --hd                   Scales to HD resolution (1280x720)"
+    echo " --h264                 Converts to H264 instead of HEVC (useful for sharing on WhatsApp Web)"
     exit 1
 fi
 
@@ -44,6 +55,25 @@ if [[ $fullhd == true && $hd == true ]]; then
     echo "ERROR - You cannot use both --fullhd and --hd at the same time."
     exit 1
 fi
+
+case "$quality" in
+    low)
+        qp=28
+        ;;
+    medium)
+        qp=24
+        ;;
+    high)
+        qp=22
+        ;;
+    very-high)
+        qp=20
+        ;;
+    *)
+        echo "ERROR - Invalid quality '$quality'. Use: low, medium, high or very-high"
+        exit 1
+        ;;
+esac
 
 input="${ARGS[0]}"
 output="${ARGS[1]}"
@@ -74,7 +104,7 @@ cmd="ffmpeg \
     -hwaccel_output_format vaapi \
     -vaapi_device /dev/dri/renderD128 \
     -i \"$input\" \
-    -c:v \"$videoCodec\" -b:v 0 -qp 28 -filter:v "fps=30" \
+    -c:v \"$videoCodec\" -b:v 0 -qp $qp -filter:v \"fps=30\" \
     $videoOptions \
     -c:a aac -b:a 128k \
     -movflags +faststart \
