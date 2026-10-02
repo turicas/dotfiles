@@ -4,7 +4,7 @@ fullhd=false
 hd=false
 h264=false
 debug=false
-quality="high"
+quality="low"
 ARGS=()
 
 while [[ $# -gt 0 ]]; do
