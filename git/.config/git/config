@@ -50,3 +50,5 @@
 	autoSquash = true
 [diff]
 	algorithm = histogram
+[credential]
+	helper = store
