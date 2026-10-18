@@ -9,6 +9,7 @@ mkdir -p ~/.local/tmp
 pushd ~/.local/tmp
 mkdir vero-ptbr
 pushd vero-ptbr
+rm -rf "$filename"
 wget "$url" -O "$filename"
 unzip "$filename"
 vim -u NONE -c "mkspell pt pt_BR" -c q

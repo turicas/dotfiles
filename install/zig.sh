@@ -7,6 +7,7 @@ pushd ~/.local/opt
 VERSION="0.17.0"
 URL="https://ziglang.org/download/${VERSION}/zig-x86_64-linux-${VERSION}.tar.xz"
 FILENAME=$(basename "$URL")
+rm -rf "$FILENAME"
 wget "$URL"
 tar xfvJ "$FILENAME"
 rm "$FILENAME"

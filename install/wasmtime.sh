@@ -13,6 +13,7 @@ wasmtime_url=$(
 	| head -1
 )
 FILENAME=$(basename "$wasmtime_url")
+rm -rf "$FILENAME"
 wget -O "$FILENAME" "$wasmtime_url"
 tar xfvJ "$FILENAME"
 rm "$FILENAME"

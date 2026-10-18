@@ -11,6 +11,7 @@ downloadUrl=$(
 	| head -1
 )
 downloadFile="ruff.tar.gz"
+rm -rf "$downloadFile"
 wget -O "$downloadFile" "$downloadUrl"
 tar xfz "$downloadFile"
 mv ruff-x86_64-unknown-linux-gnu/ruff .

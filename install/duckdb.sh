@@ -10,8 +10,10 @@ duckdb_url=$(
 	| sed 's|href="|https://github.com|; s|"$||' \
 	| head -1
 )
-wget -O duckdb.zip "$duckdb_url"
-unzip duckdb.zip duckdb
-rm duckdb.zip
+filename="duckdb.zip"
+rm -rf "$filename"
+wget -O "$filename" "$duckdb_url"
+unzip "$filename" duckdb
+rm "$filename"
 chmod +x duckdb
 popd

@@ -4,6 +4,7 @@ mkdir -p ~/.local/bin ~/.local/man
 # TODO: check new version
 VERSION="1.72.1"
 FILENAME="rclone-v${VERSION}-linux-amd64.zip"
+rm -rf "$FILENAME"
 wget "https://downloads.rclone.org/v${VERSION}/${FILENAME}"
 unzip "$FILENAME"
 mv rclone-v${VERSION}-linux-amd64/rclone ~/.local/bin/
