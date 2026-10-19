@@ -307,6 +307,10 @@ EOF
 }
 
 md() {
+  if [[ -z $1 ]]; then
+      echo "Usage: ${FUNCNAME[0]} <input.file.md> [output-file.html]" >&2
+      return 2
+  fi
   markdownPath="$1"; shift
   htmlPath="$1"
 
