@@ -272,6 +272,7 @@ endif
 autocmd BufWritePre *.py call FormatPythonBuffer()
 autocmd BufWritePre *.json call FormatJsonBuffer()
 autocmd BufWritePre *.vtt call FormatVttBuffer()
+autocmd BufWritePre *.zig call FormatZigBuffer()
 
 function! FormatPythonBuffer()
   if !get(b:, 'autofmt', g:autofmt)
@@ -353,6 +354,32 @@ function! FormatVttBuffer()
 
   let l:input = join(getline(1, '$'), "\n")
   let l:output = system('vtt-format -', l:input)
+  if v:shell_error != 0
+    return
+  endif
+  let l:output = substitute(l:output, '\n\+$', '', '')
+
+  if l:output ==# l:input
+    return
+  endif
+
+  let l:view = winsaveview()
+  silent exe "normal! i \<BS>\<Esc>"
+  try | silent undojoin | catch | endtry
+  silent %delete _
+  try | silent undojoin | catch | endtry
+  call setline(1, split(l:output, "\n", 1))
+  call winrestview(l:view)
+endfunction
+
+function! FormatZigBuffer()
+  if !get(b:, 'autofmt', g:autofmt)
+    return
+  endif
+
+  let l:input = join(getline(1, '$'), "\n")
+  " On syntax error `zig fmt` exits non-zero and prints the error to stderr (merged into the output by system())
+  let l:output = system('zig fmt --stdin', l:input)
   if v:shell_error != 0
     return
   endif
