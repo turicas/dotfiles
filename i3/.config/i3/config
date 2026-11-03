@@ -27,8 +27,9 @@ bindsym $mod+Return exec gnome-terminal
 # kill focused window
 bindsym $mod+Shift+Q kill
 
-# start dmenu (a program launcher)
+# dmenu (program launcher + unicode char selector)
 bindsym $mod+d exec bash -i dmenu_run
+bindsym $mod+e exec --no-startup-id ~/.local/bin/unicode-select
 #bindsym $mod+p exec flameshot gui
 bindsym $mod+p exec --no-startup-id scrot --select --freeze --pointer "$HOME/screenshots/%Y-%m-%d_%H-%M-%S.png"
 

@@ -1,0 +1,95 @@
+#!/usr/bin/env python3
+"""Pick a Unicode character by name with dmenu and type it with xdotool.
+
+The list of named characters is cached in a text file whose first line holds the `unicodedata` version, so the cache is
+rebuilt automatically when a Python upgrade ships a newer Unicode database.
+"""
+
+import argparse
+import subprocess
+import sys
+import unicodedata
+from pathlib import Path
+
+DEFAULT_CACHE_PATH = Path.home() / ".cache" / "emoji-type" / "list.txt"
+DMENU_TIMEOUT = 600
+XDOTOOL_TIMEOUT = 10
+# LINE SEPARATOR and PARAGRAPH SEPARATOR have names but would break the one-character-per-line format
+LINE_BREAK_CATEGORIES = {"Zl", "Zp"}
+
+
+def build_lines() -> list[str]:
+    lines = []
+    for codepoint in range(sys.maxunicode + 1):
+        char = chr(codepoint)
+        name = unicodedata.name(char, None)
+        if name is None or unicodedata.category(char) in LINE_BREAK_CATEGORIES:
+            continue
+        lines.append(f"{char} {name} U+{codepoint:04X}")
+    return lines
+
+
+def load_menu(cache_path: Path) -> str:
+    """Return the dmenu input, rebuilding the cache if it is missing or was built with another Unicode version."""
+    header = f"# unicodedata {unicodedata.unidata_version}"
+    if cache_path.exists():
+        first_line, _, body = cache_path.read_text(encoding="utf-8").partition("\n")
+        if first_line == header:
+            return body
+
+    body = "\n".join(build_lines()) + "\n"
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    temp_path = cache_path.with_suffix(".tmp")
+    temp_path.write_text(f"{header}\n{body}", encoding="utf-8")
+    temp_path.replace(cache_path)
+    return body
+
+
+def parse_selection(line: str) -> str | None:
+    """Return the character of a menu line, or `None` if the user typed free text that is not in the list."""
+    if not line:
+        return None
+    char = line[0]
+    name = unicodedata.name(char, None)
+    if name is None or not line.startswith(f"{char} {name} U+"):
+        return None
+    return char
+
+
+def choose(menu: str) -> str | None:
+    # dmenu exits with 1 when the user cancels (Esc), so the return code is checked by hand instead of `check=True`
+    result = subprocess.run(
+        ["dmenu", "-i", "-l", "20"],
+        input=menu,
+        capture_output=True,
+        check=False,
+        encoding="utf-8",
+        timeout=DMENU_TIMEOUT,
+    )
+    if result.returncode == 1:
+        return None
+    if result.returncode != 0:
+        raise subprocess.CalledProcessError(result.returncode, result.args, result.stdout, result.stderr)
+    # `strip()` would also remove a selected whitespace character (e.g. NO-BREAK SPACE)
+    return parse_selection(result.stdout.removesuffix("\n"))
+
+
+def type_char(char: str) -> None:
+    subprocess.run(["xdotool", "type", "--", char], capture_output=True, check=True, timeout=XDOTOOL_TIMEOUT)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--cache", type=Path, default=DEFAULT_CACHE_PATH, help="Character list cache file")
+    args = parser.parse_args()
+
+    char = choose(load_menu(args.cache))
+    if char is not None:
+        type_char(char)
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit(130)
